@@ -9,6 +9,7 @@
 <body>
 <div>
     테스트 하는 중이다 글자가 나타나냐?오오오오 대박 일일 음식 탭
+
     <div id="pie" style="width:400px; height:200px;">
         <script>
         $(
@@ -24,13 +25,28 @@
                 });
             }
         )
-
-
         </script>
     </div>
 </div>
 <div>
     월간 비교 탭
+    <div id="line" style="width:1000px; height:600px;">
+        <script>
+        $(
+            function () {
+                var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5000/lineGraph",
+                    dataType: 'json',
+                    success: function (result) {
+                        chart.setOption(result);
+                    }
+                });
+            }
+        )
+        </script>
+    </div>
 </div>
 
 </body>
