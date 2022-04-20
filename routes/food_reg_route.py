@@ -7,4 +7,4 @@ bp = Blueprint('food', __name__, url_prefix='/food')
 
 @bp.route('/')
 def food():
-    return render_template('food.html')
+    return render_template('pyecharts.html')

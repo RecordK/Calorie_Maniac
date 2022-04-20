@@ -6,7 +6,7 @@ app.register_blueprint(food_reg_bp)
 
 @app.route('/')
 def hello_world():  # put application's code here
-	return 'Hello World!'
+	return render_template("start_page.html")
 
 
 if __name__ == '__main__':
