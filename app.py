@@ -2,9 +2,9 @@ from flask import Flask, render_template
 from routes.food_reg_route import bp as food_reg_bp
 from graphbase import GraphBase as gb
 
-
 app = Flask(__name__, static_folder="templates")
 app.register_blueprint(food_reg_bp)
+
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -18,8 +18,15 @@ def index():
 
 @app.route("/pieChart")
 def get_pie_chart():
-    a=gb()
+    a = gb()
     c = a.pie_base()
+    return c.dump_options_with_quotes()
+
+
+@app.route("/pie2Chart")
+def get_pie_week_diff_chart():
+    a = gb()
+    c = a.pie_week_diff_base()
     return c.dump_options_with_quotes()
 
 

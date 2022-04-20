@@ -29,7 +29,27 @@
     </div>
 </div>
 <div>
-    월간 비교 탭
+    주차간 비교 탭
+    <div id="pie2" style="width:1000px; height:600px;">
+        <script>
+        $(
+            function () {
+                var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5000/pie2Graph",
+                    dataType: 'json',
+                    success: function (result) {
+                        chart.setOption(result);
+                    }
+                });
+            }
+        )
+        </script>
+    </div>
+</div>
+<div>
+    월간 리포트
     <div id="line" style="width:1000px; height:600px;">
         <script>
         $(

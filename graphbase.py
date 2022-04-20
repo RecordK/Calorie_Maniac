@@ -9,7 +9,7 @@ class GraphBase:
         a = [123, 456, 789, 999]
         v = [[i] for i in a]
         k = ['탄수화물', '당류', '단백질', '지방']
-        c = (
+        p = (
             Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
                 ).add("", [list(z) for z in zip(k, v)], rosetype="radius", radius=["30%", "60%"]
                       ).set_series_opts(label_opts=opts.LabelOpts(is_show=True, position='top')
@@ -19,8 +19,23 @@ class GraphBase:
                                                                                       orient="vertical",
                                                                                       legend_icon='pin'))
         )
-        return c
+        return p
 
+    def pie_week_diff_base(self) -> Pie:
+        a = [123, 456, 789, 999]
+        v = [[i] for i in a]
+        k = ['1주차', '2주차', '3주차', '4주차']
+        p = (
+            Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
+                ).add("", [list(z) for z in zip(k, v)], rosetype="radius", radius=["30%", "60%"]
+                      ).set_series_opts(label_opts=opts.LabelOpts(is_show=True, position='top')
+                                        ).set_global_opts(title_opts=opts.TitleOpts(title="음식 영양 정보"),
+                                                          legend_opts=opts.LegendOpts(type_='scroll', pos_bottom="60%",
+                                                                                      pos_right="-3%",
+                                                                                      orient="vertical",
+                                                                                      legend_icon='pin'))
+        )
+        return p
     def line_month_base(self) -> Line:
         ## 꺾은 선 그래프
         day = [i for i in range(1, 21)]
@@ -38,7 +53,7 @@ class GraphBase:
                                                                             animation_easing="elasticOut")
                                           ))).set_global_opts(
             title_opts=opts.TitleOpts(
-                title="월간 리포트", subtitle="월간 리포트를 활용하여 효과적으로 칼로리를 계산해보세요! 스크롤을 통해 기간을 조정할 수 있습니다!"),
+                title="월간 리포트", subtitle="월간 리포트를 활용하여 효과적으로 칼로리를 계산해보세요!"),
             yaxis_opts=opts.AxisOpts(name="kcal", name_location="center", type_="value"),
             xaxis_opts=opts.AxisOpts(name='날짜', axislabel_opts=opts.LabelOpts(rotate=0)),
             datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="inside")],
