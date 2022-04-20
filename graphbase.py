@@ -55,7 +55,7 @@ class GraphBase:
                                           ))).set_global_opts(
             title_opts=opts.TitleOpts(
                 title="월간 리포트", subtitle="월간 리포트를 활용하여 효과적으로 칼로리를 계산해보세요!"),
-            yaxis_opts=opts.AxisOpts(name="kcal", name_location="center", type_="value"),
+            yaxis_opts=opts.AxisOpts(name="kcal", name_location="top", type_="value"),
             xaxis_opts=opts.AxisOpts(name='날짜', axislabel_opts=opts.LabelOpts(rotate=0)),
             datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="inside")],
             legend_opts=opts.LegendOpts(pos_left="40%", legend_icon='pin'),
