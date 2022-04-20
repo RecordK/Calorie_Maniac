@@ -13,9 +13,9 @@ app = Flask(__name__, static_folder="templates")
 
 
 def pie_base() -> Pie:
-    a = [123,456,789]
+    a = [123,456,789,999]
     v = [[i] for i in a]
-    k = ['김기록','김승헌','최용훈']
+    k = ['탄수화물','당류','단백질','지방']
     d=[[j] for j in k]
     c = (
         Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
