@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from routes.food_reg_route import bp as food_reg_bp
 from graphbase import GraphBase as gb
 
-app = Flask(__name__, static_folder="templates")
+app = Flask(__name__, static_folder="./static")
 app.register_blueprint(food_reg_bp)
 
 
