@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+</head>
+<body>
+<div>
+    테스트 하는 중이다 글자가 나타나냐?오오오오 대박 일일 음식 탭
+
+    <div id="pie" style="width:400px; height:200px;">
+        <script>
+        $(
+            function () {
+                var chart = echarts.init(document.getElementById('pie'), 'white', {renderer: 'canvas'});
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5000/pieChart",
+                    dataType: 'json',
+                    success: function (result) {
+                        chart.setOption(result);
+                    }
+                });
+            }
+        )
+        </script>
+    </div>
+</div>
+<div>
+    주차간 비교 탭
+    <div id="pie2" style="width:1000px; height:600px;">
+        <script>
+        $(
+            function () {
+                var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5000/pie2Chart",
+                    dataType: 'json',
+                    success: function (result) {
+                        chart.setOption(result);
+                    }
+                });
+            }
+        )
+        </script>
+    </div>
+</div>
+<div>
+    월간 리포트
+    <div id="line" style="width:1000px; height:600px;">
+        <script>
+        $(
+            function () {
+                var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5000/lineGraph",
+                    dataType: 'json',
+                    success: function (result) {
+                        chart.setOption(result);
+                    }
+                });
+            }
+        )
+        </script>
+    </div>
+</div>
+
+</body>
+</html>
