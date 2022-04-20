@@ -38,10 +38,10 @@ class GraphBase:
                                                                             animation_easing="elasticOut")
                                           ))).set_global_opts(
             title_opts=opts.TitleOpts(
-                title="월간 리포트", subtitle="월간 리포트를 활용하여 효과적으로 칼로리를 계산해보세요!"),
+                title="월간 리포트", subtitle="월간 리포트를 활용하여 효과적으로 칼로리를 계산해보세요! 스크롤을 통해 기간을 조정할 수 있습니다!"),
             yaxis_opts=opts.AxisOpts(name="kcal", name_location="center", type_="value"),
             xaxis_opts=opts.AxisOpts(name='날짜', axislabel_opts=opts.LabelOpts(rotate=0)),
-
+            datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="inside")],
             legend_opts=opts.LegendOpts(pos_left="40%", legend_icon='pin'),
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross")
         ).set_series_opts(label_opts=opts.LabelOpts(is_show=True)).add_xaxis(day
