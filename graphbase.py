@@ -21,22 +21,6 @@ class GraphBase:
         )
         return p
 
-    def pie_week_diff_base(self) -> Pie:
-        a = [123, 456, 789, 999]
-        v = [[i] for i in a]
-        k = ['1주차', '2주차', '3주차', '4주차']
-        p = (
-            Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
-                ).add("", [list(z) for z in zip(k, v)], rosetype="radius", radius=["30%", "60%"]
-                      ).set_series_opts(label_opts=opts.LabelOpts(is_show=True, position='top')
-                                        ).set_global_opts(title_opts=opts.TitleOpts(title="주차간 비교"),
-                                                          legend_opts=opts.LegendOpts(type_='scroll', pos_bottom="60%",
-                                                                                      pos_right="-3%",
-                                                                                      orient="vertical",
-                                                                                      legend_icon='pin'))
-        )
-        return p
-
     def line_month_base(self) -> Line:
         ## 꺾은 선 그래프
         day = [i for i in range(1, 21)]

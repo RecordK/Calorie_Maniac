@@ -17,7 +17,7 @@
                 var chart = echarts.init(document.getElementById('pie'), 'white', {renderer: 'canvas'});
                 $.ajax({
                     type: "GET",
-                    url: "http://127.0.0.1:5000/pieChart",
+                    url: "http://127.0.0.1:5000/main/pieChart",
                     dataType: 'json',
                     success: function (result) {
                         chart.setOption(result);
@@ -37,7 +37,7 @@
                 var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
                 $.ajax({
                     type: "GET",
-                    url: "http://127.0.0.1:5000/pie2Chart",
+                    url: "http://127.0.0.1:5000/main/pie2Chart",
                     dataType: 'json',
                     success: function (result) {
                         chart.setOption(result);
@@ -57,7 +57,7 @@
                 var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
                 $.ajax({
                     type: "GET",
-                    url: "http://127.0.0.1:5000/lineGraph",
+                    url: "http://127.0.0.1:5000/main/lineGraph",
                     dataType: 'json',
                     success: function (result) {
                         chart.setOption(result);
