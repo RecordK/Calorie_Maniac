@@ -25,7 +25,7 @@ def get_pie_chart():
 @app.route("/pie2Chart")
 def get_pie_week_diff_chart():
     a = gb()
-    c = a.pie_week_diff_base()
+    c = a.pie_base()
     return c.dump_options_with_quotes()
 
 
