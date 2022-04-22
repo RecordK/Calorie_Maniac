@@ -6,7 +6,7 @@ from graphbase import GraphBase as gb
 # 블루프린트 객체 생성 : 라우트 등록 객체
 bp = Blueprint('main', __name__, url_prefix='/main')
 
-@bp.route('/')
+@bp.post('/')
 def main():
     return render_template('index.html')
 
