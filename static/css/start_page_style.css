@@ -1,0 +1,39 @@
+.content-area {
+    padding-top: 200px;
+}
+
+.gender-selector input{
+    margin:0;padding:0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.male {
+    background-image: url("../img_files/male_icon.png");
+}
+.female {
+    background-image: url("../img_files/female_icon.png");
+}
+
+.gender-selector input:active + .drink{
+    opacity: .3;
+}
+.gender-selector input:checked +.drink {
+    -webkit-filter: none;
+}
+
+.drink {
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:70px;height:70px;
+    margin: 50px 50px 30px 50px;
+    -webkit-transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+.drink:hover {
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
