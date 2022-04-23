@@ -17,6 +17,10 @@ def main():
 
     return render_template('index.html')
 
+@bp.get('/')
+def main_return():
+    return render_template('index.html')
+
 
 @bp.route("/pieChart")
 def get_pie_chart():
