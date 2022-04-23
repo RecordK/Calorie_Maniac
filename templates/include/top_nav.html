@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<header class="navbar fixed-top navbar-expand-md navbar-light color-teal">
+<header class="navbar fixed-top navbar-expand-md color-teal">
     <nav class="container-xxl flex-wrap flex-md-nowrap"  aria-label="navigation">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="#" style="padding-top: 0px;padding-bottom: 0px;">
-                    <img src="{{ url_for('static', filename='img_files/logo.png') }}" alt="logo" width="60" height="60">
-                </a>
+                {% if session['age'] is undefined %}
+                    <a class="nav-link active" href="/" style="padding-top: 0px;padding-bottom: 0px;">
+                        <img src="{{ url_for('static', filename='img_files/logo.png') }}" alt="logo" width="60" height="60">
+                    </a>
+                {% else %}
+                    <a class="nav-link active" href="/main" style="padding-top: 0px;padding-bottom: 0px;">
+                        <img src="{{ url_for('static', filename='img_files/logo.png') }}" alt="logo" width="60" height="60">
+                    </a>
+                {% endif %}
             </li>
         </ul>
         <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link color-gray-text fs-4" href="#">뒤로 가기</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link color-gray-text fs-4" href="#">다시 설정</a>
-            </li>
+            {% if session['age'] is defined %}
+                <li class="nav-item">
+                    <a class="nav-link color-gray-text fs-4" href="#">뒤로 가기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-gray-text fs-4" href="#">다시 설정</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </header>
