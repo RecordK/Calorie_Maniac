@@ -1,0 +1,11 @@
+.border-teal {
+    border-style: solid;
+    border-color: #79DFC1;
+    border-radius: 30px;
+    min-height: 120px;
+    width: 100%;
+}
+
+.spr-line {
+    border-bottom: 5px solid #79DFC1;
+}
