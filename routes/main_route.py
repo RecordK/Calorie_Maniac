@@ -1,6 +1,6 @@
 from flask import Blueprint, Flask, render_template, request, session
 from graphbase import GraphBase as gb
-import os
+from datetime import datetime
 
 # 버스와 관련된 기능 제공 클래스
 
@@ -20,6 +20,24 @@ def main():
 @bp.get('/')
 def main_return():
     return render_template('index.html')
+
+
+@bp.get('/report/daily')
+def daily_report():
+    today = datetime.today().strftime("%Y-%m-%d %H:%M")
+    print(today)        # sql 조회 문으로 바꿔야 함!!!
+    food_list = ['food_list', '밥', '공기', '자갈치']
+    return render_template('loader/daily_page.html', today=today, food_list=food_list)
+
+
+@bp.get('/report/weekly')
+def weekly_report():
+    return "weekly page"
+
+
+@bp.get('/report/monthly')
+def monthly_report():
+    return "monthly page"
 
 
 @bp.route("/pieChart")
