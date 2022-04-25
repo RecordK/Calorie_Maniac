@@ -22,6 +22,21 @@ def main_return():
     return render_template('index.html')
 
 
+@bp.get('/report/daily')
+def daily_report():
+    return render_template('loader/test_page.html')
+
+
+@bp.get('/report/weekly')
+def weekly_report():
+    return "weekly page"
+
+
+@bp.get('/report/monthly')
+def monthly_report():
+    return "monthly page"
+
+
 @bp.route("/pieChart")
 def get_pie_chart():
     a = gb()
