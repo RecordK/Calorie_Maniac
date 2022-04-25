@@ -13,25 +13,39 @@
     <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
 </head>
 <body>
-<div>
     <main class="container h-100">
         <!-- header -->
         {% include 'include/top_nav.html' %}
         <!-- header end -->
-        <div class="row">
+        <div class="row vh-100">
             <div class="col-2" aria-label="not_use">
             </div>
             <div class="col-8 text-center content-area" aria-label="main-content">
-                <div class="row">
+                <div class="row mb-5">
                     <div class="col-3">
-                        in1
+                        <form action="/main/report/daily" method="get" target="display_graph">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-outline-success btn-lg">일간리포트</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-3 ms-auto">
-                        in2
+                        <form action="/main/report/weekly" method="get" target="display_graph">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-outline-success btn-lg">주간리포트</button>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-3 ms-auto">
-                        in3
+                        <form action="/main/report/monthly" method="get" target="display_graph">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-outline-success btn-lg">월간리포트</button>
+                            </div>
+                        </form>
                     </div>
+                </div>
+                <div class="row vh-100">
+                    <iframe id="iframe-display" name="display_graph"></iframe>
                 </div>
             </div>
             <div class="col-2" aria-label="remote">
@@ -39,65 +53,5 @@
             </div>
         </div>
     </main>
-    테스트 하는 중이다 글자가 나타나냐?오오오오 대박 일일 음식 탭
-
-    <div id="pie" style="width:400px; height:200px;">
-        <script>
-        $(
-            function () {
-                var chart = echarts.init(document.getElementById('pie'), 'white', {renderer: 'canvas'});
-                $.ajax({
-                    type: "GET",
-                    url: "http://127.0.0.1:5000/main/pieChart",
-                    dataType: 'json',
-                    success: function (result) {
-                        chart.setOption(result);
-                    }
-                });
-            }
-        )
-        </script>
-    </div>
-<div>
-    주차간 비교 탭
-    <div id="pie2" style="width:1000px; height:600px;">
-        <script>
-        $(
-            function () {
-                var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
-                $.ajax({
-                    type: "GET",
-                    url: "http://127.0.0.1:5000/main/pie2Chart",
-                    dataType: 'json',
-                    success: function (result) {
-                        chart.setOption(result);
-                    }
-                });
-            }
-        )
-        </script>
-    </div>
-</div>
-<div>
-    월간 리포트
-    <div id="line" style="width:1000px; height:600px;">
-        <script>
-        $(
-            function () {
-                var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
-                $.ajax({
-                    type: "GET",
-                    url: "http://127.0.0.1:5000/main/lineGraph",
-                    dataType: 'json',
-                    success: function (result) {
-                        chart.setOption(result);
-                    }
-                });
-            }
-        )
-        </script>
-    </div>
-</div>
-
 </body>
 </html>
