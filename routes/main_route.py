@@ -32,7 +32,9 @@ def daily_report():
 
 @bp.get('/report/weekly')
 def weekly_report():
-    return "weekly page"
+    monthly_now = datetime.today().month
+    print(monthly_now)
+    return render_template('loader/weekly_page.html', month=monthly_now)
 
 
 @bp.get('/report/monthly')
