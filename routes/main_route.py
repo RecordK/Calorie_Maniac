@@ -39,7 +39,8 @@ def weekly_report():
 
 @bp.get('/report/monthly')
 def monthly_report():
-    return "monthly page"
+    monthly_now = datetime.today().month
+    return render_template('loader/monthly_page.html', month=monthly_now)
 
 
 @bp.route("/pieChart")
