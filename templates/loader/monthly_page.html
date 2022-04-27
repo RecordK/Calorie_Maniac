@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="d-grid">
-                            <select class="form-select form-select-lg mb-3" aria-label="select_month">
+                            <select class="form-select form-select-lg mb-3" aria-label="select_month" onchange="this.form.submit()">
                                 {% for display_month in range(1, 13) %}
                                     {% if display_month == month %}
                                         <option name="month_select" value="{{ display_month }}" selected>{{ display_month }} 월</option>
@@ -27,18 +27,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="d-grid">
-                            <select class="form-select form-select-lg" aria-label="select_info" onchange="this.form.submit()">
-                                <option selected disabled>선택 하세요!</option>
-                                <option name="select_info" value="0">섭취 칼로리</option>
-                                <option name="select_info" value="1">소모 칼로리</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
             </form>
-            <
+
 
         </div>
     </div>
