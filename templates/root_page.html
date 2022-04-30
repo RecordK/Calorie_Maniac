@@ -13,16 +13,13 @@
     <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
     <script type="text/javascript">
-        let key = '{{ pk_key }}'
-        if (check === undefined) {
-            let password = prompt('비밀번호 입력', '***')
-            {# key 바꿔야함 #}
-            if(password === '1234'){
-                check = 'check'
-            } else {
-                check = undefined
-                window.history.back()
-            }
+        {#let key = '{{ pk_key }}'#}
+        let key = '1234'
+        let confirm = '{{ confirm }}'
+        if (confirm === 'True') {
+
+        } else {
+            rootCheck(key)
         }
     </script>
 </head>
@@ -35,17 +32,27 @@
             <div class="col-2" aria-label="not_use">
             </div>
             <main class="col-8 text-center content-area" aria-label="main-content">
-                <div class="col-4">
-                    <h4>음식 개별로 넣기</h4>
-                    <form action="/root/each_food" method="post">
-                        <input type="text" name="food_name" placeholder="음식 이름"><br>
-                        <input type="text" name="kcal" placeholder="칼로리"><br>
-                        <input type="text" name="carbohydrate" placeholder="탄수회물"><br>
-                        <input type="text" name="protein" placeholder="단백질"><br>
-                        <input type="text" name="fat" placeholder="지방"><br>
-                        <input type="text" name="sugars" placeholder="당류"><br>
-                        <button type="submit">확인하기</button>
-                    </form>
+                <div class="row">
+                    <div class="col-6">
+                        <h4>음식 개별로 넣기</h4>
+                        <form action="/root/each_food" method="post">
+                            <input type="text" name="food_name" placeholder="음식 이름"><br>
+                            <input type="text" name="kcal" placeholder="칼로리"><br>
+                            <input type="text" name="carbohydrate" placeholder="탄수회물"><br>
+                            <input type="text" name="protein" placeholder="단백질"><br>
+                            <input type="text" name="fat" placeholder="지방"><br>
+                            <input type="text" name="sugars" placeholder="당류"><br>
+                            <button type="submit">확인하기</button>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <h4>음식 db 파일 넣기</h4>
+                        <p>.csv, 가능(xlsx 모듈 오류남...)</p>
+                        <form action="/root/file_food" method="post" enctype="multipart/form-data">
+                            <input type="file" name="food_file" required><br>
+                            <button type="submit">확인하기</button>
+                        </form>
+                    </div>
                 </div>
             </main>
             <div class="col-2" aria-label="remote">

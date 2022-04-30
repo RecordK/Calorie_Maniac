@@ -11,7 +11,7 @@ food_info_service = FoodInfoService()
 def root():
 	pk_key = os.urandom(12).hex()
 	print(pk_key)
-	return render_template('root_page.html', pk_key=pk_key)
+	return render_template('root_page.html', pk_key=pk_key, confirm=None)
 
 
 @bp.post('/each_food')
@@ -21,4 +21,12 @@ def register_food():
 		request.form['protein'], request.form['fat'], request.form['sugars']
 	)
 	confirm = food_info_service.insert_food(food)
+	return render_template('root_page.html', confirm=confirm)
+
+
+@bp.post('/file_food')
+def register_foods():
+	food_file = request.files['food_file']
+	file_type = food_file.filename.split('.')[1]
+	confirm = food_info_service.insert_foods(food_file, file_type)
 	return render_template('root_page.html', confirm=confirm)

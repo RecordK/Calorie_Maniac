@@ -20,9 +20,15 @@ class FoodInfoDB:
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
-			sql = f'INSERT INTO food_info(food_name, food_kcal, food_carbohydrate, food_protein, food_fat, food_sugars) VALUES (%s, %s, %s, %s, %s, %s)'
-			data = (food_info.food_name, food_info.food_kcal, food_info.food_carbohydrate, food_info.food_protein, food_info.food_fat, food_info.food_sugars)
-			cursor.execute(sql, data)
+			if isinstance(food_info, list):
+				sql = 'INSERT INTO food_info(food_name, food_kcal, food_carbohydrate, food_protein, food_fat, food_sugars) VALUES'\
+						+', '.join('(%s, %s, %s, %s, %s, %s)' for _ in food_info)
+				flatten_values = [food for food_info_list in food_info for food in food_info_list]
+				cursor.execute(sql, flatten_values)
+			else:
+				sql = 'INSERT INTO food_info(food_name, food_kcal, food_carbohydrate, food_protein, food_fat, food_sugars) VALUES (%s, %s, %s, %s, %s, %s)'
+				data = (food_info.food_name, food_info.food_kcal, food_info.food_carbohydrate, food_info.food_protein, food_info.food_fat, food_info.food_sugars)
+				cursor.execute(sql, data)
 			self.conn.commit()
 			return True
 		except Exception as e:
