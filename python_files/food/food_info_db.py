@@ -37,18 +37,32 @@ class FoodInfoDB:
 		finally:
 			self.disconnection()
 
-	def search_by_name(self, name):
+	def select_all(self):
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			sql = 'SELECT * FROM food_info'
+			cursor.execute(sql, )
+			foods = []
+			for row in cursor:
+				foods.append(FoodInfo(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+			return foods
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+
+	def select_by_name(self, name):
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
 			sql = 'SELECT * FROM food_info WHERE food_name = %s'
-			data = (name,)
+			data = ('%' + name + '%',)
 			cursor.execute(sql, data)
-			row = cursor.fetchone()
-			if row:
-				return row[0], FoodInfo(row[1], row[2], row[3], row[4], row[5], row[6])
-			self.logger.info()
-			return
+			foods = []
+			for row in cursor:
+				foods.append(FoodInfo(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+			return foods
 		except Exception as e:
 			self.logger.error(e)
 		finally:
