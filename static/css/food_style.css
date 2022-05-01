@@ -1,0 +1,11 @@
+.border-teal {
+    border-style: solid;
+    border-color: #79DFC1;
+    border-radius: 30px;
+    min-height: 120px;
+    max-height: 530px;
+}
+
+.double-check {
+    margin-top: 8px;
+}
