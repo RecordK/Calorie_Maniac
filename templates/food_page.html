@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/food_style.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/core.js') }}"></script>
+    <script>
+        window.onload = function () {
+            autoLoad('food_display')
+        };
+
+    </script>
 </head>
 <body>
     <main class="container h-100">
@@ -27,17 +33,16 @@
                     </div>
                     <div class="col-6 mt-5">
                         <p>right</p>
-                        <form action="/main/food/search" method="post" target="iframe-food">
+                        <form action="/main/food/search" method="post" target="iframe-food" id="food_display">
                             <div class="row">
                                 <div class="col-9">
                                     <div class="input-group input-group-lg">
-                                        <input type="hidden" id="input_hidden" name="food_index" value="">
-                                        <input type="text" class="form-control" id="food_select" name="food_name" aria-label="select-food"/>
+                                        <input type="text" class="form-control" id="food_name" name="food_name" aria-label="select-food"/>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-outline-success btn-lg" onload="this.submit()">검색</button>
+                                        <button type="submit" class="btn btn-outline-success btn-lg">검색</button>
                                     </div>
                                 </div>
                             </div>
