@@ -20,3 +20,16 @@ html, body {
     margin-left: 12px;
     cursor: pointer;
 }
+
+.input-wrapper {
+   position: relative;
+}
+.input-wrapper::after {
+    content: attr(data-required);
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    font-size: 15px;
+    transform: translateY(-50%);
+    color: #ccc;
+}
