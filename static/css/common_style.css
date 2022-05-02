@@ -10,6 +10,11 @@ html, body {
     color: #EEEEEE;
 }
 
+.no-scroll {
+    overflow: hidden;
+    scroll-behavior: unset;
+}
+
 .side-remote{
     position: fixed;
     border: 3px solid #79DFC1;
