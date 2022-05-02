@@ -23,34 +23,21 @@
                 <div class="row">
                     <div class="col-6 mt-5 border-teal" style="overflow: auto">
                         <span class="fs-4">추가 가능한 음식 목록</span>
-                        <iframe id="iframe-food" name="iframe-food"></iframe>
-                        <table class="table" id="food_table" name="food_table">
-                            <thead></thead>
-                            <tbody>
-                                {% for food in food_list %}
-                                    <tr>
-                                        <td>{{ food.food_name }}</td>
-                                        <td>{{ food.food_carbohydrate }}</td>
-                                        <td><button type="submit" class="btn btn-outline-success pt-0 pb-0" onclick="buttonDetection({{ food.food_index }}, '{{ food.food_name }}', 'food_select', 'input_hidden')">추가하기</button></td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        <iframe class="h-100" id="iframe-food" name="iframe-food"></iframe>
                     </div>
                     <div class="col-6 mt-5">
                         <p>right</p>
-                        <form>
+                        <form action="/main/food/search" method="post" target="iframe-food">
                             <div class="row">
                                 <div class="col-9">
-                                    <div class="input-group input-group-lg mb-3">
+                                    <div class="input-group input-group-lg">
                                         <input type="hidden" id="input_hidden" name="food_index" value="">
-                                        <input type="text" class="form-control double-check" id="food_select" name="food_name" aria-label="select-food"/>
+                                        <input type="text" class="form-control" id="food_select" name="food_name" aria-label="select-food"/>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-outline-success btn-lg pt-0 pb-0" formaction="/main/food/search" formmethod="post" formtarget="iframe-food">검색</button>
-                                        <button type="submit" class="btn btn-outline-success btn-lg pt-0 pb-0" formaction="#">추가</button>
+                                        <button type="submit" class="btn btn-outline-success btn-lg" onload="this.submit()">검색</button>
                                     </div>
                                 </div>
                             </div>

@@ -56,8 +56,8 @@ class FoodInfoDB:
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
-			sql = 'SELECT * FROM food_info WHERE food_name = %s'
-			data = ('%' + name + '%',)
+			sql = 'SELECT * FROM food_info WHERE food_name LIKE %s'
+			data = (name, )
 			cursor.execute(sql, data)
 			foods = []
 			for row in cursor:
