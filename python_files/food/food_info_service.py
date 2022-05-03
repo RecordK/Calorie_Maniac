@@ -34,10 +34,10 @@ class FoodInfoService:
 
 		return 0
 
-	def find_food(self, food_name):
-		exist_check = self.food_db.search_by_name(food_name)
-		if exist_check is None:
-			return 0
-		else:
-			return 1
+	def retrieve_all(self):
+		food_list = self.food_db.select_all()
+		return food_list
 
+	def retrieve_name(self, food_name):
+		food_list = self.food_db.select_by_name(food_name)
+		return food_list
