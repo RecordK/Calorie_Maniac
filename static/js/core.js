@@ -10,3 +10,9 @@ function rootCheck(key) {
             window.history.back()
         }
 }
+
+function buttonDetection(val_index, val_name, input_name, input_hidden) {
+    let food = {val_index, val_name}
+    document.getElementById(input_hidden).value = food.val_index;
+    document.getElementById(input_name).value = food.val_name;
+}

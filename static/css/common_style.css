@@ -10,6 +10,11 @@ html, body {
     color: #EEEEEE;
 }
 
+.no-scroll {
+    overflow: hidden;
+    scroll-behavior: unset;
+}
+
 .side-remote{
     position: fixed;
     border: 3px solid #79DFC1;
@@ -19,4 +24,20 @@ html, body {
     margin-top: 150px;
     margin-left: 12px;
     cursor: pointer;
+}
+
+.input-wrapper {
+   position: relative;
+}
+.input-wrapper::after {
+    content: attr(data-required);
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    font-size: 15px;
+    transform: translateY(-50%);
+    color: #ccc;
+}
+#logo{
+color: #EEEEEE;
 }
