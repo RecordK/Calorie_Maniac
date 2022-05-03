@@ -38,12 +38,14 @@
                             <select class="form-select form-select-lg" aria-label="select_info"
                                     onchange="this.form.submit()">
                                 <option selected disabled>선택 하세요!</option>
-                                <option name="select_info" value="0">먹은 음식 칼로리</option>
-                                <option name="select_info" value="1">운동한 칼로리</option>
+                                {% for calorie in ['먹은 음식 칼로리','운동한 칼로리'] %}
+                                <option name="select_info" value="{{calorie}}">{{calorie}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
                     <div id="pie2" style="width:1000px; height:600px;">
+
                         <script>
         $(
             function () {
@@ -60,7 +62,9 @@
         )
 
                         </script>
+
                     </div>
+
                 </div>
             </form>
 
