@@ -18,29 +18,36 @@
     </script>
 </head>
 <body>
-    <main class="container h-100">
+    <main class="container h-100 no-scroll">
         <!-- header -->
         {% include 'include/top_nav.html' %}
         <!-- header end -->
         <div class="row h-100 mt-5 pt-5">
             <div class="col-2" aria-label="not_use">
             </div>
-            <main class="col-8 text-center content-area" aria-label="main-content">
+            <main class="col-8 text-start content-area" aria-label="main-content">
                 <div class="row">
-                    <div class="col-6 mt-5 border-teal" style="overflow: auto">
+                    <div class="col-6 mt-5 text-center border-teal no-scroll">
                         <span class="fs-4">추가 가능한 음식 목록</span>
-                        <iframe class="h-100" id="iframe-food" name="iframe-food"></iframe>
+                        <iframe id="iframe-food" name="iframe-food" style="height: 90%"></iframe>
                     </div>
-                    <div class="col-6 mt-5">
-                        <p>right</p>
+                    <div class="col-1"></div>
+                    <div class="col-5 mt-5">
+                        <form class="mt-5 mb-5" action="#">
+                            <div class="d-grid">
+                                <button class="btn btn-outline-success btn-lg">음식 사진 업로드</button>
+                            </div>
+                            <span class="fs-6 fw-lighter">원하는 음식이 아니신가요?</span><br>
+                            <span class="fs-6 fw-lighter">좌측의 '추가하기' 버튼을 눌러주세요.</span>
+                        </form>
                         <form action="/main/food/search" method="post" target="iframe-food" id="food_display">
                             <div class="row">
-                                <div class="col-9">
+                                <div class="col-8">
                                     <div class="input-group input-group-lg">
                                         <input type="text" class="form-control" id="food_name" name="food_name" aria-label="select-food"/>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-outline-success btn-lg">검색</button>
                                     </div>

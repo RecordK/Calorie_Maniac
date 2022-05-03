@@ -1,3 +1,4 @@
+from _datetime import datetime
 from flask import Blueprint, Flask, render_template, request, session
 from python_files.food.food_info_service import FoodInfoService
 
@@ -21,5 +22,7 @@ def food_search():
 @bp.get('/register')
 def get_index():
 	index = request.args.get('fid')
+	today = datetime.today().strftime("%Y-%m-%d %H:%M")
+	print(today)
 	print(index)
 	return render_template('index.html')
