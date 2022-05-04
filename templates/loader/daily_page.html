@@ -25,19 +25,20 @@
         <main class="container mb-2">
             <div class="row">
             {% if kinds is defined %}
-                {% for i in kinds %}        {#  나중에 zip 으로 출력(음식만) #}
+                {% for i,j in enumerate(kinds) %}        {#  나중에 zip 으로 출력(음식만) #}
                     {% if daily_list.split()[0] == '음식'%} {# 운동은 출력안됨 #}
                         <div class="col-3" style="float:left;">
-                            출력부, {{ i }}
+                            출력부, {{ j }}
                         </div>
-                            <div id="pie" style="width:400px; height:200px;" class="col-6" style="float:right;">
+                            <div id="pie{{j}}" value="{{j}}" style="width:400px; height:200px;" class="col-6" style="float:right;">
                                 <script>
                                     $(
                                         function () {
-                                            var chart = echarts.init(document.getElementById('pie'), 'white', {renderer: 'canvas'});
+                                            var chart = echarts.init(document.getElementById('pie{{j}}'), 'white', {renderer: 'canvas'});
+                                            var url = "http://127.0.0.1:5000/main/dailyChart/{{j}}";
                                             $.ajax({
                                                 type: "GET",
-                                                url: "http://127.0.0.1:5000/main/dailyChart",
+                                                url: url,
                                                 dataType: 'json',
                                                 success: function (result) {
                                                     chart.setOption(result);

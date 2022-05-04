@@ -13,6 +13,7 @@ app.register_blueprint(root_bp)
 app.register_blueprint(food_bp)
 
 
+
 @app.route('/')
 def hello_world():  # put application's code here
     return render_template("start_page.html")

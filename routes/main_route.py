@@ -1,6 +1,7 @@
 from flask import Blueprint, Flask, render_template, request, session
 from graphbase import GraphBase as gb
 from datetime import datetime
+from python_files.food.food_info_service import FoodInfoService as FS
 
 # 버스와 관련된 기능 제공 클래스
 
@@ -27,8 +28,8 @@ def main_return():
 def daily_report():
     today = datetime.today().strftime("%Y-%m-%d %H:%M")
     print(today)  # sql 조회 문으로 바꿔야 함!!!
-    food_list = ['food_list', '밥', '공기', '자갈치']
-    return render_template('loader/daily_page.html', today=today, food_list=food_list)
+    food_list = ['food_list', 'rice', 'air', 'snack']
+    return render_template('loader/daily_page.html', today=today, food_list=food_list, enumerate=enumerate)
 
 
 @bp.get('/report/weekly')
@@ -45,10 +46,12 @@ def monthly_report():
     return render_template('loader/monthly_page.html', month=monthly_now)
 
 
-@bp.route("/dailyChart")
-def get_pie_chart():
+@bp.route("/dailyChart/<foodname>")
+def get_pie_chart(foodname):
     a = gb()
-    c = a.pie_base()
+    v1 = FS.retrieve_name(foodname)
+    value = v1[2:] * 4
+    c = a.pie_base(value=value)
     return c.dump_options_with_quotes()
 
 
@@ -56,11 +59,11 @@ def get_pie_chart():
 def get_pie_week_diff_chart1():
     a = gb()
     # value= db에서 꺼내온 먹은 음식 칼로리 값
-    # key= 주차
+    # name= 주차
     value = [3000, 5000, 4210, 7466]
-    key = ['1주차', '2주차', '3주차', '4주차']
+    name = ['1주차', '2주차', '3주차', '4주차']
     title = '주차간 비교'
-    c = a.pie_base(value, key, title)
+    c = a.pie_base(name, value, title)
     return c.dump_options_with_quotes()
 
 
@@ -68,11 +71,11 @@ def get_pie_week_diff_chart1():
 def get_pie_week_diff_chart2():
     a = gb()
     # value= db에서 꺼내온 운동한 칼로리  값
-    # key= 주차
+    # name= 주차
     value = [2000, 500, 1421, 746]
-    key = ['1주차', '2주차', '3주차', '4주차']
+    name = ['1주차', '2주차', '3주차', '4주차']
     title = '주차간 비교'
-    c = a.pie_base(value, key, title)
+    c = a.pie_base(name, value, title)
     return c.dump_options_with_quotes()
 
 
