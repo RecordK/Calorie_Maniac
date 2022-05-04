@@ -5,15 +5,16 @@ from random import randrange
 
 
 class GraphBase:
-    def pie_base(self, value=[123, 456, 789, 321], name=['탄수화물', '당류', '단백질', '지방'], title='음식 영양 정보') -> Pie:
+    def pie_base(self, name = ['탄수화물', '단백질', '지방', '당류'], value=[123, 456, 789, 321], title='음식 영양 정보') -> Pie:
         a = value
         v = [[i] for i in a]
         k = name
         p = (
             Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
                 ).add("", [list(z) for z in zip(k, v)], rosetype="radius", radius=["30%", "60%"]
-                      ).set_series_opts(label_opts=opts.LabelOpts(is_show=True, position='top')
+                      ).set_series_opts(label_opts=opts.LabelOpts(is_show=True, position='top', formatter="{d} %")
                                         ).set_global_opts(title_opts=opts.TitleOpts(title=title),
+                                                          tooltip_opts=opts.TooltipOpts(formatter="{b}: {c} kcal"),
                                                           legend_opts=opts.LegendOpts(type_='scroll', pos_bottom="60%",
                                                                                       pos_right="0%",
                                                                                       orient="vertical",
