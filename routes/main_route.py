@@ -10,12 +10,13 @@ bp = Blueprint('main', __name__, url_prefix='/main')
 
 @bp.post('/')
 def main():
-    session['gender'] = request.form['gender-options']      # male, female
+    session['gender'] = request.form['gender-options']  # male, female
     session['age'] = request.form['age']
     session['height'] = request.form['height']
     session['weight'] = request.form['weight']
 
     return render_template('index.html')
+
 
 @bp.get('/')
 def main_return():
@@ -25,7 +26,7 @@ def main_return():
 @bp.get('/report/daily')
 def daily_report():
     today = datetime.today().strftime("%Y-%m-%d %H:%M")
-    print(today)        # sql 조회 문으로 바꿔야 함!!!
+    print(today)  # sql 조회 문으로 바꿔야 함!!!
     food_list = ['food_list', '밥', '공기', '자갈치']
     return render_template('loader/daily_page.html', today=today, food_list=food_list)
 
@@ -43,17 +44,22 @@ def monthly_report():
     return render_template('loader/monthly_page.html', month=monthly_now)
 
 
-@bp.route("/pieChart")
+@bp.route("/dailyChart")
 def get_pie_chart():
     a = gb()
     c = a.pie_base()
     return c.dump_options_with_quotes()
 
 
-@bp.route("/pie2Chart")
+@bp.route("/weekChart")
 def get_pie_week_diff_chart():
     a = gb()
-    c = a.pie_base()
+    # value= db에서 꺼내온 운동한 칼로리 먹은 음식 칼로리 값
+    # key= 주차
+    value = [3000, 5000, 4210, 7466]
+    key = ['1주차', '2주차', '3주차', '4주차']
+    title = '주차간 비교'
+    c = a.pie_base(value, key, title)
     return c.dump_options_with_quotes()
 
 
