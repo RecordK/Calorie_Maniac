@@ -31,22 +31,23 @@
                             출력부, {{ i }}
                         </div>
                             <div id="pie" style="width:400px; height:200px;" class="col-6">
-    <script>
-    $(
-        function () {
-            var chart = echarts.init(document.getElementById('pie'), 'white', {renderer: 'canvas'});
-            $.ajax({
-                type: "GET",
-                url: "http://127.0.0.1:5000/main/pieChart",
-                dataType: 'json',
-                success: function (result) {
-                    chart.setOption(result);
-                }
-            });
-        }
-    )
-    </script>
-</div>
+                                <script>
+                                    $(
+                                        function () {
+                                            var chart = echarts.init(document.getElementById('pie'), 'white', {renderer: 'canvas'});
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "http://127.0.0.1:5000/main/dailyChart",
+                                                dataType: 'json',
+                                                success: function (result) {
+                                                    chart.setOption(result);
+                                                }
+                                            });
+                                        }
+                                    )
+                                </script>
+sdf
+                            </div>
                     {% else %}      {# 운동 출력부 #}
                         <div class="col-12">
                             운동

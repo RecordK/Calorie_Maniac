@@ -44,14 +44,14 @@ def monthly_report():
     return render_template('loader/monthly_page.html', month=monthly_now)
 
 
-@bp.route("/pieChart")
+@bp.route("/dailyChart")
 def get_pie_chart():
     a = gb()
     c = a.pie_base()
     return c.dump_options_with_quotes()
 
 
-@bp.route("/pie2Chart")
+@bp.route("/weekChart")
 def get_pie_week_diff_chart():
     a = gb()
     # value= db에서 꺼내온 운동한 칼로리 먹은 음식 칼로리 값
