@@ -35,6 +35,7 @@ def daily_report():
 def weekly_report():
     monthly_now = datetime.today().month
     print(monthly_now)
+
     return render_template('loader/weekly_page.html', month=monthly_now)
 
 
@@ -51,12 +52,24 @@ def get_pie_chart():
     return c.dump_options_with_quotes()
 
 
-@bp.route("/weekChart")
-def get_pie_week_diff_chart():
+@bp.route("/weekChart1")
+def get_pie_week_diff_chart1():
     a = gb()
-    # value= db에서 꺼내온 운동한 칼로리 먹은 음식 칼로리 값
+    # value= db에서 꺼내온 먹은 음식 칼로리 값
     # key= 주차
     value = [3000, 5000, 4210, 7466]
+    key = ['1주차', '2주차', '3주차', '4주차']
+    title = '주차간 비교'
+    c = a.pie_base(value, key, title)
+    return c.dump_options_with_quotes()
+
+
+@bp.route("/weekChart2")
+def get_pie_week_diff_chart2():
+    a = gb()
+    # value= db에서 꺼내온 운동한 칼로리  값
+    # key= 주차
+    value = [2000, 500, 1421, 746]
     key = ['1주차', '2주차', '3주차', '4주차']
     title = '주차간 비교'
     c = a.pie_base(value, key, title)

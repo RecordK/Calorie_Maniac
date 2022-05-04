@@ -27,10 +27,10 @@
             {% if kinds is defined %}
                 {% for i in kinds %}        {#  나중에 zip 으로 출력(음식만) #}
                     {% if daily_list.split()[0] == '음식'%} {# 운동은 출력안됨 #}
-                        <div class="col-6">
+                        <div class="col-3" style="float:left;">
                             출력부, {{ i }}
                         </div>
-                            <div id="pie" style="width:400px; height:200px;" class="col-6">
+                            <div id="pie" style="width:400px; height:200px;" class="col-6" style="float:right;">
                                 <script>
                                     $(
                                         function () {
@@ -46,7 +46,7 @@
                                         }
                                     )
                                 </script>
-sdf
+
                             </div>
                     {% else %}      {# 운동 출력부 #}
                         <div class="col-12">

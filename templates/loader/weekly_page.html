@@ -16,17 +16,27 @@
 <script>
 $(
     function () {
-        var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
-        $.ajax({
-            type: "GET",
-            url: "http://127.0.0.1:5000/main/weekChart",
-            dataType: 'json',
-            success: function (result) {
-                chart.setOption(result);
-            }
+        $("#sel").change(function() {
+            var v = $("#sel").val();
+            var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
+            var url = "http://127.0.0.1:5000/main/weekChart"+v
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
         });
     }
 )
+
+function checkForm(food_index){
+    parent.location.href = "/main/food/register?fid=" + food_index;
+}
+
 </script>
 <main class="h-100">
     <div class="border-teal">
@@ -50,16 +60,16 @@ $(
                     </div>
                     <div class="col-4">
                         <div class="d-grid">
-                            <select class="form-select form-select-lg" aria-label="select_info"
-                                    onchange="this.form.submit()">
+                            <select id="sel" class="form-select form-select-lg" aria-label="select_info" onchange="this.form.submit()">
                                 <option selected disabled>선택 하세요!</option>
-                                {% for calorie in ['먹은 음식 칼로리','운동한 칼로리'] %}
-                                <option name="select_info" value="{{calorie}}">{{calorie}}</option>
-                                {% endfor %}
+                                <option name="select_info" value="1">먹은 음식 칼로리</option>
+                                <option name="select_info" value="2">운동한 칼로리</option>
                             </select>
                         </div>
                     </div>
+
                     <div id="pie2" style="width:1000px; height:600px;"></div>
+
                 </div>
             </form>
         </div>
