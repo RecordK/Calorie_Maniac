@@ -28,7 +28,7 @@ def main_return():
 def daily_report():
     today = datetime.today().strftime("%Y-%m-%d %H:%M")
     print(today)  # sql 조회 문으로 바꿔야 함!!!
-    food_list = ['food_list', 'rice', 'air', 'snack']
+    food_list = ['쌀밥', '현미밥', '콩밥', '기타잡곡밥']
     return render_template('loader/daily_page.html', today=today, food_list=food_list, enumerate=enumerate)
 
 
@@ -49,7 +49,8 @@ def monthly_report():
 @bp.route("/dailyChart/<foodname>")
 def get_pie_chart(foodname):
     a = gb()
-    v1 = FS.retrieve_name(foodname)
+    v1 = food_service.retrieve_name(foodname)
+    print(v1)
     value = v1[2:] * 4
     c = a.pie_base(value=value)
     return c.dump_options_with_quotes()

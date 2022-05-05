@@ -5,7 +5,6 @@ from python_files.food.food_info_service import FoodInfoService
 bp = Blueprint('food', __name__, url_prefix='/main/food')
 food_info_service = FoodInfoService()
 
-
 @bp.get('/')
 def food_page():
 	return render_template('food_page.html')
@@ -26,3 +25,10 @@ def get_index():
 	print(today)
 	print(index)
 	return render_template('index.html')
+
+
+@bp.post('/upload_food')
+def get_food_img():
+	food_image = request.files['food_image']
+	print(food_image)
+	return "done"
