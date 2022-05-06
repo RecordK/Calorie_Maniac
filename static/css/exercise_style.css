@@ -1,0 +1,29 @@
+.exercise-selector input{
+    margin:0;padding:0;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.gender-selector input:active + .drink{
+    opacity: .9;
+}
+.gender-selector input:checked +.drink {
+    -webkit-filter: none;
+}
+
+.drink {
+    display: inline-block;
+    float: left;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80px; height: 80px;
+    margin: 10px 20px 10px 0px;
+    -webkit-transition: all 100ms ease-in;
+    -webkit-filter: invert(0.25) grayscale(1) opacity(.7);
+}
+
+.drink:hover {
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
