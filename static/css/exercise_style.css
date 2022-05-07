@@ -1,19 +1,8 @@
-.content-area {
-    padding-top: 200px;
-}
-
-.gender-selector input{
+.exercise-selector input{
     margin:0;padding:0;
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
-}
-
-.male {
-    background-image: url("../images/male_check_icon.png");
-}
-.female {
-    background-image: url("../images/female_check_icon.png");
 }
 
 .gender-selector input:active + .drink{
@@ -24,13 +13,14 @@
 }
 
 .drink {
+    display: inline-block;
+    float: left;
     cursor: pointer;
     background-size: contain;
     background-repeat: no-repeat;
-    display: inline-block;
-    width: 70px; height: 70px;
-    margin: 50px 50px 30px 50px;
-    -webkit-transition: all 100ms ease-in;
+    width: 80px; height: 80px;
+    margin: 10px 20px 10px 0px;
+    /*-webkit-transition: all 100ms ease-in;*/
     -webkit-filter: invert(0.25) grayscale(1) opacity(.7);
 }
 
