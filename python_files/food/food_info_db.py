@@ -1,6 +1,7 @@
 import logging
 import pymysql
 from python_files.food.food_info import FoodInfo
+from python_files.setting.db_setting import DBSetting
 
 
 # local mysql!!!
@@ -9,9 +10,13 @@ class FoodInfoDB:
 
 	def __init__(self):
 		self.conn = None
+		self.host = DBSetting.HOST
+		self.user = DBSetting.USER
+		self.password = DBSetting.PASSWORD
+		self.db_schema = DBSetting.DBSCHEMA
 
 	def connection(self):
-		self.conn = pymysql.connect(host='localhost', user='root', password='1234', db='calorieManiac')
+		self.conn = pymysql.connect(host=self.host, user=self.user, password=self.password, db=self.db_schema)
 
 	def disconnection(self):
 		self.conn.close()
@@ -20,7 +25,7 @@ class FoodInfoDB:
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
-			if isinstance(food_info, list):
+			if isinstance(food_info, list):		# not test
 				sql = 'INSERT INTO food_info(food_name, food_kcal, food_carbohydrate, food_protein, food_fat, food_sugars) VALUES'\
 						+', '.join('(%s, %s, %s, %s, %s, %s)' for _ in food_info)
 				flatten_values = [food for food_info_list in food_info for food in food_info_list]
