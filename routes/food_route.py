@@ -33,4 +33,4 @@ def get_index():
 def get_food_img():
 	food_image = request.files['food_image']
 	print(food_image)
-	return "done"
+	return render_template('food_page.html')

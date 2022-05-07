@@ -49,10 +49,10 @@ def monthly_report():
 @bp.route("/dailyChart/<foodname>")
 def get_pie_chart(foodname):
     a = gb()
-    v1 = food_service.retrieve_name(foodname)
-    print(v1)
-    value = v1[2:] * 4
-    c = a.pie_base(value=value)
+    # v1 = FS.retrieve_by_index(foodname)
+    # print(v1)
+    # value = v1[2:] * 4
+    c = a.pie_base()
     return c.dump_options_with_quotes()
 
 

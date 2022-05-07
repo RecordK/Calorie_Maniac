@@ -69,14 +69,14 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.4 * self.counter)
 
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 130), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -99,7 +99,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def squat(self):
-        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/squats.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/squats.mp4')
         self.counter = 0
         self.calories = 0
         stage = None
@@ -152,7 +152,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.32 * self.counter)
 
                 except:
                     pass
@@ -182,7 +182,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def pull_up(self):
-        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/pullup3.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/pullup3.mp4')
         self.counter = 0
         self.stage = None
         ## Setup mediapipe instance
@@ -226,7 +226,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(1 * self.counter)
                 except:
                     pass
 
@@ -255,7 +255,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def chair_dips(self):
-        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/Chair Dips.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/Chair Dips.mp4')
         self.counter = 0
         self.calories = 0
         stage = None
@@ -302,7 +302,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.5 * self.counter)
 
                 except:
                     pass
@@ -331,7 +331,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def crunch(self):
-        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/crunches.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/crunches.mp4')
         self.counter = 0
         self.calories = 0
         stage = None
@@ -377,7 +377,7 @@ class Exersize_service:
                         print(self.counter)
 
                         # Calorie calc logic
-                        self.calories = 1 * self.counter
+                        self.calories = round(0.25 * self.counter)
 
                 except:
                     pass
@@ -451,7 +451,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.33 * self.counter)
 
                 except:
                     pass
@@ -481,7 +481,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def push_up(self):
-        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/pushup.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/Side Lateral Raise.mp4')
         self.counter = 0
         self.calories = 0
         stage = None
@@ -525,7 +525,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.3 * self.counter)
 
                 except:
                     pass
@@ -555,7 +555,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def lunge(self):
-        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/Lunge.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/Lunge.mp4')
         self.counter = 0
         self.calories = 0
         stage = None
@@ -600,7 +600,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.3 * self.counter)
 
                 except:
                     pass
@@ -630,8 +630,7 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def leg_raise(self):
-        cap = cv2.VideoCapture(
-            '/Users/gimseungheon/Desktop/김승헌/sessac_python/cal_excersize/videos/Lying Leg Raises.mp4')
+        cap = cv2.VideoCapture('/Users/gimseungheon/Desktop/김승헌/sessac_python/Calorie_Maniac/static/videos/Lying Leg Raises.mp4')
         self.counter = 0
         self.calories = 0
         stage = None
@@ -677,7 +676,7 @@ class Exersize_service:
                         print(self.counter)
 
                     # Calorie calc logic
-                    self.calories = 1 * self.counter
+                    self.calories = round(0.1 * self.counter)
 
                 except:
                     pass
