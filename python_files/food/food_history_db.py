@@ -1,5 +1,6 @@
 import logging
 import pymysql
+from _datetime import datetime
 from python_files.food.food_history import FoodHistory
 
 
@@ -18,12 +19,16 @@ class FoodHistoryDB:
 	def select_by_index(self):
 		pass
 
-	def insert_by_food_index(self):
+	def insert_data(self, food_index, food_name, food_image):
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
-			sql = 'INSERT INTO food_history(food_index, food_name, food_data, food_image) VALUES (%s, %s, %s, %s)'
-
+			if food_image is None:
+				sql = 'INSERT INTO food_history(food_index, food_name) VALUES (%s, %s)'
+				data = (int(food_index), food_name)
+				cursor.execute(sql, data)
+			self.conn.commit()
+			return True
 		except Exception as e:
 			self.logger.error(e)
 		finally:
