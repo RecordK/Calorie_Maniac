@@ -34,7 +34,7 @@
                     <div class="col-5 mt-5">
                         <form action="/main/food/upload_food" class="mb-5" method="post" enctype="multipart/form-data">
                             <div class="d-grid">
-                                <button type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#modal_upload" onclick="document.getElementById('file_button').click()">음식 사진 업로드</button>
+                                <button type="button" id="upload_button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#modal_upload" onclick="document.querySelector('#file_button').click()">음식 사진 업로드</button>
                                 <input type="file" id="file_button" name="food_image" accept="image/*" style="display: none; visibility: hidden;">
                             </div>
                             <span class="fs-6 fw-lighter">원하는 음식이 아니신가요?</span><br>
@@ -87,40 +87,36 @@
         const inputFile = document.querySelector('#file_button');
         const previewContainer = document.querySelector('#image-preview');
         const previewImage = document.querySelector('.image-preview__image');
-        const previewDefaultText = document.querySelector('.image-preview__image-text')
+        const previewDefaultText = document.querySelector('.image-preview__image-text');
+        const uploadButton = document.querySelector('#upload_button');
 
-        inputFile.addEventListener("click", function () {
-            console.log("click");
-            document.body.onfocus = function () {
-                console.log("in1");
-                if (inputFile.value.length) {
-                    console.log("length > 0")
+        /* preview page in modal */
+        uploadButton.addEventListener("click", function () {
+            console.log('in1')
+            inputFile.addEventListener("change", function () {
+                const file = this.files[0];
+                console.log('in2')
+                if (file) {
+                    const reader = new FileReader();
+
+                    previewDefaultText.style.display = "none";
+                    previewImage.style.display = "block";
+
+                    reader.addEventListener("load", function () {
+                        previewImage.setAttribute("src", this.result);
+                    });
+                    reader.readAsDataURL(file);
                 } else {
-                    console.log("length = 0");
-                    document.querySelector('#close_button').click();
-                    document.body.onfocus = null;
+                    previewDefaultText.style.display = null;
+                    previewImage.style.display = null;
+                    document.querySelector('#close_button').click()
                 }
-            };
-        });
-
-
-        inputFile.addEventListener("change", function () {
-            let file = this.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                previewDefaultText.style.display = "none";
-                previewImage.style.display = "block";
-
-                reader.addEventListener("load", function () {
-                    previewImage.setAttribute("src", this.result);
-                });
-                reader.readAsDataURL(file);
-            } else if (file === null) {
-                previewDefaultText.style.display = null;
-                previewImage.style.display = null;
-            }
+                (function () {
+                    if (previewImage == null) {
+                        document.querySelector('#close_button').click()
+                    }
+                })();
+            });
         });
     </script>
 </html>

@@ -28,7 +28,7 @@
                         <div class="col-4 mb-4 exercise-selector">
                             <input type="radio" id="{{ exercise_file[0] }}" name="select_exercise" onclick="window.location.href='/main/health/realtime?index={{ loop.index }}'">
                             <label class="drink" for="{{ exercise_file[0] }}" style="background-image: url({{ url_for("static", filename='/images/exercise_img/' + exercise_file[0]) }}"></label>
-                            <h6 class="text-center">{{ exercise_file[1] }}</h6>
+                            <h6 class="text-center"><a onclick="window.location.href='/main/health/realtime?index={{ loop.index }}'">{{ exercise_file[1] }}</a></h6>
                             <input type="hidden" value="{{ loop.index }}" name="exercise_index">
                         </div>
                     {% endfor %}
