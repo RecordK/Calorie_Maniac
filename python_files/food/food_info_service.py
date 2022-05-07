@@ -38,6 +38,10 @@ class FoodInfoService:
 		food_list = self.food_db.select_all()
 		return food_list
 
-	def retrieve_name(self, food_name):
+	def retrieve_by_index(self, food_index):
+		food_list = self.food_db.select_by_index(food_index)
+		return food_list
+
+	def retrieve_by_name(self, food_name):
 		food_list = self.food_db.select_by_name(food_name)
 		return food_list

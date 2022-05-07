@@ -68,3 +68,28 @@ class FoodInfoDB:
 		finally:
 			self.disconnection()
 
+	def select_by_index(self, index):
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			if isinstance(index, list):
+				sql = 'SELECT * FROM food_info WHERE food_index IN (' + ', '.join(('%s') for _ in index) +')'
+				print(sql)
+				cursor.execute(sql, index)
+				food_list = []
+				for row in cursor:
+					food_list.append(FoodInfo(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+				return food_list
+			else:
+				sql = 'SELECT * FROM food_info WHERE food_index = (%s)'
+				index = int(index)
+				data = (index, )
+				cursor.execute(sql, data)
+				row = cursor.fetchone()
+				print('row0', row[1])
+				return FoodInfo(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+
