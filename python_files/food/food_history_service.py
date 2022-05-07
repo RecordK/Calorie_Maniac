@@ -8,3 +8,5 @@ class FoodHistoryService:
 	def insert_data(self, food_index, food_name, food_image):
 		self.food_history_db.insert_data(food_index, food_name, food_image)
 
+	def retrieve_by_today(self):
+		return self.food_history_db.select_by_date()
