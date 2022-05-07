@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8  offset-lg-2">
+            <h3 class="mt-5">운동하기!!</h3>
+            {%if index == 1%}
+            <img src="{{ url_for('exec.video_feed_push_up') }}" width="80%">
+            {%elif index == 2%}
+            <img src="{{ url_for('exec.video_feed_squat') }}" width="80%">
+            {%elif index == 3%}
+            <img src="{{ url_for('exec.video_feed_crunch') }}" width="80%">
+            {%elif index == 4%}
+            <img src="{{ url_for('exec.video_feed_leg_raise') }}" width="80%">
+            {%elif index == 5%}
+            <img src="{{ url_for('exec.video_feed_dips') }}" width="80%">
+            {%elif index == 6%}
+            <img src="{{ url_for('exec.video_feed_arm_curl') }}" width="80%">
+            {%elif index == 7%}
+            <img src="{{ url_for('exec.video_feed_lunge') }}" width="80%">
+            {%elif index == 8%}
+            <img src="{{ url_for('exec.video_feed_pull_up') }}" width="80%">
+            {%elif index == 9%}
+            <img src="{{ url_for('exec.video_feed_side_lateral_raise') }}" width="80%">
+            {%endif%}
+            <form action="/exec/exec_result">
+                <input type="submit" name="end_exec" value="운동종료">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
