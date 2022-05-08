@@ -3,11 +3,16 @@ from datetime import datetime
 import glob
 from python_files.exercise.exercise_info_db import ExerciseInfoDB
 from python_files.exercise.exec_service import Exersize_service
+from python_files.exercise.exercise_history_db import ExerciseHistoryDB
+from python_files.exercise.exercise_history_service import ExerciseHistoryService
 
 bp = Blueprint('health', __name__, url_prefix='/main/health')
 
 execdb = ExerciseInfoDB()
 execserv = Exersize_service()
+exechistorydb = ExerciseHistoryDB()
+exechistoryserv = ExerciseHistoryService()
+
 
 @bp.get('/')
 def main():
@@ -28,17 +33,18 @@ def main():
 @bp.get('/realtime')
 def move_page():
     req_index = request.args.get('index')
-    print(req_index)
     data_index = execdb.select_by_index(req_index)
     print(data_index[0].exercise_index)
     idx = data_index[0].exercise_index
-    return render_template('realtime.html', index=idx)
+    name = data_index[0].exercise_name
+    print(name)
+    exechistoryserv.insert_start_by_index(idx, name)
+    return render_template('realtime.html', index=idx, name=name)
 
 
 @bp.route('/video_feed_arm_curl')
 def video_feed_arm_curl():
     return Response(execserv.arm_curl(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
 
 @bp.route('/video_feed_chair_dips')
 def video_feed_chair_dips():
@@ -79,8 +85,18 @@ def video_feed_side_lateral_raise():
 def video_feed_squat():
     return Response(execserv.squat(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@bp.route('/exercise_result')
-def exercise_result():
+
+@bp.route('/exercise_result/<int:index>')
+def exercise_result(index):
+    print('exec_index: ', index)
+    data_index = execdb.select_by_index(index)
+    idx = data_index[0].exercise_index
+    name = data_index[0].exercise_name
+    print('name:', name)
     counter = execserv.counter
+    print('counter: ', counter)
     calories = execserv.calories
-    return render_template('exercise_result.html', counter=counter, calories=calories)
+    print('calories: ', calories)
+    exechistorydb.update_end_by_index(idx, calories, counter)
+    # exechistorydb.save_exercised_time(idx)
+    return render_template('exercise_result.html', name=name, counter=counter, calories=calories)
