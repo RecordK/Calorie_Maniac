@@ -38,6 +38,6 @@ out/
 
 ### python ###
 python_files/setting/db_setting.py
-
+static/yolov3/
 ### others ###
 *.csv
