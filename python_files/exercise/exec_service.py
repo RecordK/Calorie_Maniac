@@ -10,6 +10,7 @@ class Exersize_service:
     def __init__(self):
         self.counter = 0
         self.calories = 0
+        self.coin = 0
 
     def calculate_angle(self, a, b, c):
         a = np.array(a)  # First
@@ -25,9 +26,12 @@ class Exersize_service:
         return angle
 
     def arm_curl(self):
-        cap = cv2.VideoCapture('static/videos/Bicep Curl.mp4')
+
+        # cap = cv2.VideoCapture('static/videos/Bicep Curl.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -71,12 +75,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.4 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -86,6 +93,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -102,6 +114,7 @@ class Exersize_service:
         cap = cv2.VideoCapture('static/videos/squats.mp4')
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -154,12 +167,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.32 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -169,6 +185,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -184,6 +205,8 @@ class Exersize_service:
     def pull_up(self):
         cap = cv2.VideoCapture('static/videos/pullup3.mp4')
         self.counter = 0
+        self.calories = 0
+        self.coin = 0
         self.stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -227,12 +250,15 @@ class Exersize_service:
 
                     # Calorie calc logic
                     self.calories = round(1 * self.counter)
+
+                    # Reward coin logic
+                    self.coin = self.counter
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -242,6 +268,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -258,6 +289,7 @@ class Exersize_service:
         cap = cv2.VideoCapture('static/videos/Chair Dips.mp4')
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -304,12 +336,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.5 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -320,6 +355,12 @@ class Exersize_service:
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                           mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
@@ -334,6 +375,7 @@ class Exersize_service:
         cap = cv2.VideoCapture('static/videos/crunches.mp4')
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -376,15 +418,18 @@ class Exersize_service:
                         self.counter += 1
                         print(self.counter)
 
-                        # Calorie calc logic
-                        self.calories = round(0.25 * self.counter)
+                    # Calorie calc logic
+                    self.calories = round(0.25 * self.counter)
+
+                    # Reward coin logic
+                    self.coin = self.counter
 
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -394,6 +439,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -409,6 +459,8 @@ class Exersize_service:
     def side_lateral_raise(self):
         cap = cv2.VideoCapture(0)
         self.counter = 0
+        self.calories = 0
+        self.coin = 0
         self.stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -453,12 +505,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.33 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -468,6 +523,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -482,8 +542,10 @@ class Exersize_service:
 
     def push_up(self):
         cap = cv2.VideoCapture('static/videos/pushup.mp4')
+        # cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -527,12 +589,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.3 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -542,6 +607,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -558,6 +628,7 @@ class Exersize_service:
         cap = cv2.VideoCapture('static/videos/Lunge.mp4')
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -602,12 +673,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.3 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -617,6 +691,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
@@ -633,6 +712,7 @@ class Exersize_service:
         cap = cv2.VideoCapture('static/videos/Lying Leg Raises.mp4')
         self.counter = 0
         self.calories = 0
+        self.coin = 0
         stage = None
         ## Setup mediapipe instance
         with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -678,12 +758,15 @@ class Exersize_service:
                     # Calorie calc logic
                     self.calories = round(0.1 * self.counter)
 
+                    # Reward coin logic
+                    self.coin = self.counter
+
                 except:
                     pass
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (280, 130), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
@@ -693,6 +776,11 @@ class Exersize_service:
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+
+                # Reward Coin data
+                cv2.putText(image, 'Coin: ' + str(self.coin),
+                            (10, 190),
                             cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
 
                 # Render detections
