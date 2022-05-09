@@ -42,17 +42,19 @@ class FoodHistoryDB:
 		finally:
 			self.disconnection()
 
-	def select_by_date(self):		# not test
+	def select_by_date(self):
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
 			today = datetime.today().strftime("%Y-%m-%d")
+			print('food_history_db-today:', today)
 			sql = 'SELECT * FROM food_history WHERE DATE(food_date) = %s'
 			date = (today, )
 			cursor.execute(sql, date)
 			food_today = []
 			for row in cursor:
-				food_today.append(FoodHistory(row[1], row[2], row[3], row[4]))
+				food_today.append(FoodHistory(row[0], row[1], row[2], row[3], row[4]))
+			print('food_history_db-food_toady[]:', food_today)
 			return food_today
 		except Exception as e:
 			self.logger.error(e)
