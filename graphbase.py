@@ -5,7 +5,7 @@ from random import randrange
 
 
 class GraphBase:
-    def pie_base(self, name = ['탄수화물', '단백질', '지방', '당류'], value=[123, 456, 789, 321], title='음식 영양 정보') -> Pie:
+    def pie_base(self, name=['탄수화물', '단백질', '지방', '당류'], value=[123, 456, 789, 321], title='음식 영양 정보') -> Pie:
         a = value
         v = [[i] for i in a]
         k = name

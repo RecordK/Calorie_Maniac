@@ -41,3 +41,9 @@ html, body {
 #logo{
 color: #EEEEEE;
 }
+
+.food_image {
+    float: left;
+    min-width: 100px;
+    min-height: 100px;
+}

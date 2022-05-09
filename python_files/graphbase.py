@@ -21,29 +21,36 @@ class GraphBase:
         #                                                                               legend_icon='pin'))
         # )
         # return p
-        title = '음식 영양 정보'
-        name = ['탄수화물', '단백질', '지방', '당류']
-        value = [[i] for i in values]
-        print(value)
-        pie_graph = (Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
-                 ).add("", [list(z) for z in zip(name, values)], rosetype="radius", radius=["30%", "60%"]
-                       ).set_series_opts(
-                            label_opts=opts.LabelOpts(
-                                is_show=True, position='top', formatter="{d} %")
-                                 ).set_global_opts(
-                                        title_opts=opts.TitleOpts(title=title),
-                                        tooltip_opts=opts.TooltipOpts(formatter="{b}: {c} kcal"),
-                                        legend_opts=opts.LegendOpts(
-                                            type_='scroll',
-                                            pos_bottom="60%",
-                                            pos_right="0%",
-                                            orient="vertical",
-                                            legend_icon='pin'
-                                        )
-                                )
-        )
 
-        return pie_graph
+        # title = '음식 영양 정보'
+        # name = ['탄수화물', '단백질', '지방', '당류']
+        # value = [[i] for i in values]
+        # print(value)
+        # pie_graph = (Pie(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
+        #          ).add("", [list(z) for z in zip(name, values)], rosetype="radius", radius=["30%", "60%"]
+        #                ).set_series_opts(
+        #                     label_opts=opts.LabelOpts(
+        #                         is_show=True, position='top', formatter="{d} %")
+        #                          ).set_global_opts(
+        #                                 title_opts=opts.TitleOpts(title=title),
+        #                                 tooltip_opts=opts.TooltipOpts(formatter="{b}: {c} kcal"),
+        #                                 legend_opts=opts.LegendOpts(
+        #                                     type_='scroll',
+        #                                     pos_bottom="60%",
+        #                                     pos_right="0%",
+        #                                     orient="vertical",
+        #                                     legend_icon='pin'
+        #                                 )
+        #                         )
+        # )
+        names = ['탄수화물', '단백질', '지방', '당류']
+        print(values)
+        pair = []
+        for name, value in zip(names, values):
+            pair.append([name, value])
+        pie = Pie()
+        pie.add('음식 영양 정보', data_pair=pair)
+        return pie.render()
 
 
     def line_month_base(self) -> Line:
