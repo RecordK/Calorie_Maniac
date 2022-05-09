@@ -25,30 +25,33 @@
         <main class="container mb-2">
             <div class="row">
             {% if kinds is defined %}
-                {% for i,j in enumerate(kinds) %}        {#  나중에 zip 으로 출력(음식만) #}
+                {% for kind, nutrition in zip(kinds, food_nutrition) %}        {#  나중에 zip 으로 출력(음식만) #}
                     {% if daily_list.split()[0] == '음식'%} {# 운동은 출력안됨 #}
-                        <div class="col-3" style="float:left;">
-                            출력부, {{ j }}
+                        <div class="mb-1">{{ kind.food_date }}</div>
+                        <div class="col-5" style="float:left;">
+                            <h6>{{ kind.food_name }}</h6>
+                            <img class="food_image" src="{{ kind.food_image }}" alt="food_image" id="food_image" onerror="null"><br>
+                            탄수화물: {{ nutrition[0] }}, 단백질: {{ nutrition[1] }}<br>
+                            지방: {{ nutrition[2] }}, 당류: {{ nutrition[3] }}
                         </div>
-                            <div id="pie{{j}}" value="{{j}}" style="width:400px; height:200px;" class="col-6" style="float:right;">
-                                <script>
-                                    $(
-                                        function () {
-                                            var chart = echarts.init(document.getElementById('pie{{j}}'), 'white', {renderer: 'canvas'});
-                                            var url = "http://127.0.0.1:5000/main/dailyChart/{{j}}";
-                                            $.ajax({
-                                                type: "GET",
-                                                url: url,
-                                                dataType: 'json',
-                                                success: function (result) {
-                                                    chart.setOption(result);
-                                                }
-                                            });
-                                        }
-                                    )
-                                </script>
-
-                            </div>
+                        <div id="pie{{kind.food_index}}" value="{{kind.food_index}}" style="width:400px; height:200px;" class="col-7 pie-graph">
+                            <script>
+                                $(
+                                    function () {
+                                        var chart = echarts.init(document.getElementById('pie{{kind.food_index}}'), 'white', {renderer: 'canvas'});
+                                        var url = "http://127.0.0.1:5000/main/dailyChart/{{kind.food_index}}";
+                                        $.ajax({
+                                            type: "GET",
+                                            url: url,
+                                            dataType: 'json',
+                                            success: function (result) {
+                                                chart.setOption(result);
+                                            }
+                                        });
+                                    }
+                                )
+                            </script>
+                        </div>
                     {% else %}      {# 운동 출력부 #}
                         <div class="col-12">
                             운동

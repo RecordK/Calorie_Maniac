@@ -80,7 +80,6 @@ class FoodInfoDB:
             cursor = self.conn.cursor()
             if isinstance(index, list):
                 sql = 'SELECT * FROM food_info WHERE food_index IN (' + ', '.join(('%s') for _ in index) + ')'
-                print(sql)
                 cursor.execute(sql, index)
                 food_list = []
                 for row in cursor:
@@ -92,7 +91,6 @@ class FoodInfoDB:
                 data = (index,)
                 cursor.execute(sql, data)
                 row = cursor.fetchone()
-                print('row0', row[1])
                 return FoodInfo(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
         except Exception as e:
             self.logger.error(e)
