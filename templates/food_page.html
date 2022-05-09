@@ -13,6 +13,7 @@
     <script>
         window.onload = function () {
             autoLoad('food_display');
+            history.pushState(null, null, '/');
         };
     </script>
 </head>
@@ -53,8 +54,8 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" id="close_button" data-bs-dismiss="modal">닫기</button>
-                                            <button type="submit" class="btn btn-primary">업로드</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                            <button type="submit" class="btn btn-primary" id="modal_upload">업로드</button>
                                         </div>
                                     </div>
                                 </div>
@@ -90,12 +91,12 @@
         const previewDefaultText = document.querySelector('.image-preview__image-text');
         const uploadButton = document.querySelector('#upload_button');
 
+        const uploadModalButton = document.querySelector('#modal_upload')
+
         /* preview page in modal */
         uploadButton.addEventListener("click", function () {
-            console.log('in1')
             inputFile.addEventListener("change", function () {
                 const file = this.files[0];
-                console.log('in2')
                 if (file) {
                     const reader = new FileReader();
 
@@ -111,12 +112,11 @@
                     previewImage.style.display = null;
                     document.querySelector('#close_button').click()
                 }
-                (function () {
-                    if (previewImage == null) {
-                        document.querySelector('#close_button').click()
-                    }
-                })();
             });
+        });
+
+        uploadModalButton.addEventListener('click', function () {
+
         });
     </script>
 </html>
