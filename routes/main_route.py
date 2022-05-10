@@ -47,9 +47,13 @@ def daily_report():
     exercise_index = [exercise.exercise_index for exercise in exercise_today]
     exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     exercise_info = []
-    for exercise in exercise_list:
-        exercise_info.append(
-            [exercise.exercise_name, exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin])
+
+    if not exercise_today:
+        exercise_today = '몰루'
+    else:
+        for exercise in exercise_list:
+            exercise_info.append(
+                [exercise.exercise_name, exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin])
     print('======')
     print(exercise_today[0].exercise_name)
     print(exercise_info)

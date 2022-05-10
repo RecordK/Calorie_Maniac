@@ -30,8 +30,8 @@
     <main class="container mb-2">
         <div class="row">
             {% if kinds is defined %}
-                {% for kind, nutrition in zip(kinds, food_nutrition) %} {# 나중에 zip 으로 출력(음식만) #}
-                    {% if daily_list.split()[0] == '음식'%} {# 운동은 출력안됨 #}
+                {% if daily_list.split()[0] == '음식'%} {# 운동은 출력안됨 #}
+                    {% for kind, nutrition in zip(kinds, food_nutrition) %} {# 나중에 zip 으로 출력(음식만) #}
                         <div class="mb-1">{{ kind.food_date }}</div>
                         <div class="col-5" style="float:left;">
                             <h6>{{ kind.food_name }}</h6>
@@ -48,47 +48,38 @@
                         <div id="pie{{kind.food_index}}" value="{{kind.food_index}}" style="width:400px; height:200px;"
                              class="col-7 pie-graph">
                             <script>
-                                            $(
-                                                function () {
-                                                    var chart = echarts.init(document.getElementById('pie{{kind.food_index}}'), 'white', {renderer: 'canvas'});
-                                                    var url = "http://127.0.0.1:5000/main/dailyChart/{{kind.food_index}}";
-                                                    $.ajax({
-                                                        type: "GET",
-                                                        url: url,
-                                                        dataType: 'json',
-                                                        success: function (result) {
-                                                            chart.setOption(result);
-                                                        }
-                                                    });
-                                                }
-                                            )
-
-
-
+                                $(
+                                    function () {
+                                        var chart = echarts.init(document.getElementById('pie{{kind.food_index}}'), 'white', {renderer: 'canvas'});
+                                        var url = "http://127.0.0.1:5000/main/dailyChart/{{kind.food_index}}";
+                                        $.ajax({
+                                            type: "GET",
+                                            url: url,
+                                            dataType: 'json',
+                                            success: function (result) {
+                                                chart.setOption(result);
+                                            }
+                                        });
+                                    }
+                                )
                             </script>
                         </div>
-                    {% endif %}
-                {% endfor %}
-
+                    {% endfor %}
+                {% endif %}
             {% else %} {# 운동 출력부 #}
                 <div class="col-12">
-<!--                    {% if kinds is defined %}-->
-                {% for kind, exec in zip(kinds, exercise_info) %} {# 나중에 zip 으로 출력(음식만) #}
-                    {% if daily_list.split()[0] == '운동'%} {# 운동은 출력안됨 #}
-                    <!--                <div class="mb-1">{{ kind.end_time }}</div>-->
-                    <div class="col-5" style="float:left;">
-                        <h6>{{ kind.exercise_name }}</h6>
-                        <img class="exercise_image" src="{{ kind.exercise_image }}" alt="exercise_image" id="exercise_image"
-                             onerror="null"><br>
-                        운동일시: {{ exec[1] }}<br>
-                        운동 시간: {{ exec[2] }}<br> 운동 횟수: {{ exec[3] }}<br>
-                        소모 칼로리: {{ exec[4] }}<br> 획득 코인: {{ exec[5] }}<br>
-                    </div>
+                    {% for kind, exec in zip(kinds, exercise_info) %} {# 나중에 zip 으로 출력(음식만) #}
+                        {% if daily_list.split()[0] == '운동'%} {# 운동은 출력안됨 #}
+                            <h6>{{ kind.exercise_name }}</h6>
+                            <img class="exercise_image" src="{{ kind.exercise_image }}" alt="exercise_image" id="exercise_image" onerror="null"><br>
+                            운동일시: {{ exec[1] }}<br>
+                            운동 시간: {{ exec[2] }}<br> 운동 횟수: {{ exec[3] }}<br>
+                            소모 칼로리: {{ exec[4] }}<br> 획득 코인: {{ exec[5] }}<br>
+                        {% else %}
+                            <span class="fs-5">{{ daily_list.split()[0] }}이 등록되어 있지 않아요!</span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                    {% else %}
-                        <span class="fs-5">{{ daily_list.split()[0] }}이 등록되어 있지 않아요!</span>
-                    {% endif %}
-                {% endfor %}
             {% endif %}
         </div>
     </main>
