@@ -44,7 +44,8 @@ def daily_report():
     # Exercise
     exercise_history_service = ExerciseHistoryService()
     exercise_today = exercise_history_service.retrieve_by_today()
-    exercise_index = [exercise.exercise_index for exercise in exercise_today]
+    exercise_index = [exercise.exercise_list for exercise in exercise_today]
+    print(exercise_index)
     exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     exercise_info = []
 
@@ -53,7 +54,7 @@ def daily_report():
     else:
         for exercise in exercise_list:
             exercise_info.append(
-                [exercise.exercise_name, exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin])
+                [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time, exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin])
     print('======')
     print(exercise_today[0].exercise_name)
     print(exercise_info)

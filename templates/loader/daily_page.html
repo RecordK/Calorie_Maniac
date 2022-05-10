@@ -20,6 +20,7 @@
             {% set kinds = food_list %}
         {% elif list == 'exercise_list' %}
             {% set kinds = exercise_list %}
+{{kinds}}
         {% endif %}
 <div class="border-teal">
     <div class="container mb-2">
@@ -66,15 +67,14 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-            {% else %} {# 운동 출력부 #}
                 <div class="col-12">
                     {% for kind, exec in zip(kinds, exercise_info) %} {# 나중에 zip 으로 출력(음식만) #}
                         {% if daily_list.split()[0] == '운동'%} {# 운동은 출력안됨 #}
                             <h6>{{ kind.exercise_name }}</h6>
                             <img class="exercise_image" src="{{ kind.exercise_image }}" alt="exercise_image" id="exercise_image" onerror="null"><br>
-                            운동일시: {{ exec[1] }}<br>
-                            운동 시간: {{ exec[2] }}<br> 운동 횟수: {{ exec[3] }}<br>
-                            소모 칼로리: {{ exec[4] }}<br> 획득 코인: {{ exec[5] }}<br>
+                            운동일시: {{ exec[4] }}<br>
+                            운동 시간: {{ exec[5] }}<br> 운동 횟수: {{ exec[6] }}<br>
+                            소모 칼로리: {{ exec[7] }}<br> 획득 코인: {{ exec[8] }}<br>
                         {% else %}
                             <span class="fs-5">{{ daily_list.split()[0] }}이 등록되어 있지 않아요!</span>
                         {% endif %}
