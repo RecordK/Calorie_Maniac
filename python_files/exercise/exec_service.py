@@ -111,7 +111,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def squat(self):
-        cap = cv2.VideoCapture('static/videos/squats.mp4')
+        # cap = cv2.VideoCapture('static/videos/squats.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
@@ -203,7 +204,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def pull_up(self):
-        cap = cv2.VideoCapture('static/videos/pullup3.mp4')
+        # cap = cv2.VideoCapture('static/videos/pullup3.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
@@ -286,7 +288,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def chair_dips(self):
-        cap = cv2.VideoCapture('static/videos/Chair Dips.mp4')
+        # cap = cv2.VideoCapture('static/videos/Chair Dips.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
@@ -372,7 +375,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def crunch(self):
-        cap = cv2.VideoCapture('static/videos/crunches.mp4')
+        # cap = cv2.VideoCapture('static/videos/crunches.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
@@ -541,8 +545,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def push_up(self):
-        cap = cv2.VideoCapture('static/videos/pushup.mp4')
-        # cap = cv2.VideoCapture(0)
+        # cap = cv2.VideoCapture('static/videos/pushup.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
@@ -625,7 +629,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def lunge(self):
-        cap = cv2.VideoCapture('static/videos/Lunge.mp4')
+        # cap = cv2.VideoCapture('static/videos/Lunge.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
@@ -709,7 +714,8 @@ class Exersize_service:
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def leg_raise(self):
-        cap = cv2.VideoCapture('static/videos/Lying Leg Raises.mp4')
+        # cap = cv2.VideoCapture('static/videos/Lying Leg Raises.mp4')
+        cap = cv2.VideoCapture(0)
         self.counter = 0
         self.calories = 0
         self.coin = 0
