@@ -1,6 +1,8 @@
 from flask import Blueprint, Flask, render_template, request, session
 from graphbase import GraphBase
 from datetime import datetime
+
+from python_files.exercise.exercise_history_service import ExerciseHistoryService
 from python_files.food.food_info_service import FoodInfoService
 from python_files.food.food_history_service import FoodHistoryService
 
@@ -26,6 +28,7 @@ def main_return():
 
 @bp.get('/report/daily')
 def daily_report():
+    # Food
     food_info_service = FoodInfoService()
     food_history_service = FoodHistoryService()
     today = datetime.today().strftime("%Y-%m-%d %H:%M")
@@ -38,7 +41,21 @@ def daily_report():
     print('======')
     print(food_today[0].food_name)
     print(nutrition_info)
-    return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info, zip=zip)
+
+    # Exercise
+    exercise_history_service = ExerciseHistoryService()
+    exercise_today = exercise_history_service.retrieve_by_today()
+    exercise_index = [exercise.exercise_index for exercise in exercise_today]
+    exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
+    exercise_info = []
+    for exercise in exercise_list:
+        exercise_info.append(
+            [exercise.exercise_name, exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin])
+    print('======')
+    print(exercise_today[0].exercise_name)
+    print(exercise_info)
+    return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
+                           exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
 
 
 @bp.get('/report/weekly')
@@ -60,8 +77,8 @@ def get_pie_chart(foodindex):
     food_info_service = FoodInfoService()
     graph_base = GraphBase()
     v1 = food_info_service.retrieve_by_index(foodindex)
-    nut = [v1.food_carbohydrate, v1.food_protein, v1.food_fat, v1.food_sugars ]
-    kcal = [nut[0]*4, nut[1]*4, nut[2]*9, nut[3]*4]
+    nut = [v1.food_carbohydrate, v1.food_protein, v1.food_fat, v1.food_sugars]
+    kcal = [nut[0] * 4, nut[1] * 4, nut[2] * 9, nut[3] * 4]
     c = graph_base.pie_base(value=kcal)
     return c.dump_options_with_quotes()
 
@@ -89,6 +106,7 @@ def get_pie_week_diff_chart2():
     # c = a.pie_base(name, value, title)
     # return c.dump_options_with_quotes()
     pass
+
 
 @bp.route("/lineGraph")
 def get_line_month_graph():
