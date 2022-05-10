@@ -36,12 +36,11 @@ def daily_report():
     food_info_index = [food.food_index for food in food_today]
     food_info_list = food_info_service.retrieve_by_index(food_info_index)
     nutrition_info = []
-    for food in food_info_list:
-        nutrition_info.append([food.food_carbohydrate, food.food_protein, food.food_fat, food.food_sugars])
-    print('======')
-    print(food_today[0].food_name)
-    print(nutrition_info)
-
+    if not food_today:      # 빈 배열 감지
+        food_today = '오늘 먹은 음식이 없어요!'
+    else:
+        for food in food_info_list:
+            nutrition_info.append([food.food_carbohydrate, food.food_protein, food.food_fat, food.food_sugars])
     # Exercise
     exercise_history_service = ExerciseHistoryService()
     exercise_today = exercise_history_service.retrieve_by_today()
