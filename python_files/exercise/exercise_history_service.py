@@ -12,5 +12,9 @@ class ExerciseHistoryService:
     def retrieve_by_today(self):
         return exercise_history_db.select_by_date()
 
+    def retrieve_by_index(self, exercise_list):
+        exercise_list = exercise_history_db.select_by_index(exercise_list)
+        return exercise_list
+
     def insert_start_by_index(self, exercise_index, exercise_name):
         exercise_history_db.insert_start_by_index(exercise_index, exercise_name)
