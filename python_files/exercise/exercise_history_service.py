@@ -36,7 +36,7 @@ class ExerciseHistoryService:
             origin = firstday - timedelta(days=firstday.weekday() + 1)
         else:
             origin = firstday + timedelta(days=6 - firstday.weekday())
-        return (target - origin).days
+        return (target - origin).days // 7 + 1
 
     def retrieve_by_month(self, month):
         exercise_month_list = exercise_history_db.select_by_month(month)

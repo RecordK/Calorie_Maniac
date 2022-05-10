@@ -68,6 +68,7 @@ def exercise_result():
     d = int(end_date.split('-')[2])
     print(y, m, d)
     week = exercise_history_service.get_week_no(y, m, d)
+    print(week)
     month = datetime.today().strftime("%m")
 
     # check
