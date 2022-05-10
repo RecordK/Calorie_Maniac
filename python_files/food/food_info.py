@@ -8,7 +8,7 @@ class FoodInfo:
 		self.food_fat = food_fat
 		self.food_sugars = food_sugars
 
-	def __str__(self) -> tuple[object, float, float, float, float, float]:
+	def __str__(self):
 		return self.food_name, self.food_kcal, self.food_carbohydrate, self.food_protein, self.food_fat, self.food_sugars
 
 

@@ -38,3 +38,27 @@ html, body {
     transform: translateY(-50%);
     color: #ccc;
 }
+
+#logo{
+color: #EEEEEE;
+}
+
+.inline {
+    display: inline-block;
+}
+
+#food_image {
+    float: left;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.video_file {
+    object-fit: fill;
+}
+
+.session_info {
+    color: white;
+}

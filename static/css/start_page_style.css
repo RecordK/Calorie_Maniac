@@ -10,10 +10,10 @@
 }
 
 .male {
-    background-image: url("../img_files/male_check_icon.png");
+    background-image: url("../images/male_check_icon.png");
 }
 .female {
-    background-image: url("../img_files/female_check_icon.png");
+    background-image: url("../images/female_check_icon.png");
 }
 
 .gender-selector input:active + .drink{
