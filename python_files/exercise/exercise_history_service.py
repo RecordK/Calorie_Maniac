@@ -7,8 +7,10 @@ exercise_history_db = ExerciseHistoryDB()
 
 class ExerciseHistoryService:
 
-    def insert_data(self, exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week):
-        exercise_history_db.insert_exercise_data(exercise_index, exercise_name, start_time, use_kcal, count, coin, month, week)
+    def insert_data(self, exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin,
+                    month, week):
+        exercise_history_db.insert_exercise_data(exercise_index, exercise_name, start_time, use_kcal, count, coin,
+                                                 month, week)
 
     def retrieve_by_today(self):
         return exercise_history_db.select_by_date()
@@ -22,9 +24,6 @@ class ExerciseHistoryService:
         exercise_history_db.insert_start_by_index(exercise_index, exercise_name)
 
     def get_date(self, y, m, d):
-        '''y: year(4 digits)
-         m: month(2 digits)
-         d: day(2 digits'''
         s = f'{y:04d}-{m:02d}-{d:02d}'
         return datetime.strptime(s, '%Y-%m-%d')
 
@@ -36,5 +35,15 @@ class ExerciseHistoryService:
         elif firstday.weekday() < 3:
             origin = firstday - timedelta(days=firstday.weekday() + 1)
         else:
-            origin = firstday + timedelta(days=6-firstday.weekday())
-        return (target - origin).days // 7 + 1
+            origin = firstday + timedelta(days=6 - firstday.weekday())
+        return (target - origin).days
+
+    def retrieve_by_month(self, month):
+        exercise_month_list = exercise_history_db.select_by_month(month)
+        # print(execercise_month_list)
+        return exercise_month_list
+
+    def retrieve_by_week(self, week):
+        exercise_week_list = exercise_history_db.select_by_week(week)
+        # print(execercise_week_list)
+        return exercise_week_list
