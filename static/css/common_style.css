@@ -54,3 +54,11 @@ color: #EEEEEE;
     max-width: 100px;
     max-height: 100px;
 }
+
+.video_file {
+    object-fit: fill;
+}
+
+.session_info {
+    color: white;
+}

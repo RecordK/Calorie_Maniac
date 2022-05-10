@@ -17,7 +17,8 @@ def main():
     session['age'] = request.form['age']
     session['height'] = request.form['height']
     session['weight'] = request.form['weight']
-
+    session['user'] = session['gender'] + session['age'] + session['height'] + session['weight']
+    print(session['user'])
     return render_template('index.html')
 
 
