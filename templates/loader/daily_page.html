@@ -30,9 +30,15 @@
                         <div class="mb-1">{{ kind.food_date }}</div>
                         <div class="col-5" style="float:left;">
                             <h6>{{ kind.food_name }}</h6>
-                            <img class="food_image" src="{{ kind.food_image }}" alt="food_image" id="food_image" onerror="null"><br>
-                            탄수화물: {{ nutrition[0] }}, 단백질: {{ nutrition[1] }}<br>
-                            지방: {{ nutrition[2] }}, 당류: {{ nutrition[3] }}
+                            <div class="inline">
+                                <img src="{{ kind.food_image }}" alt="food_image" id="food_image" onerror="this.src='{{ url_for('static', filename='images/No_image_available.webp') }}'">
+                                <div class="inline">
+                                    탄수화물: {{ nutrition[0] }}g<br>
+                                    단백질: {{ nutrition[1] }}g<br>
+                                    지방: {{ nutrition[2] }}g<br>
+                                    당류: {{ nutrition[3] }}g
+                                </div>
+                            </div>
                         </div>
                         <div id="pie{{kind.food_index}}" value="{{kind.food_index}}" style="width:400px; height:200px;" class="col-7 pie-graph">
                             <script>
