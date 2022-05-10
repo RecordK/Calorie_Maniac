@@ -30,9 +30,13 @@
     <main class="container mb-2">
         <div class="row">
             {% if kinds is defined %}
-                {% if daily_list.split()[0] == '음식'%} {# 운동은 출력안됨 #}
-                    {% for kind, nutrition in zip(kinds, food_nutrition) %} {# 나중에 zip 으로 출력(음식만) #}
-                        <div class="mb-1">{{ kind.food_date }}</div>
+                {% if daily_list.split()[0] == '음식'%}
+                    {% for kind, nutrition in zip(kinds, food_nutrition) %}
+                        {% if loop.index > 1 %}
+                            <div class="spr-line-1"></div>
+                        {% endif %}
+                        <div class="">{{ kind.food_date }}</div>
+                        <div class="spr-line-1 mb-1"></div>
                         <div class="col-5" style="float:left;">
                             <h6>{{ kind.food_name }}</h6>
                             <div class="inline">
@@ -76,8 +80,6 @@
                             운동 시간: {{ exec[5] }}<br> 운동 횟수: {{ exec[6] }}<br>
                             소모 칼로리: {{ exec[7] }}<br> 획득 코인: {{ exec[8] }}<br>
                             </div>
-                        {% else %}
-                            <span class="fs-5">{{ daily_list.split()[0] }}이 등록되어 있지 않아요!</span>
                         {% endif %}
                     {% endfor %}
                 </div>

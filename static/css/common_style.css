@@ -58,3 +58,7 @@ color: #EEEEEE;
 .video_file {
     object-fit: fill;
 }
+
+.session_info {
+    color: white;
+}
