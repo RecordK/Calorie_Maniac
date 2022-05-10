@@ -22,24 +22,30 @@
 <!-- header -->
 {% include 'include/top_nav.html' %}
 <!-- header end -->
-<h3 class="mt-5">운동하기!!</h3>
-<div class="border-teal">
 <div class="container">
     <div class="row">
         <div class="col-lg-8  offset-lg-2">
             <!--            push up-->
             {%if index == 1%}
-            <img src="" class="video_file" width="100%">
-            <input type="button" class="video_button" value="운동시작">
-            <form action="/main/health/exercise_result/" method="post">
-                <input type="submit" name="end_exec" value="운동종료">
-                <input type="hidden" value="{{ start_time }}" name="start_exec">
-                <input type="hidden" value="{{ index }}" name="index_exec">
-            </form>
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
+            <img src="" class="video_file text-center" width="100%">
+            </div>
+            <div class="text-center">
+                <form action="/main/health/exercise_result/" method="post">
+                    <input type="button" class="btn btn-success video_button" value="운동시작">
+                    <input type="submit" class="btn" name="end_exec" value="운동종료">
+                    <input type="hidden" value="{{ start_time }}" name="start_exec">
+                    <input type="hidden" value="{{ index }}" name="index_exec">
+                </form>
+            </div>
 
             <!--            squat-->
             {%elif index == 2%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
             <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
@@ -49,7 +55,10 @@
 
             <!--            crunch-->
             {%elif index == 3%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
             <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
@@ -59,7 +68,10 @@
 
             <!--            leg raise-->
             {%elif index == 4%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
             <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
@@ -69,7 +81,10 @@
 
             <!--            chair dips-->
             {%elif index == 5%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
             <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
@@ -79,17 +94,22 @@
 
             <!--            arm_curl-->
             {%elif index == 6%}
-            <img src="" class="video_file" width="110%">
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
+            <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
                 <input type="hidden" value="{{ start_time }}" name="start_exec">
                 <input type="hidden" value="{{ index }}" name="index_exec">
             </form>
-
             <!--            lunge-->
             {%elif index == 7%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
             <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
@@ -99,7 +119,23 @@
 
             <!--            pull up-->
             {%elif index == 8%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
             <img src="" class="video_file" width="100%">
+            </div>
+            <input type="button" class="video_button" value="운동시작">
+            <form action="/main/health/exercise_result/" method="post">
+                <input type="submit" class="video_close" name="end_exec" value="운동종료">
+                <input type="hidden" value="{{ start_time }}" name="start_exec">
+                <input type="hidden" value="{{ index }}" name="index_exec">
+            </form>
+
+            <!--            side lateral raise-->
+            {%elif index == 9%}
+            <h3 class="mt-5">Arm Curl</h3>
+            <div class="border-video">
+            <img src="" class="video_file" width="100%">
+            </div>
             <input type="button" class="video_button" value="운동시작">
             <form action="/main/health/exercise_result/" method="post">
                 <input type="submit" name="end_exec" value="운동종료">
@@ -107,19 +143,9 @@
                 <input type="hidden" value="{{ index }}" name="index_exec">
             </form>
 
-            <!--            side lateral raise-->
-            {%elif index == 9%}
-            <img src="" class="video_file" width="100%">
-            <input type="button" class="video_button" value="운동시작">
-            <form action="/main/health/exercise_result/" method="post">
-                <input type="submit" name="end_exec" value="운동종료">
-                <input type="hidden" value="{{ start_time }}" name="start_exec">
-                <input type="hidden" value="{{ index }}" name="index_exec">
-            </form>
             {%endif%}
         </div>
     </div>
-</div>
 </div>
 </body>
 

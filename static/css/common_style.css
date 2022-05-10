@@ -56,9 +56,25 @@ color: #EEEEEE;
 }
 
 .video_file {
-    object-fit: fill;
+    object-fit: contain;
 }
 
 .session_info {
     color: white;
+}
+
+.border-video{
+    border-style: solid;
+    border-color: #79DFC1;
+    border-radius: 5px;
+    border-width: 1em;
+    min-height: 50px;
+    width: 100%;
+    margin-top: 200px;
+}
+
+
+.video_close{
+    margin-left:400px;
+    margin-top: 0px;
 }

@@ -39,11 +39,24 @@ def get_food_img():
     base_path = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     path = os.path.join(base_path, 'yolov3/data/samples')
     food_image = request.files['food_image']
+
     food_image.save(path + '/' + secure_filename(food_image.filename))
     print(food_image)
     an = d.detect()
+    print(an)
+    an = check(an)
     print(an)
     i = os.listdir(path)
     for j in i:
         os.remove(path + '/' + j)
     return render_template('food_page.html', an=an)
+
+
+def check(x):
+    for i in x:
+        if len(x) > 1 and type(i) == str:
+            x.remove('사진을 다시 등록해주세요')
+    if len(set(x)) != len(x):
+        x = set(x)
+
+    return x
