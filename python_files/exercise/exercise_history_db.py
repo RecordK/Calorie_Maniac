@@ -21,8 +21,28 @@ class ExerciseHistoryDB:
     def disconnection(self):
         self.conn.close()
 
-    def select_by_index(self):
-        pass
+    def select_by_index(self, exercise_index):
+        try:
+            self.connection()
+            cursor = self.conn.cursor()
+            if isinstance(exercise_index, list):
+                sql = 'SELECT * FROM exercise_history WHERE exercise_index IN (' + ', '.join(('%s') for _ in exercise_index) + ')'
+                cursor.execute(sql, exercise_index)
+                exercise_list = []
+                for row in cursor:
+                    exercise_list.append(ExerciseHistory(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
+                return exercise_list
+            else:
+                sql = 'SELECT * FROM exercise_history WHERE exercise_index = (%s)'
+                index = int(exercise_index)
+                data = (index,)
+                cursor.execute(sql, data)
+                row = cursor.fetchone()
+                return ExerciseHistory(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+        except Exception as e:
+            self.logger.error(e)
+        finally:
+            self.disconnection()
 
     def select_by_date(self):  # not test
 
@@ -35,7 +55,7 @@ class ExerciseHistoryDB:
             cursor.execute(sql, date)
             exercise_today = []
             for row in cursor:
-                exercise_today.append(ExerciseHistory(row[1], row[2], row[4], row[5], row[6], row[7], row[8]))
+                exercise_today.append(ExerciseHistory(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
             return exercise_today
         except Exception as e:
             self.logger.error(e)
