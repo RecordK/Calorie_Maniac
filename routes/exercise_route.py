@@ -9,9 +9,7 @@ from python_files.exercise.exercise_history_db import ExerciseHistoryDB
 
 bp = Blueprint('health', __name__, url_prefix='/main/health')
 
-execdb = ExerciseInfoDB()
-execserv = Exersize_service()
-exechistorydb = ExerciseHistoryDB()
+
 
 
 @bp.get('/')
@@ -32,6 +30,7 @@ def main():
 
 @bp.get('/realtime')
 def move_page():
+    execdb = ExerciseInfoDB()
     req_index = request.args.get('index')
     data_index = execdb.select_by_index(req_index)
     idx = data_index[0].exercise_index
@@ -46,6 +45,9 @@ def move_page():
 
 @bp.post('/exercise_result/')
 def exercise_result():
+    execdb = ExerciseInfoDB()
+    execserv = Exersize_service()
+    exechistorydb = ExerciseHistoryDB()
     st_time = request.form['start_exec']
     index = request.form['index_exec']
     data_index = execdb.select_by_index(index)
@@ -77,44 +79,53 @@ def exercise_result():
 
 @bp.route('/video_feed_arm_curl')
 def video_feed_arm_curl():
+    execserv = Exersize_service()
     return Response(execserv.arm_curl(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_chair_dips')
 def video_feed_chair_dips():
+    execserv = Exersize_service()
     return Response(execserv.chair_dips(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_crunch')
 def video_feed_crunch():
+    execserv = Exersize_service()
     return Response(execserv.crunch(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_leg_raise')
 def video_feed_leg_raise():
+    execserv = Exersize_service()
     return Response(execserv.leg_raise(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_lunge')
 def video_feed_lunge():
+    execserv = Exersize_service()
     return Response(execserv.lunge(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_pull_up')
 def video_feed_pull_up():
+    execserv = Exersize_service()
     return Response(execserv.pull_up(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_push_up')
 def video_feed_push_up():
+    execserv = Exersize_service()
     return Response(execserv.push_up(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_side_lateral_raise')
 def video_feed_side_lateral_raise():
+    execserv = Exersize_service()
     return Response(execserv.side_lateral_raise(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @bp.route('/video_feed_squat')
 def video_feed_squat():
+    execserv = Exersize_service()
     return Response(execserv.squat(), mimetype='multipart/x-mixed-replace; boundary=frame')
