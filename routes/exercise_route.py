@@ -3,6 +3,8 @@ from flask import Blueprint, Flask, render_template, request, session, Response
 from datetime import datetime
 import glob
 
+# from python_files.exercise import exercise_history_service
+from python_files.exercise.exercise_history_service import ExerciseHistoryService
 from python_files.exercise.exercise_info_db import ExerciseInfoDB
 from python_files.exercise.exec_service import Exersize_service
 from python_files.exercise.exercise_history_db import ExerciseHistoryDB
@@ -12,6 +14,8 @@ bp = Blueprint('health', __name__, url_prefix='/main/health')
 execdb = ExerciseInfoDB()
 execserv = Exersize_service()
 exechistorydb = ExerciseHistoryDB()
+exercise_history_service = ExerciseHistoryService()
+
 
 
 @bp.get('/')
@@ -58,6 +62,13 @@ def exercise_result():
     ed_time = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
     end_time = datetime.strptime(ed_time, "%Y-%m-%d %H:%M:%S")
     exercised_time = round((lambda x, y: y - x)(start_time, end_time).total_seconds())
+    end_date = datetime.today().strftime("%Y-%m-%d")
+    y = int(end_date.split('-')[0])
+    m = int(end_date.split('-')[1])
+    d = int(end_date.split('-')[2])
+    print(y, m, d)
+    week = exercise_history_service.get_week_no(y, m, d)
+    month = datetime.today().strftime("%m")
 
     # check
     print('index: ', index)
@@ -68,11 +79,13 @@ def exercise_result():
     print('start_time: ', start_time)
     print('end_time: ', end_time)
     print('exercised_time: ', exercised_time)
+    print('month: ', month)
+    print('week: ', week)
 
     # insert data in sql
-    exechistorydb.insert_exercise_data(idx, name, start_time, end_time, exercised_time, calories, counter, coin)
+    exechistorydb.insert_exercise_data(idx, name, start_time, end_time, exercised_time, calories, counter, coin, month, week)
     return render_template('index.html', name=name, start_time=start_time, end_time=end_time,
-                           exercised_time=exercised_time, counter=counter, calories=calories, coin=coin)
+                           exercised_time=exercised_time, counter=counter, calories=calories, coin=coin, month=month, week=week)
 
 
 @bp.route('/video_feed_arm_curl')

@@ -37,7 +37,7 @@ def daily_report():
     food_info_index = [food.food_index for food in food_today]
     food_info_list = food_info_service.retrieve_by_index(food_info_index)
     nutrition_info = []
-    if not food_today:      # 빈 배열 감지
+    if not food_today:  # 빈 배열 감지
         food_today = '오늘 먹은 음식이 없어요!'
     else:
         for food in food_info_list:
@@ -46,7 +46,6 @@ def daily_report():
     exercise_history_service = ExerciseHistoryService()
     exercise_today = exercise_history_service.retrieve_by_today()
     exercise_index = [exercise.exercise_list for exercise in exercise_today]
-    # print(exercise_index)
     exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     exercise_info = []
 
@@ -55,10 +54,9 @@ def daily_report():
     else:
         for exercise in exercise_list:
             exercise_info.append(
-                [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time, exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin])
-    print('======')
-    # print(exercise_today[0].exercise_name)
-    # print(exercise_info)
+                [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
+                 exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
+                 exercise.month, exercise.week])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
                            exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
 
