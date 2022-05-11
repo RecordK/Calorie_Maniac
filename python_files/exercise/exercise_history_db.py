@@ -1,7 +1,7 @@
 import logging
 import pymysql
 from python_files.exercise.exercise_history import ExerciseHistory
-from _datetime import datetime
+from datetime import datetime
 from python_files.setting.db_setting import DBSetting
 
 
