@@ -76,20 +76,17 @@
                             {% if loop.index > 1 %}
                                 <div class="spr-line-1"></div>
                             {% endif %}
-                            <div class="">{{ kind.end_time }}</div>
+                            <div class="col-12">{{ kind.end_time }}</div>
                             <div class="spr-line-1 mb-1"></div>
-                            <div class="col-5" style="float:left;">
-                                <h6>{{ kind.exercise_name }}</h6>
+                            <h6>{{ kind.exercise_name }}</h6>
+                            <div>
                                 <div class="inline">
                                     <img src="{{ kind.exercise_image }}" alt="exercise_image" id="exercise_image" onerror="this.src='{{ url_for('static', filename='images/exercise_img/squat.png') }}'">
-                                    <div class="inline">
-                                    운동 시간: {{ exec[5] }} 초<br>
-                                    운동 횟수: {{ exec[6] }} 회<br>
-                                    소모 칼로리: {{ exec[7] }} Kcal<br>
-                                    획득 코인: {{ exec[8] }} 개<br>
-                                    월: {{ exec[9] }} 월<br>
-                                    주차: {{ exec[10] }} 주차
-                                    </div>
+                                    <span class="inline">
+                                        운동 시간: {{ exec[5] }} 초, 운동 횟수: {{ exec[6] }} 회<br>
+                                        소모 칼로리: {{ exec[7] }} Kcal, 획득 코인: {{ exec[8] }} 개<br>
+                                        월: {{ exec[9] }} 월, 주차: {{ exec[10] }} 주차
+                                    </span>
                                 </div>
                             </div>
                         {% endfor %}

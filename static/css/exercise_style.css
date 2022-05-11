@@ -27,3 +27,10 @@
 .drink:hover {
     -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
 }
+
+#exercise_image {
+    display: inline-block;
+    float: left;
+    max-width: 100px;
+    max-height: 100px;
+}
