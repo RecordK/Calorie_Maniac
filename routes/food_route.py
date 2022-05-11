@@ -5,7 +5,6 @@ from python_files.food.food_history_service import FoodHistoryService
 from yolov3 import detect_1231 as d
 from werkzeug.utils import secure_filename
 import os
-import cv2
 
 bp = Blueprint('food', __name__, url_prefix='/main/food')
 food_info_service = FoodInfoService()
@@ -32,21 +31,32 @@ def get_index():
     food_image = None
     fd_time = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
     food_time = datetime.strptime(fd_time, "%Y-%m-%d %H:%M:%S")
-    print('data type: ' , type(food_time))
-    print('date : ' , food_time)
+    # print('data type: ' , type(food_time))
+    # print('date : ' , food_time)
     food_date = datetime.today().strftime("%Y-%m-%d")
     y = int(food_date.split('-')[0])
     m = int(food_date.split('-')[1])
     d = int(food_date.split('-')[2])
     food_week = food_history_service.get_week_no(y, m, d)
     food_month = datetime.today().strftime("%m")
-    print('food_index: ', food.food_index)
-    print('food_name: ', food.food_name)
-    print('food_kcal: ', food.food_kcal)
-    print('food_time: ', fd_time)
-    print('food_month: ', food_month)
-    print('food_week: ', food_week)
     food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, fd_time, food_image, food_month, food_week)
+    return render_template('index.html')
+
+
+@bp.post('/register')
+def upload_food_with_image():
+    food_index = request.form['food_index']
+    food_path = request.form['food_path']
+    print(food_index, food_path)
+    food = food_info_service.retrieve_by_index(food_index)
+
+    food_date = datetime.today().strftime("%Y-%m-%d")
+    year = int(food_date.split('-')[0])
+    month = int(food_date.split('-')[1])
+    day = int(food_date.split('-')[2])
+    food_week = food_history_service.get_week_no(year, month, day)
+    food_month = datetime.today().strftime("%m")
+    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, food_date, food_path, food_month, food_week)
     return render_template('index.html')
 
 

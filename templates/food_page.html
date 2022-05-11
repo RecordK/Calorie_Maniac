@@ -98,12 +98,14 @@
                         <form>
                             {{ food_image_file }}
                             <div class="mt-3 mb-3">
-                                <img class="img-fluid" src="{{ url_for('static', filename=image_path) }}">
+                                <img class="img-fluid" src="{{ url_for('static', filename=image_path) }}" alt="your food">
+                                <input type="hidden" value="{{ food.food_index }}" name="food_index">
+                                <input type="hidden" value="{{ image_path }}" name="food_path">
                             </div>
                             <span>{{ food.food_name }} 가 맞나요?</span><br>
                             <div class="row">
                                 <div class="col-6 d-grid">
-                                    <button type="submit" class="btn btn-outline-success" formaction="/main/food/register?fid={{ food.food_index }}">네!</button>
+                                    <button type="submit" class="btn btn-outline-success" formaction="/main/food/register" formmethod="post">네!</button>
                                 </div>
                                 <div class="col-6 d-grid">
                                     <button type="submit" class="btn btn-outline-success" formaction="/main/food">아니요!</button>
