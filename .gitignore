@@ -39,7 +39,7 @@ out/
 ### python ###
 python_files/setting/db_setting.py
 yolov3/
-__pyache__/
+__pycache__/
 *.pyc
 ### others ###
 *.csv
