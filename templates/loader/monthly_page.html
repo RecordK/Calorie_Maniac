@@ -17,11 +17,11 @@
     <div class="border-teal">
         <div class="container-sm">
             <div class="mb-4"></div>
-            <form action="#" method="get">
+            <form action="/main/lineGraph" method="get">
                 <div class="row">
                     <div class="col-2">
                         <div class="d-grid">
-                            <select class="form-select form-select-lg mb-3" aria-label="select_month"
+                            <select name="ll" class="form-select form-select-lg mb-3" aria-label="select_month"
                                     onchange="this.form.submit()">
                                 {% for display_month in range(1, 13) %}
                                 {% if display_month == month %}
@@ -48,6 +48,7 @@
                 });
             }
         )
+
 
 
                             </script>

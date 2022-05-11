@@ -1,7 +1,7 @@
 import logging
 import pymysql
 from python_files.food.food_history import FoodHistory
-from _datetime import datetime
+from datetime import datetime
 from python_files.setting.db_setting import DBSetting
 
 
@@ -24,16 +24,16 @@ class FoodHistoryDB:
 	def select_by_index(self):
 		pass
 
-	def insert_data(self, food_index, food_name, food_kcal, food_date, food_image, food_month, food_week):
+	def insert_data(self, food_index, food_name, food_kcal, food_date, food_image, food_month, food_week, food_day):
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
 			if food_image is None:
-				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_month, food_week) VALUES (%s, %s, %s, %s, %s, %s)'
-				data = (int(food_index), food_name, food_kcal, food_date, food_month, food_week)
+				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_month, food_week, food_day) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+				data = (int(food_index), food_name, food_kcal, food_date, food_month, food_week, food_day)
 			else:			# not test
-				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week) VALUES (%s, %s, %s, %s, %s, %s, %s)'
-				data = (int(food_index), food_name, food_kcal, food_date, food_image, food_month, food_week)
+				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week, food_day) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
+				data = (int(food_index), food_name, food_kcal, food_date, food_image, food_month, food_week, food_day)
 			cursor.execute(sql, data)
 			self.conn.commit()
 			return True
@@ -53,7 +53,7 @@ class FoodHistoryDB:
 			cursor.execute(sql, date)
 			food_today = []
 			for row in cursor:
-				food_today.append(FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+				food_today.append(FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
 			print('food_history_db-food_toady[]:', food_today)
 			return food_today
 		except Exception as e:
@@ -72,7 +72,7 @@ class FoodHistoryDB:
 			food_today = []
 			for row in cursor:
 				food_today.append(
-					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
 			return food_today
 		except Exception as e:
 			self.logger.error(e)
@@ -90,7 +90,25 @@ class FoodHistoryDB:
 			food_today = []
 			for row in cursor:
 				food_today.append(
-					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
+			return food_today
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+
+	def select_by_day(self, day):
+
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			sql = 'SELECT * FROM food_history WHERE food_day = %s'
+			date = (day,)
+			cursor.execute(sql, date)
+			food_today = []
+			for row in cursor:
+				food_today.append(
+					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
 			return food_today
 		except Exception as e:
 			self.logger.error(e)
@@ -108,7 +126,7 @@ class FoodHistoryDB:
 				food_list = []
 				for row in cursor:
 					food_list.append(
-						FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+						FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
 				return food_list
 			else:
 				sql = 'SELECT * FROM food_history WHERE food_index = (%s)'
@@ -116,7 +134,7 @@ class FoodHistoryDB:
 				data = (index,)
 				cursor.execute(sql, data)
 				row = cursor.fetchone()
-				return FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
+				return FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
 		except Exception as e:
 			self.logger.error(e)
 		finally:

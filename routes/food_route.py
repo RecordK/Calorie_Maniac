@@ -40,13 +40,15 @@ def get_index():
     d = int(food_date.split('-')[2])
     food_week = food_history_service.get_week_no(y, m, d)
     food_month = datetime.today().strftime("%m")
+    food_day = datetime.today().strftime("%d")
     print('food_index: ', food.food_index)
     print('food_name: ', food.food_name)
     print('food_kcal: ', food.food_kcal)
     print('food_time: ', fd_time)
     print('food_month: ', food_month)
     print('food_week: ', food_week)
-    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, fd_time, food_image, food_month, food_week)
+    print('food_day: ', food_day)
+    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, fd_time, food_image, food_month, food_week, food_day)
     return render_template('index.html')
 
 
