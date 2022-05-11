@@ -28,12 +28,8 @@ class FoodHistoryDB:
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
-			if food_image is None:
-				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_month, food_week, food_day) VALUES (%s, %s, %s, %s, %s, %s, %s)'
-				data = (int(food_index), food_name, food_kcal, food_date, food_month, food_week, food_day)
-			else:			# not test
-				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week, food_day) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
-				data = (int(food_index), food_name, food_kcal, food_date, food_image, food_month, food_week, food_day)
+			sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week, food_day) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
+			data = (int(food_index), food_name, food_kcal, food_date, food_image, food_month, food_week, food_day)
 			cursor.execute(sql, data)
 			self.conn.commit()
 			return True
