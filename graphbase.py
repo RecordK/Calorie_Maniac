@@ -22,16 +22,12 @@ class GraphBase:
         )
         return p
 
-    def line_month_base(self) -> Line:
-        ## 꺾은 선 그래프
-        day = [i for i in range(1, 21)]
-        ex = [randrange(1000, 3000) for _ in range(20)]
-        ex2 = [randrange(1000, 3000) for _ in range(20)]
+    def line_month_base(self, day, exercise_kcal, food_kcal) -> Line:
         total_job_rate = Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS
                                                       , animation_opts=opts.AnimationOpts(animation_delay=1000
                                                                                           ,
                                                                                           animation_easing="elasticOut")))
-        total_job_rate.add_xaxis(day).add_xaxis(day).add_yaxis('운동한 칼로리', ex)
+        total_job_rate.add_xaxis(day).add_yaxis('운동한 칼로리', exercise_kcal)
 
         ## 추가 꺾은선
         l = (Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
@@ -39,14 +35,14 @@ class GraphBase:
                                                                             animation_easing="elasticOut")
                                           ))).set_global_opts(
             title_opts=opts.TitleOpts(
-                title="월간 리포트", subtitle="월간 리포트를 활용하여 효과적으로 칼로리를 계산해보세요!"),
-            yaxis_opts=opts.AxisOpts(name="kcal", name_location="top", type_="value"),
-            xaxis_opts=opts.AxisOpts(name='날짜', axislabel_opts=opts.LabelOpts(rotate=0)),
-            datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="inside")],
+                title="월간 리포트"),
+            yaxis_opts=opts.AxisOpts(name="kcal", type_="value"),
+            xaxis_opts=opts.AxisOpts(name='날짜', type_="value"),
+            datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="slider")],
             legend_opts=opts.LegendOpts(pos_left="40%", legend_icon='pin'),
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross")
         ).set_series_opts(label_opts=opts.LabelOpts(is_show=True)).add_xaxis(day
-                                                                             ).add_yaxis('먹은 음식 칼로리', ex2)
+                                                                             ).add_yaxis('먹은 음식 칼로리', food_kcal)
 
         ## 합치기
         l = l.overlap(total_job_rate)
