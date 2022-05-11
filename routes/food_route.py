@@ -60,6 +60,15 @@ def upload_food_with_image():
     return render_template('index.html')
 
 
+@bp.post('/wrong')
+def delete_img():
+    food_path = request.form['food_path']
+    print(food_path)
+    food_path = '../static' + food_path
+    if os.path.exists(food_path):
+        os.remove(food_path)
+
+
 @bp.post('/upload_food')
 def get_food_img():
     food_image = request.files['food_image']
