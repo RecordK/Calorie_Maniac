@@ -41,7 +41,7 @@
                             <h6>{{ kind.food_name }}</h6>
                             <div class="inline">
                                 <img src="{{ url_for('static', filename=kind.food_image) }}" alt="food_image" id="food_image" onerror="this.src='{{ url_for('static', filename='images/No_image_available.webp') }}'">
-                                <div class="inline">
+                                <div class="inline ms-2">
                                     탄수화물: {{ nutrition[0] }}g<br>
                                     단백질: {{ nutrition[1] }}g<br>
                                     지방: {{ nutrition[2] }}g<br>
