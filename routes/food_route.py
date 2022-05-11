@@ -5,6 +5,7 @@ from python_files.food.food_history_service import FoodHistoryService
 from yolov3 import detect_1231 as d
 from werkzeug.utils import secure_filename
 import os
+import cv2
 
 bp = Blueprint('food', __name__, url_prefix='/main/food')
 food_info_service = FoodInfoService()
@@ -41,16 +42,17 @@ def get_food_img():
     food_image = request.files['food_image']
 
     food_image.save(path + '/' + secure_filename(food_image.filename))
+    food_image_file = cv2.imread(path +'/' + secure_filename(food_image.filename), cv2.IMREAD_UNCHANGED)
     an = d.detect()
     an = check(an)
-    print(an)
+
     food_index = an[0]
     if isinstance(food_index, int):
         food = food_info_service.retrieve_by_index(food_index)
     i = os.listdir(path)
     for j in i:
         os.remove(path + '/' + j)
-    return render_template('food_page.html', an=an, food=food)
+    return render_template('food_page.html', an=an, food=food, food_image=food_image_file)
 
 
 def check(x):
