@@ -57,7 +57,8 @@ def upload_food_with_image():
     day = int(food_date.split('-')[2])
     food_week = food_history_service.get_week_no(year, month, day)
     food_month = datetime.today().strftime("%m")
-    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, food_date, food_path, food_month, food_week)
+    food_day = datetime.today().strftime("%d")
+    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, food_date, food_path, food_month, food_week, food_day)
     return render_template('index.html')
 
 
