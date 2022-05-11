@@ -96,8 +96,11 @@
                         <span>{{an}}</span>
                     {% elif an|length==1 and (an[0]|string)|length<4 %}
                         <form>
-                            <img src="data:image/png;base64,{{ food_image_file }}" alt="result image" class="">
-                            <span>분석결과 : {{ food.food_name }} 가 맞나요?</span><br>
+                            {{ food_image_file }}
+                            <div class="mt-3 mb-3">
+                                <img class="img-fluid" src="{{ url_for('static', filename=image_path) }}">
+                            </div>
+                            <span>{{ food.food_name }} 가 맞나요?</span><br>
                             <div class="row">
                                 <div class="col-6 d-grid">
                                     <button type="submit" class="btn btn-outline-success" formaction="/main/food/register?fid={{ food.food_index }}">네!</button>

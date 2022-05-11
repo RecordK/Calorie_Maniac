@@ -52,13 +52,16 @@ def get_index():
 
 @bp.post('/upload_food')
 def get_food_img():
+    food_image = request.files['food_image']
     food = 0
+
     base_path = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     path = os.path.join(base_path, 'yolov3/data/samples')
-    food_image = request.files['food_image']
+    img_path = os.path.join(base_path, 'static/save_img')
 
-    food_image.save(path + '/' + secure_filename(food_image.filename))
-    food_image_file = cv2.imread(path +'/' + secure_filename(food_image.filename), cv2.IMREAD_UNCHANGED)
+    file_today = datetime.today().strftime("%Y%m%d%H%M%S_")
+    food_image.save(path + '/' + file_today + secure_filename(food_image.filename))
+
     an = d.detect()
     an = check(an)
 
@@ -67,8 +70,12 @@ def get_food_img():
         food = food_info_service.retrieve_by_index(food_index)
     i = os.listdir(path)
     for j in i:
-        os.remove(path + '/' + j)
-    return render_template('food_page.html', an=an, food=food, food_image=food_image_file)
+        os.replace(path + '/' + j, img_path + '/' + j)
+    food_image_file_path = img_path + '/' + file_today + secure_filename(food_image.filename)
+    path_list = food_image_file_path.split('/')
+    image_path = path_list[-2] + '/' + path_list[-1]
+    print(image_path)
+    return render_template('food_page.html', an=an, food=food, image_path=image_path)
 
 
 def check(x):
