@@ -51,10 +51,10 @@ def upload_food_with_image():
     print(food_index, food_path)
     food = food_info_service.retrieve_by_index(food_index)
 
-    food_date = datetime.today().strftime("%Y-%m-%d")
-    year = int(food_date.split('-')[0])
-    month = int(food_date.split('-')[1])
-    day = int(food_date.split('-')[2])
+    food_date = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+    year = datetime.today().year
+    month = datetime.today().month
+    day = datetime.today().day
     food_week = food_history_service.get_week_no(year, month, day)
     food_month = datetime.today().strftime("%m")
     food_day = datetime.today().strftime("%d")
