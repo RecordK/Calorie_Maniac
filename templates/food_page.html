@@ -88,21 +88,26 @@
                             </div>
                         </div>
                     </form>
-                    <div>
-                        {% if an|length>1%}
-                        <span>
-                            {% for i in an %}
-                                분석결과 : {{i}}
-                            {% endfor %}
-                            </span>
-
-                        {% elif an|length==1 and (an[0]|string)|length>3 %}
+                    {% if an|length>1%}
+                        {% for i in an %}
+                            <span>분석결과 : {{i}}</span>
+                        {% endfor %}
+                    {% elif an|length==1 and (an[0]|string)|length>3 %}
                         <span>{{an}}</span>
-                        {% elif an|length==1 and (an[0]|string)|length<4 %}
-                        <span>분석결과 : {{an}}</span>
-                        <span>분석결과가 맞습니까?</span>
-                        {% endif %}
-                    </div>
+                    {% elif an|length==1 and (an[0]|string)|length<4 %}
+                        <form>
+                            <img src="data:image/png;base64,{{ food_image_file }}" alt="result image" class="">
+                            <span>분석결과 : {{ food.food_name }} 가 맞나요?</span><br>
+                            <div class="row">
+                                <div class="col-6 d-grid">
+                                    <button type="submit" class="btn btn-outline-success" formaction="/main/food/register?fid={{ food.food_index }}">네!</button>
+                                </div>
+                                <div class="col-6 d-grid">
+                                    <button type="submit" class="btn btn-outline-success" formaction="/main/food">아니요!</button>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </main>
