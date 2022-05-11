@@ -56,7 +56,7 @@ def daily_report():
             exercise_info.append(
                 [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
-                 exercise.month, exercise.week])
+                 exercise.month, exercise.week, exercise.day])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
                            exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
 
@@ -363,5 +363,87 @@ def get_pie_week_diff_chart2():
 @bp.route("/lineGraph")
 def get_line_month_graph():
     graph_base = GraphBase()
-    c = graph_base.line_month_base()
+    monthly_now = datetime.today().month
+    print(monthly_now)
+
+    # Test Code
+    exercise_history_service = ExerciseHistoryService()
+
+    # Month Logic
+    monthly_now = datetime.today().month
+    exercise_month_list = exercise_history_service.retrieve_by_month(monthly_now)
+    exercise_month_info = []
+
+    if not exercise_month_list:
+        exercise_month_list = '몰루'
+    else:
+        for exercise in exercise_month_list:
+            exercise_month_info.append(
+                [exercise.use_kcal, exercise.month,
+                 exercise.day])
+
+    execercise_days = dict()
+    m = int(str(datetime.today().month))
+    end = int(str(datetime.today().day))
+    d = []
+    if monthly_now < m:
+        d = [l for l in range(1, 32)]
+    else:
+        d = [l for l in range(1, end + 1)]
+    for e in d:
+        execercise_days[e] = 0
+
+    for i in range(0, len(exercise_month_info)):
+        for j in d:
+            if exercise_month_info[i][2] == j:
+                execercise_days[j] = execercise_days[j] + exercise_month_info[i][0]
+
+                print('=========', execercise_days[j], exercise_month_info[i][0])
+
+    print(execercise_days)
+    # # 데이터 삽입
+    day_exercise_total_kcal = list(execercise_days.values())
+    print(day_exercise_total_kcal)
+
+    ## Food Section
+    # Test Code
+    food_history_service = FoodHistoryService()
+
+    # Month Logic
+    monthly_now = datetime.today().month
+    food_month_list = food_history_service.retrieve_by_month(monthly_now)
+    food_month_info = []
+
+    if not food_month_list:
+        food_month_list = '몰루'
+    else:
+        for food in food_month_list:
+            food_month_info.append(
+                [food.food_index, food.food_name, food.food_kcal, food.food_month,
+                 food.food_day])
+
+    days = dict()
+    m = int(str(datetime.today().month))
+    end = int(str(datetime.today().day))
+    d = []
+    if monthly_now < m:
+        d = [l for l in range(1, 32)]
+    else:
+        d = [l for l in range(1, end + 1)]
+    for l in d:
+        days[l] = 0
+
+    for i in range(0, len(food_month_info)):
+        for j in d:
+            if food_month_info[i][4] == j:
+                days[j] = days[j] + food_month_info[i][2]
+
+                print('=========', days[j], food_month_info[i][2])
+
+    print(days)
+
+    # # 데이터 삽입
+    day_food_total_kcal = list(days.values())
+    print(day_food_total_kcal)
+    c = graph_base.line_month_base(d, day_exercise_total_kcal, day_food_total_kcal)
     return c.dump_options_with_quotes()

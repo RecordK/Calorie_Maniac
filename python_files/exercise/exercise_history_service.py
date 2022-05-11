@@ -8,9 +8,9 @@ exercise_history_db = ExerciseHistoryDB()
 class ExerciseHistoryService:
 
     def insert_data(self, exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin,
-                    month, week):
+                    month, week, day):
         exercise_history_db.insert_exercise_data(exercise_index, exercise_name, start_time, use_kcal, count, coin,
-                                                 month, week)
+                                                 month, week, day)
 
     def retrieve_by_today(self):
         return exercise_history_db.select_by_date()
@@ -40,10 +40,12 @@ class ExerciseHistoryService:
 
     def retrieve_by_month(self, month):
         exercise_month_list = exercise_history_db.select_by_month(month)
-        # print(execercise_month_list)
         return exercise_month_list
 
     def retrieve_by_week(self, week):
         exercise_week_list = exercise_history_db.select_by_week(week)
-        # print(execercise_week_list)
         return exercise_week_list
+
+    def retrieve_by_day(self, day):
+        exercise_day_list = exercise_history_db.select_by_day(day)
+        return exercise_day_list

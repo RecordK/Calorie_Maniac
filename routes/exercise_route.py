@@ -17,7 +17,6 @@ exechistorydb = ExerciseHistoryDB()
 exercise_history_service = ExerciseHistoryService()
 
 
-
 @bp.get('/')
 def main():
     exercise_list = [
@@ -66,27 +65,16 @@ def exercise_result():
     y = int(end_date.split('-')[0])
     m = int(end_date.split('-')[1])
     d = int(end_date.split('-')[2])
-    print(y, m, d)
     week = exercise_history_service.get_week_no(y, m, d)
-    print(week)
     month = datetime.today().strftime("%m")
-
-    # check
-    print('index: ', index)
-    print('name:', name)
-    print('counter: ', counter)
-    print('calories: ', calories)
-    print('coins: ', coin)
-    print('start_time: ', start_time)
-    print('end_time: ', end_time)
-    print('exercised_time: ', exercised_time)
-    print('month: ', month)
-    print('week: ', week)
+    day = datetime.today().strftime("%d")
 
     # insert data in sql
-    exechistorydb.insert_exercise_data(idx, name, start_time, end_time, exercised_time, calories, counter, coin, month, week)
+    exechistorydb.insert_exercise_data(idx, name, start_time, end_time, exercised_time, calories, counter, coin, month,
+                                       week, day)
     return render_template('index.html', name=name, start_time=start_time, end_time=end_time,
-                           exercised_time=exercised_time, counter=counter, calories=calories, coin=coin, month=month, week=week)
+                           exercised_time=exercised_time, counter=counter, calories=calories, coin=coin, month=month,
+                           week=week, day=day)
 
 
 @bp.route('/video_feed_arm_curl')
