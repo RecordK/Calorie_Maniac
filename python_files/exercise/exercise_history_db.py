@@ -26,13 +26,14 @@ class ExerciseHistoryDB:
             self.connection()
             cursor = self.conn.cursor()
             if isinstance(exercise_list, list):
-                sql = 'SELECT * FROM exercise_history WHERE exercise_list IN (' + ', '.join(('%s') for _ in exercise_list) + ')'
-                print(sql)
+                sql = 'SELECT * FROM exercise_history WHERE exercise_list IN (' + ', '.join(
+                    ('%s') for _ in exercise_list) + ')'
                 cursor.execute(sql, exercise_list)
                 exercise_list = []
                 for row in cursor:
-                    exercise_list.append(ExerciseHistory(row[0],row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
-                    print(exercise_list)
+                    exercise_list.append(
+                        ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
+                                        row[10]))
                 return exercise_list
             else:
                 sql = 'SELECT * FROM exercise_history WHERE exercise_list = (%s)'
@@ -40,7 +41,8 @@ class ExerciseHistoryDB:
                 data = (exercise_list,)
                 cursor.execute(sql, data)
                 row = cursor.fetchone()
-                return ExerciseHistory(row[0],row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+                return ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
+                                       row[10])
         except Exception as e:
             self.logger.error(e)
         finally:
@@ -57,7 +59,9 @@ class ExerciseHistoryDB:
             cursor.execute(sql, date)
             exercise_today = []
             for row in cursor:
-                exercise_today.append(ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
+                exercise_today.append(
+                    ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
+                                    row[10]))
             return exercise_today
         except Exception as e:
             self.logger.error(e)
@@ -65,15 +69,54 @@ class ExerciseHistoryDB:
             self.disconnection()
 
     def insert_exercise_data(self, exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count,
-                             coin):
+                             coin, month, week):
         try:
             self.connection()
             cursor = self.conn.cursor()
-            sql = 'INSERT INTO exercise_history (exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
-            data = (exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin)
+            sql = 'INSERT INTO exercise_history (exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+            data = (
+            exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week)
             cursor.execute(sql, data)
             self.conn.commit()
             return True
+        except Exception as e:
+            self.logger.error(e)
+        finally:
+            self.disconnection()
+
+    def select_by_month(self, month):
+
+        try:
+            self.connection()
+            cursor = self.conn.cursor()
+            sql = 'SELECT * FROM exercise_history WHERE month = %s'
+            date = (month,)
+            cursor.execute(sql, date)
+            exercise_today = []
+            for row in cursor:
+                exercise_today.append(
+                    ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
+                                    row[10]))
+            return exercise_today
+        except Exception as e:
+            self.logger.error(e)
+        finally:
+            self.disconnection()
+
+    def select_by_week(self, week):
+
+        try:
+            self.connection()
+            cursor = self.conn.cursor()
+            sql = 'SELECT * FROM exercise_history WHERE week = %s'
+            date = (week,)
+            cursor.execute(sql, date)
+            exercise_today = []
+            for row in cursor:
+                exercise_today.append(
+                    ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
+                                    row[10]))
+            return exercise_today
         except Exception as e:
             self.logger.error(e)
         finally:
