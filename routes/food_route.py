@@ -1,10 +1,9 @@
-from _datetime import datetime
+from datetime import datetime
 from flask import Blueprint, Flask, render_template, request, session
 from python_files.food.food_info_service import FoodInfoService
 from python_files.food.food_history_service import FoodHistoryService
 from yolov3 import detect_1231 as d
 from werkzeug.utils import secure_filename
-
 import os
 
 bp = Blueprint('food', __name__, url_prefix='/main/food')
@@ -29,11 +28,11 @@ def food_search():
 def get_index():
     food_info_index = request.args.get('fid')
     food = food_info_service.retrieve_by_index(food_info_index)
-    food_image = None
+    food_image = 'images/No_image_available.webp'       # 이미지 없을때 기본 경로
     fd_time = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
     food_time = datetime.strptime(fd_time, "%Y-%m-%d %H:%M:%S")
-    print('data type: ' , type(food_time))
-    print('date : ' , food_time)
+    # print('data type: ' , type(food_time))
+    # print('date : ' , food_time)
     food_date = datetime.today().strftime("%Y-%m-%d")
     y = int(food_date.split('-')[0])
     m = int(food_date.split('-')[1])
@@ -41,33 +40,53 @@ def get_index():
     food_week = food_history_service.get_week_no(y, m, d)
     food_month = datetime.today().strftime("%m")
     food_day = datetime.today().strftime("%d")
-    print('food_index: ', food.food_index)
-    print('food_name: ', food.food_name)
-    print('food_kcal: ', food.food_kcal)
-    print('food_time: ', fd_time)
-    print('food_month: ', food_month)
-    print('food_week: ', food_week)
-    print('food_day: ', food_day)
     food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, fd_time, food_image, food_month, food_week, food_day)
+    return render_template('index.html')
+
+
+@bp.post('/register')
+def upload_food_with_image():
+    food_index = request.form['food_index']
+    food_path = request.form['food_path']
+    print(food_index, food_path)
+    food = food_info_service.retrieve_by_index(food_index)
+
+    food_date = datetime.today().strftime("%Y-%m-%d")
+    year = int(food_date.split('-')[0])
+    month = int(food_date.split('-')[1])
+    day = int(food_date.split('-')[2])
+    food_week = food_history_service.get_week_no(year, month, day)
+    food_month = datetime.today().strftime("%m")
+    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, food_date, food_path, food_month, food_week)
     return render_template('index.html')
 
 
 @bp.post('/upload_food')
 def get_food_img():
+    food_image = request.files['food_image']
+    food = 0
+
     base_path = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     path = os.path.join(base_path, 'yolov3/data/samples')
-    food_image = request.files['food_image']
+    img_path = os.path.join(base_path, 'static/save_img')
 
-    food_image.save(path + '/' + secure_filename(food_image.filename))
-    print(food_image)
+    file_today = datetime.today().strftime("%Y%m%d%H%M%S_")
+    food_image.save(path + '/' + file_today + secure_filename(food_image.filename))
+
     an = d.detect()
-    print(an)
     an = check(an)
-    print(an)
+
+    food_index = an[0]
+    if isinstance(food_index, int):
+        food = food_info_service.retrieve_by_index(food_index)
     i = os.listdir(path)
     for j in i:
-        os.remove(path + '/' + j)
-    return render_template('food_page.html', an=an)
+        os.replace(path + '/' + j, img_path + '/' + j)
+    food_image_file_path = img_path + '/' + file_today + secure_filename(food_image.filename)
+    path_list = food_image_file_path.split('/')
+    image_path = path_list[-2] + '/' + path_list[-1]
+    print(image_path)
+    return render_template('food_page.html', an=an, food=food, image_path=image_path)
 
 
 def check(x):
