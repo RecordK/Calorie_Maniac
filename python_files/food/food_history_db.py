@@ -24,16 +24,16 @@ class FoodHistoryDB:
 	def select_by_index(self):
 		pass
 
-	def insert_data(self, food_index, food_name, food_image):
+	def insert_data(self, food_index, food_name, food_kcal, food_date, food_image, food_month, food_week):
 		try:
 			self.connection()
 			cursor = self.conn.cursor()
 			if food_image is None:
-				sql = 'INSERT INTO food_history(food_index, food_name) VALUES (%s, %s)'
-				data = (int(food_index), food_name)
+				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_month, food_week) VALUES (%s, %s, %s, %s, %s, %s)'
+				data = (int(food_index), food_name, food_kcal, food_date, food_month, food_week)
 			else:			# not test
-				sql = 'INSERT INTO food_history(food_index, food_name, food_image) VALUES (%s, %s, %s)'
-				data = (int(food_index), food_name, food_image)
+				sql = 'INSERT INTO food_history(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+				data = (int(food_index), food_name, food_kcal, food_date, food_image, food_month, food_week)
 			cursor.execute(sql, data)
 			self.conn.commit()
 			return True
@@ -53,9 +53,70 @@ class FoodHistoryDB:
 			cursor.execute(sql, date)
 			food_today = []
 			for row in cursor:
-				food_today.append(FoodHistory(row[0], row[1], row[2], row[3], row[4]))
+				food_today.append(FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
 			print('food_history_db-food_toady[]:', food_today)
 			return food_today
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+
+	def select_by_month(self, month):
+
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			sql = 'SELECT * FROM food_history WHERE food_month = %s'
+			date = (month,)
+			cursor.execute(sql, date)
+			food_today = []
+			for row in cursor:
+				food_today.append(
+					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+			return food_today
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+
+	def select_by_week(self, week):
+
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			sql = 'SELECT * FROM food_history WHERE food_week = %s'
+			date = (week,)
+			cursor.execute(sql, date)
+			food_today = []
+			for row in cursor:
+				food_today.append(
+					FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+			return food_today
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+
+	def select_by_index(self, food_index):
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			if isinstance(food_index, list):
+				sql = 'SELECT * FROM food_history WHERE food_index IN (' + ', '.join(
+					('%s') for _ in food_index) + ')'
+				cursor.execute(sql, food_index)
+				food_list = []
+				for row in cursor:
+					food_list.append(
+						FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+				return food_list
+			else:
+				sql = 'SELECT * FROM food_history WHERE food_index = (%s)'
+				index = int(food_index)
+				data = (index,)
+				cursor.execute(sql, data)
+				row = cursor.fetchone()
+				return FoodHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
 		except Exception as e:
 			self.logger.error(e)
 		finally:
