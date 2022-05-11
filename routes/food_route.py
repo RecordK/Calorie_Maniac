@@ -1,4 +1,4 @@
-from _datetime import datetime
+from datetime import datetime
 from flask import Blueprint, Flask, render_template, request, session
 from python_files.food.food_info_service import FoodInfoService
 from python_files.food.food_history_service import FoodHistoryService
@@ -39,7 +39,8 @@ def get_index():
     d = int(food_date.split('-')[2])
     food_week = food_history_service.get_week_no(y, m, d)
     food_month = datetime.today().strftime("%m")
-    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, fd_time, food_image, food_month, food_week)
+    food_day = datetime.today().strftime("%d")
+    food_history_service.insert_data(food.food_index, food.food_name, food.food_kcal, fd_time, food_image, food_month, food_week, food_day)
     return render_template('index.html')
 
 

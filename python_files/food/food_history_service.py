@@ -10,8 +10,8 @@ class FoodHistoryService:
 	def __init__(self):
 		self.food_history_db = FoodHistoryDB()
 
-	def insert_data(self, food_index, food_name, food_kcal, food_date, food_image, food_month, food_week):
-		self.food_history_db.insert_data(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week)
+	def insert_data(self, food_index, food_name, food_kcal, food_date, food_image, food_month, food_week, food_day):
+		self.food_history_db.insert_data(food_index, food_name, food_kcal, food_date, food_image, food_month, food_week, food_day)
 
 	def retrieve_by_index(self, food_index):
 		food_list = food_history_db.select_by_index(food_index)
@@ -43,3 +43,7 @@ class FoodHistoryService:
 	def retrieve_by_week(self, week):
 		exercise_week_list = food_history_db.select_by_week(week)
 		return exercise_week_list
+
+	def retrieve_by_day(self, day):
+		exercise_day_list = food_history_db.select_by_day(day)
+		return exercise_day_list
