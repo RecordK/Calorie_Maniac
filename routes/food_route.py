@@ -28,7 +28,7 @@ def food_search():
 def get_index():
     food_info_index = request.args.get('fid')
     food = food_info_service.retrieve_by_index(food_info_index)
-    food_image = 'images/No_image_available.webp'       # 이미지 없을때 기본 경로
+    food_image = 'images/food/' + food_info_index + '.jpg'       # 이미지 없을때 기본 경로
     fd_time = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
     food_time = datetime.strptime(fd_time, "%Y-%m-%d %H:%M:%S")
     # print('data type: ' , type(food_time))
