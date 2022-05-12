@@ -33,7 +33,7 @@ class GraphBase:
             title_opts=opts.TitleOpts(title=title),
             yaxis_opts=opts.AxisOpts(min_='Datamin', name="kcal", type_="value"),
             xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=0)),
-            legend_opts=opts.LegendOpts(pos_left="40%", legend_icon='pin'),
+            legend_opts=opts.LegendOpts(pos_right="10%", pos_top="5%", legend_icon='pin'),
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross")
         ).set_series_opts(
             label_opts=opts.LabelOpts(is_show=False))).overlap(Bar(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)

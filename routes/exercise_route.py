@@ -70,7 +70,7 @@ def exercise_result():
     day = datetime.today().strftime("%d")
 
     print('idx type: ', type(idx))
-    exercise_image = 'images/exercise_img/' + idx + '.png'  # 이미지 없을때 기본 경로
+    exercise_image = 'images/exercise_img/' + str(idx) + '.png'  # 이미지 없을때 기본 경로
 
     # insert data in sql
     exechistorydb.insert_exercise_data(idx, name, start_time, end_time, exercised_time, calories, counter, coin, month,
