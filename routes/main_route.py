@@ -54,11 +54,11 @@ def daily_report():
     if not exercise_today:
         exercise_today = '.'
     else:
-        for exercise in exercise_list:
+        for exercise in exercise_today:
             exercise_info.append(
                 [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
-                 exercise.month, exercise.week, exercise.day])
+                 exercise.month, exercise.week, exercise.day, exercise.image])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
                            exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
 
