@@ -33,7 +33,7 @@ class ExerciseHistoryDB:
                 for row in cursor:
                     exercise_list.append(
                         ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                                        row[10], row[11]))
+                                        row[10], row[11], row[12]))
                 return exercise_list
             else:
                 sql = 'SELECT * FROM exercise_history WHERE exercise_list = (%s)'
@@ -42,7 +42,7 @@ class ExerciseHistoryDB:
                 cursor.execute(sql, data)
                 row = cursor.fetchone()
                 return ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                                       row[10], row[11])
+                                       row[10], row[11], row[12])
         except Exception as e:
             self.logger.error(e)
         finally:
@@ -61,7 +61,7 @@ class ExerciseHistoryDB:
             for row in cursor:
                 exercise_today.append(
                     ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                                    row[10], row[11]))
+                                    row[10], row[11], row[12]))
             return exercise_today
         except Exception as e:
             self.logger.error(e)
@@ -69,13 +69,13 @@ class ExerciseHistoryDB:
             self.disconnection()
 
     def insert_exercise_data(self, exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count,
-                             coin, month, week, day):
+                             coin, month, week, day, image):
         try:
             self.connection()
             cursor = self.conn.cursor()
-            sql = 'INSERT INTO exercise_history (exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+            sql = 'INSERT INTO exercise_history (exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day, image) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
             data = (
-            exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day)
+            exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day, image)
             cursor.execute(sql, data)
             self.conn.commit()
             return True
@@ -96,7 +96,7 @@ class ExerciseHistoryDB:
             for row in cursor:
                 exercise_today.append(
                     ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                                    row[10], row[11]))
+                                    row[10], row[11], row[12]))
             return exercise_today
         except Exception as e:
             self.logger.error(e)
@@ -115,7 +115,7 @@ class ExerciseHistoryDB:
             for row in cursor:
                 exercise_today.append(
                     ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                                    row[10], row[11]))
+                                    row[10], row[11], row[12]))
             return exercise_today
         except Exception as e:
             self.logger.error(e)
@@ -134,7 +134,7 @@ class ExerciseHistoryDB:
             for row in cursor:
                 exercise_today.append(
                     ExerciseHistory(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9],
-                                    row[10], row[11]))
+                                    row[10], row[11], row[12]))
             return exercise_today
         except Exception as e:
             self.logger.error(e)

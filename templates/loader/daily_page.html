@@ -42,6 +42,7 @@
                             <div class="inline">
                                 <img src="{{ url_for('static', filename=kind.food_image) }}" alt="food_image" id="food_image" onerror="this.src='{{ url_for('static', filename='images/No_image_available.webp') }}'">
                                 <div class="inline ms-2">
+                                    {{kind.food_image}}
                                     탄수화물: {{ nutrition[0] }}g<br>
                                     단백질: {{ nutrition[1] }}g<br>
                                     지방: {{ nutrition[2] }}g<br>
@@ -81,8 +82,9 @@
                             <h6>{{ kind.exercise_name }}</h6>
                             <div>
                                 <div class="inline">
-                                    <img src="{{ kind.exercise_image }}" alt="exercise_image" id="exercise_image" onerror="this.src='{{ url_for('static', filename='images/exercise_img/squat.png') }}'">
+                                    <img src="{{ url_for('static', filename=kind.wimage) }}" alt="exercise_image" id="exercise_image" onerror="this.src='{{ url_for('static', filename='images/No_image_available.webp') }}'">
                                     <span class="inline">
+                                        {{kind.image}}
                                         운동 시간: {{ exec[5] }} 초, 운동 횟수: {{ exec[6] }} 회<br>
                                         소모 칼로리: {{ exec[7] }} Kcal, 획득 코인: {{ exec[8] }} 개<br>
                                         월: {{ exec[9] }} 월, 주차: {{ exec[10] }} 주차

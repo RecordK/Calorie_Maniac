@@ -20,15 +20,15 @@ exercise_history_service = ExerciseHistoryService()
 @bp.get('/')
 def main():
     exercise_list = [
-        ['push_up.png', '푸쉬업'],
-        ['squat.png', '스쿼트'],
-        ['crunch.png', '크런치'],
-        ['lying_reg_raise.png', '라잉레그레이즈'],
-        ['dips.png', '딥스'],
-        ['arm_curl.png', '암컬'],
-        ['cross_lunge.png', '런지'],
-        ['pull_up.png', '풀업'],
-        ['side_lateral_raise.png', '사이드 레터럴 레이즈']
+        ['1.png', '푸쉬업'],
+        ['2.png', '스쿼트'],
+        ['3.png', '크런치'],
+        ['4.png', '라잉레그레이즈'],
+        ['5.png', '딥스'],
+        ['6.png', '암컬'],
+        ['7.png', '런지'],
+        ['8.png', '풀업'],
+        ['9.png', '사이드 레터럴 레이즈']
     ]
     return render_template('exercise_page.html', exercise_list=exercise_list)
 
@@ -69,12 +69,15 @@ def exercise_result():
     month = datetime.today().strftime("%m")
     day = datetime.today().strftime("%d")
 
+    print('idx type: ', type(idx))
+    exercise_image = 'images/exercise_img/' + idx + '.png'  # 이미지 없을때 기본 경로
+
     # insert data in sql
     exechistorydb.insert_exercise_data(idx, name, start_time, end_time, exercised_time, calories, counter, coin, month,
-                                       week, day)
+                                       week, day, exercise_image)
     return render_template('index.html', name=name, start_time=start_time, end_time=end_time,
                            exercised_time=exercised_time, counter=counter, calories=calories, coin=coin, month=month,
-                           week=week, day=day)
+                           week=week, day=day, exercise_image=exercise_image)
 
 
 @bp.route('/video_feed_arm_curl')
