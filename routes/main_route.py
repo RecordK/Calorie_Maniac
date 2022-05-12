@@ -77,8 +77,8 @@ def monthly_report():
     return render_template('loader/monthly_page.html', month=monthly_now)
 
 
-@bp.route("/dailyChart/<foodindex>")
-def get_pie_chart(foodindex):
+@bp.route("/dailyChart/<foodindex>/<i>")
+def get_pie_chart(foodindex, i):
     food_info_service = FoodInfoService()
     graph_base = GraphBase()
     v1 = food_info_service.retrieve_by_index(foodindex)
