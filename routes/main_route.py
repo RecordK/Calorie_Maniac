@@ -18,7 +18,7 @@ def main():
     session['height'] = request.form['height']
     session['weight'] = request.form['weight']
     session['user'] = session['gender'] + session['age'] + session['height'] + session['weight']
-    print(session['user'])
+    # print(session['user'])
     return render_template('index.html')
 
 
@@ -44,13 +44,15 @@ def daily_report():
             nutrition_info.append([food.food_carbohydrate, food.food_protein, food.food_fat, food.food_sugars])
     # Exercise
     exercise_history_service = ExerciseHistoryService()
+    # print(exercise_history_service)
     exercise_today = exercise_history_service.retrieve_by_today()
+    # print('exercise_today:', exercise_today)
     exercise_index = [exercise.exercise_list for exercise in exercise_today]
     exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     exercise_info = []
 
     if not exercise_today:
-        exercise_today = '몰루'
+        exercise_today = '.'
     else:
         for exercise in exercise_list:
             exercise_info.append(
@@ -64,7 +66,7 @@ def daily_report():
 @bp.get('/report/weekly')
 def weekly_report():
     monthly_now = datetime.today().month
-    print(monthly_now)
+    # print(monthly_now)
 
     return render_template('loader/weekly_page.html', month=monthly_now)
 
@@ -91,7 +93,7 @@ def get_pie_week_diff_chart1():
     food_info_service = FoodInfoService()
     graph_base = GraphBase()
     monthly_now = datetime.today().month
-    print(monthly_now)
+    # print(monthly_now)
     # Test Code
     food_history_service = FoodHistoryService()
 
@@ -103,7 +105,7 @@ def get_pie_week_diff_chart1():
     food_month_info = []
 
     if not food_month:
-        food_month = '몰루'
+        food_month = '.'
     else:
         for food in food_month_list:
             food_month_info.append(
@@ -112,127 +114,60 @@ def get_pie_week_diff_chart1():
     # Week Logic
     #     print('week_1: ', exercise_month_info[3][10])
     # while True:
+    name = set()
+    h = set()
+    value = []
+
+    fw = dict()
     for i in range(0, len(food_month_info)):
-        if food_month_info[i][5] == 1:
-            food_week = food_history_service.retrieve_by_week(1)
-            food_index = [food.food_index for food in food_week]
-            food_week_list = food_history_service.retrieve_by_index(food_index)
-            food_week_info = []
+        h.add(food_month_info[i][5])
+        for lll in range(1, 6):
+            if food_month_info[i][5] == lll:
+                name.add('{}주차'.format(lll))
 
-            if not food_week:
-                food_week = '몰루'
-            else:
-                for food in food_week_list:
-                    food_week_info.append(
-                        [food.food_index, food.food_name, food.food_kcal, food.food_kcal, food.food_month,
-                         food.food_week])
-                print(int(food_week_info[0][2]))
-                print('len: ', len(food_week_info))
+                fw[lll] = 0
 
-                food_kcal_week_1_list = []
-                for j in range(0, len(food_week_info)):
-                    food_kcal_week_1_list.append(int(food_week_info[j][2]))
-                print(food_kcal_week_1_list)
-                sum_food_kcal_week_1_list = sum(food_kcal_week_1_list)
-                print('sum1: ', sum_food_kcal_week_1_list)
+                food_week_list = food_history_service.retrieve_by_week(lll)
+                food_week_info = []
 
-        elif food_month_info[i][5] == 2:
-            food_week = food_history_service.retrieve_by_week(2)
-            food_index = [food.food_index for food in food_week]
-            food_week_list = food_history_service.retrieve_by_index(food_index)
-            food_week_info = []
+                if not food_week_list:
+                    food_week_list = '.'
+                else:
+                    for food in food_week_list:
+                        food_week_info.append(
+                            [food.food_index, food.food_name, food.food_kcal, food.food_kcal, food.food_month,
+                             food.food_week])
 
-            if not food_week:
-                food_week = '몰루'
-            else:
-                for food in food_week_list:
-                    food_week_info.append(
-                        [food.food_index, food.food_name, food.food_kcal, food.food_kcal, food.food_month,
-                         food.food_week])
-                print(food_week_info[0][2])
-                print('len: ', len(food_week_info))
-
-                food_kcal_week_2_list = []
-                for j in range(0, len(food_week_info)):
-                    food_kcal_week_2_list.append(int(food_week_info[j][2]))
-                print(food_kcal_week_2_list)
-                sum_food_kcal_week_2_list = sum(food_kcal_week_2_list)
-                print('sum2: ', sum_food_kcal_week_2_list)
-
-        elif food_month_info[i][5] == 3:
-            food_week = food_history_service.retrieve_by_week(3)
-            food_index = [food.food_index for food in food_week]
-            food_week_list = food_history_service.retrieve_by_index(food_index)
-            food_week_info = []
-
-            if not food_week:
-                food_week = '몰루'
-            else:
-                for food in food_week_list:
-                    food_week_info.append(
-                        [food.food_index, food.food_name, food.food_kcal, food.food_kcal, food.food_month,
-                         food.food_week])
-                print(int(food_week_info[0][2]))
-                print('len: ', len(food_week_info))
-
-                food_kcal_week_3_list = []
-                for j in range(0, len(food_week_info)):
-                    food_kcal_week_3_list.append(int(food_week_info[j][2]))
-                print(food_kcal_week_3_list)
-                sum_food_kcal_week_3_list = sum(food_kcal_week_3_list)
-                print('sum3: ', sum_food_kcal_week_3_list)
-
-
-        elif food_month_info[i][5] == 4:
-
-            food_week = food_history_service.retrieve_by_week(4)
-            food_index = [food.food_index for food in food_week]
-            food_week_list = food_history_service.retrieve_by_index(food_index)
-            food_week_info = []
-
-            if not food_week:
-                food_week = '몰루'
-            else:
-                for food in food_week_list:
-                    food_week_info.append(
-                        [food.food_index, food.food_name, food.food_kcal, food.food_kcal, food.food_month,
-                         food.food_week])
-                print(int(food_week_info[0][2]))
-                print('len: ', len(food_week_info))
-
-                food_kcal_week_4_list = []
-                for j in range(0, len(food_week_info)):
-                    food_kcal_week_4_list.append(int(food_week_info[j][2]))
-                print(food_kcal_week_4_list)
-                sum_food_kcal_week_4_list = sum(food_kcal_week_4_list)
-                print('sum2: ', sum_food_kcal_week_4_list)
-
-                # 데이터 삽입
-                value = [sum_food_kcal_week_1_list, sum_food_kcal_week_2_list, sum_food_kcal_week_3_list,
-                         sum_food_kcal_week_4_list]
-                name = ['1주차', '2주차', '3주차', '4주차']
-                title = '주차간 비교'
-                c = graph_base.pie_base(name, value, title)
-                return c.dump_options_with_quotes()
+                    ## 00주차에 해당되는 리스트 다 불러옴
+                    for j in range(0, len(food_week_info)):
+                        fw[lll] = fw[lll] + int(food_week_info[j][2])
+    value = list(dict(sorted(fw.items(), key=lambda x: x[0])).values())
+    for i in range(6):
+        try:
+            value.remove(0)
+        except:
+            continue
+    title = '주차간 비교'
+    name = sorted(name)
+    c = graph_base.pie_base(name, value, title)
+    return c.dump_options_with_quotes()
 
 
 @bp.route("/weekChart2")
 def get_pie_week_diff_chart2():
     graph_base = GraphBase()
     monthly_now = datetime.today().month
-    print(monthly_now)
+    # print(monthly_now)
     # Test Code
     exercise_history_service = ExerciseHistoryService()
 
     # Month Logic
     monthly_now = datetime.today().month
-    exercise_month = exercise_history_service.retrieve_by_month(monthly_now)
-    exercise_index = [exercise.exercise_list for exercise in exercise_month]
-    exercise_month_list = exercise_history_service.retrieve_by_index(exercise_index)
+    exercise_month_list = exercise_history_service.retrieve_by_month(monthly_now)
     exercise_month_info = []
 
-    if not exercise_month:
-        exercise_month = '몰루'
+    if not exercise_month_list:
+        exercise_month_list = '.'
     else:
         for exercise in exercise_month_list:
             exercise_month_info.append(
@@ -243,128 +178,53 @@ def get_pie_week_diff_chart2():
     # Week Logic
     #     print('week_1: ', exercise_month_info[3][10])
     # while True:
+    name = set()
+    h = set()
+    value = []
+
+    ew = dict()
     for i in range(0, len(exercise_month_info)):
-        if exercise_month_info[i][10] == 1:
-            exercise_week = exercise_history_service.retrieve_by_week(1)
-            exercise_index = [exercise.exercise_list for exercise in exercise_week]
-            exercise_week_list = exercise_history_service.retrieve_by_index(exercise_index)
-            exercise_week_info = []
+        h.add(exercise_month_info[i][10])
+        for lll in range(1, 6):
+            if exercise_month_info[i][10] == lll:
+                name.add('{}주차'.format(lll))
 
-            if not exercise_week:
-                exercise_week = '몰루'
-            else:
-                for exercise in exercise_week_list:
-                    exercise_week_info.append(
-                        [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name,
-                         exercise.start_time,
-                         exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal,
-                         exercise.coin,
-                         exercise.month, exercise.week])
-                print(int(exercise_week_info[0][7]))
-                print('len: ', len(exercise_week_info))
+                ew[lll] = 0
 
-                kcal_week_1_list = []
-                for j in range(0, len(exercise_week_info)):
-                    kcal_week_1_list.append(int(exercise_week_info[j][7]))
-                print(kcal_week_1_list)
-                sum_kcal_by_week_1 = sum(kcal_week_1_list)
-                print('sum1: ', sum_kcal_by_week_1)
-                # return sum_kcal_by_week_1
+                exercise_week_list = exercise_history_service.retrieve_by_week(lll)
+                exercise_week_info = []
 
-        elif exercise_month_info[i][10] == 2:
-            exercise_week = exercise_history_service.retrieve_by_week(2)
-            exercise_index = [exercise.exercise_list for exercise in exercise_week]
-            exercise_week_list = exercise_history_service.retrieve_by_index(exercise_index)
-            exercise_week_info = []
+                if not exercise_week_list:
+                    exercise_week_list = '.'
+                else:
+                    for exercise in exercise_week_list:
+                        exercise_week_info.append(
+                            [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name,
+                             exercise.start_time,
+                             exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal,
+                             exercise.coin,
+                             exercise.month, exercise.week])
 
-            if not exercise_week:
-                exercise_week = '몰루'
-            else:
-                for exercise in exercise_week_list:
-                    exercise_week_info.append(
-                        [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name,
-                         exercise.start_time,
-                         exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal,
-                         exercise.coin,
-                         exercise.month, exercise.week])
-                print(int(exercise_week_info[0][7]))
-                print('len: ', len(exercise_week_info))
-
-                kcal_week_2_list = []
-                for j in range(0, len(exercise_week_info)):
-                    kcal_week_2_list.append(int(exercise_week_info[j][7]))
-                print(kcal_week_2_list)
-                sum_kcal_by_week_2 = sum(kcal_week_2_list)
-                print('sum2: ', sum_kcal_by_week_2)
-                # return sum_kcal_by_week_2
-
-        elif exercise_month_info[i][10] == 3:
-            exercise_week = exercise_history_service.retrieve_by_week(3)
-            exercise_index = [exercise.exercise_list for exercise in exercise_week]
-            exercise_week_list = exercise_history_service.retrieve_by_index(exercise_index)
-            exercise_week_info = []
-
-            if not exercise_week:
-                exercise_week = '몰루'
-            else:
-                for exercise in exercise_week_list:
-                    exercise_week_info.append(
-                        [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name,
-                         exercise.start_time,
-                         exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal,
-                         exercise.coin,
-                         exercise.month, exercise.week])
-                # print(int(exercise_week_info[0][7]))
-                print('len: ', len(exercise_week_info))
-
-                kcal_week_3_list = []
-                for j in range(0, len(exercise_week_info)):
-                    kcal_week_3_list.append(int(exercise_week_info[j][7]))
-                print(kcal_week_3_list)
-                sum_kcal_by_week_3 = sum(kcal_week_3_list)
-                print('sum3: ', sum_kcal_by_week_3)
-                # return sum_kcal_by_week_3
-
-        elif exercise_month_info[i][10] == 4:
-            exercise_week = exercise_history_service.retrieve_by_week(4)
-            exercise_index = [exercise.exercise_list for exercise in exercise_week]
-            exercise_week_list = exercise_history_service.retrieve_by_index(exercise_index)
-            exercise_week_info = []
-
-            if not exercise_week:
-                exercise_week = '몰루'
-            else:
-                for exercise in exercise_week_list:
-                    exercise_week_info.append(
-                        [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name,
-                         exercise.start_time,
-                         exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal,
-                         exercise.coin,
-                         exercise.month, exercise.week])
-                print(int(exercise_week_info[0][7]))
-                print('len: ', len(exercise_week_info))
-
-                kcal_week_4_list = []
-                for j in range(0, len(exercise_week_info)):
-                    kcal_week_4_list.append(int(exercise_week_info[j][7]))
-                print(kcal_week_4_list)
-                sum_kcal_by_week_4 = sum(kcal_week_4_list)
-                print('sum4: ', sum_kcal_by_week_4)
-                # return sum_kcal_by_week_1
-
-                # 데이터 삽입
-                value = [sum_kcal_by_week_1, sum_kcal_by_week_2, sum_kcal_by_week_3, sum_kcal_by_week_4]
-                name = ['1주차', '2주차', '3주차', '4주차']
-                title = '주차간 비교'
-                c = graph_base.pie_base(name, value, title)
-                return c.dump_options_with_quotes()
+                    ## 00주차에 해당되는 리스트 다 불러옴
+                    for j in range(0, len(exercise_week_info)):
+                        ew[lll] = ew[lll] + int(exercise_week_info[j][7])
+    value = list(dict(sorted(ew.items(), key=lambda x: x[0])).values())
+    for i in range(6):
+        try:
+            value.remove(0)
+        except:
+            continue
+    title = '주차간 비교'
+    name = sorted(name)
+    c = graph_base.pie_base(name, value, title)
+    return c.dump_options_with_quotes()
 
 
 @bp.route("/lineGraph")
 def get_line_month_graph():
     graph_base = GraphBase()
     monthly_now = datetime.today().month
-    print(monthly_now)
+    # print(monthly_now)
 
     # Test Code
     exercise_history_service = ExerciseHistoryService()
@@ -398,12 +258,12 @@ def get_line_month_graph():
             if exercise_month_info[i][2] == j:
                 execercise_days[j] = execercise_days[j] + exercise_month_info[i][0]
 
-                print('=========', execercise_days[j], exercise_month_info[i][0])
+                # print('=========', execercise_days[j], exercise_month_info[i][0])
 
-    print(execercise_days)
+    # print(execercise_days)
     # # 데이터 삽입
     day_exercise_total_kcal = list(execercise_days.values())
-    print(day_exercise_total_kcal)
+    # print(day_exercise_total_kcal)
 
     ## Food Section
     # Test Code
@@ -415,7 +275,7 @@ def get_line_month_graph():
     food_month_info = []
 
     if not food_month_list:
-        food_month_list = '몰루'
+        food_month_list = '.'
     else:
         for food in food_month_list:
             food_month_info.append(
@@ -438,12 +298,12 @@ def get_line_month_graph():
             if food_month_info[i][4] == j:
                 days[j] = days[j] + food_month_info[i][2]
 
-                print('=========', days[j], food_month_info[i][2])
+                # print('=========', days[j], food_month_info[i][2])
 
-    print(days)
+    # print(days)
 
     # # 데이터 삽입
     day_food_total_kcal = list(days.values())
-    print(day_food_total_kcal)
+    # print(day_food_total_kcal)
     c = graph_base.line_month_base(d, day_exercise_total_kcal, day_food_total_kcal)
     return c.dump_options_with_quotes()
