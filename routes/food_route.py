@@ -69,7 +69,7 @@ def delete_img():
     food_path = '../static' + food_path
     if os.path.exists(food_path):
         os.remove(food_path)
-
+    return render_template('food_page.html')
 
 @bp.post('/upload_food')
 def get_food_img():
