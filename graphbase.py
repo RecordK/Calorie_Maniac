@@ -1,6 +1,6 @@
 from pyecharts.globals import ThemeType
 from pyecharts import options as opts
-from pyecharts.charts import Line, Pie
+from pyecharts.charts import Line, Pie, Bar, Timeline
 from random import randrange
 
 
@@ -22,12 +22,59 @@ class GraphBase:
         )
         return p
 
+    def bar_base(self, name, value, title) -> Bar:
+        # 연도별 취업현황
+        attr = name
+        b = (Bar(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
+                                         animation_opts=opts.AnimationOpts(
+                                             animation_delay=1000, animation_easing="elasticOut"
+                                         ))).add_xaxis(attr
+                                                       ).set_global_opts(
+            title_opts=opts.TitleOpts(title=title),
+            yaxis_opts=opts.AxisOpts(min_='Datamin', name="kcal", type_="value"),
+            xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=0)),
+            legend_opts=opts.LegendOpts(pos_right="10%", pos_top="5%", legend_icon='pin'),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross")
+        ).set_series_opts(
+            label_opts=opts.LabelOpts(is_show=False))).overlap(Bar(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS)
+                                                                   ).add_xaxis(attr)
+                                                               .add_yaxis('kcal', value))
+
+        return b
+
+    def test(self, name, value, title) -> Line:
+        base = Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS
+                                            , animation_opts=opts.AnimationOpts(animation_delay=1000
+                                                                                ,
+                                                                                animation_easing="elasticOut")))
+        base.add_xaxis(name).add_yaxis('운동한 칼로리', value)
+
+        ## 추가 꺾은선
+        l = (Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
+                                          animation_opts=opts.AnimationOpts(animation_delay=1000,
+                                                                            animation_easing="elasticOut")
+                                          ))).set_global_opts(
+            title_opts=opts.TitleOpts(
+                title=title),
+            yaxis_opts=opts.AxisOpts(name="kcal", type_="value"),
+            xaxis_opts=opts.AxisOpts(name='주차', type_="value"),
+            # datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="slider")],
+            # legend_opts=opts.LegendOpts(pos_left="40%", legend_icon='pin'),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross")
+        ).set_series_opts(label_opts=opts.LabelOpts(is_show=True)).add_xaxis(name
+                                                                             )
+
+        ## 합치기
+        l = l.overlap(base)
+
+        return l
+
     def line_month_base(self, day, exercise_kcal, food_kcal) -> Line:
-        total_job_rate = Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS
-                                                      , animation_opts=opts.AnimationOpts(animation_delay=1000
-                                                                                          ,
-                                                                                          animation_easing="elasticOut")))
-        total_job_rate.add_xaxis(day).add_yaxis('운동한 칼로리', exercise_kcal)
+        base = Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS
+                                            , animation_opts=opts.AnimationOpts(animation_delay=1000
+                                                                                ,
+                                                                                animation_easing="elasticOut")))
+        base.add_xaxis(day).add_yaxis('운동한 칼로리', exercise_kcal)
 
         ## 추가 꺾은선
         l = (Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
@@ -45,6 +92,6 @@ class GraphBase:
                                                                              ).add_yaxis('먹은 음식 칼로리', food_kcal)
 
         ## 합치기
-        l = l.overlap(total_job_rate)
+        l = l.overlap(base)
 
         return l

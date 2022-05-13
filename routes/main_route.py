@@ -54,11 +54,11 @@ def daily_report():
     if not exercise_today:
         exercise_today = '.'
     else:
-        for exercise in exercise_list:
+        for exercise in exercise_today:
             exercise_info.append(
                 [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
-                 exercise.month, exercise.week, exercise.day])
+                 exercise.month, exercise.week, exercise.day, exercise.image])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
                            exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
 
@@ -77,8 +77,8 @@ def monthly_report():
     return render_template('loader/monthly_page.html', month=monthly_now)
 
 
-@bp.route("/dailyChart/<foodindex>")
-def get_pie_chart(foodindex):
+@bp.route("/dailyChart/<foodindex>/<i>")
+def get_pie_chart(foodindex, i):
     food_info_service = FoodInfoService()
     graph_base = GraphBase()
     v1 = food_info_service.retrieve_by_index(foodindex)
@@ -88,10 +88,8 @@ def get_pie_chart(foodindex):
     return c.dump_options_with_quotes()
 
 
-@bp.route("/weekChart1")
-def get_pie_week_diff_chart1():
+def ffff():
     food_info_service = FoodInfoService()
-    graph_base = GraphBase()
     monthly_now = datetime.today().month
     # print(monthly_now)
     # Test Code
@@ -149,13 +147,18 @@ def get_pie_week_diff_chart1():
             continue
     title = '주차간 비교'
     name = sorted(name)
+    return name, value, title, fw
+
+
+@bp.route("/weekChart1")
+def get_pie_week_diff_chart1():
+    graph_base = GraphBase()
+    name, value, title, fw = ffff()
     c = graph_base.pie_base(name, value, title)
     return c.dump_options_with_quotes()
 
 
-@bp.route("/weekChart2")
-def get_pie_week_diff_chart2():
-    graph_base = GraphBase()
+def exer():
     monthly_now = datetime.today().month
     # print(monthly_now)
     # Test Code
@@ -208,6 +211,7 @@ def get_pie_week_diff_chart2():
                     ## 00주차에 해당되는 리스트 다 불러옴
                     for j in range(0, len(exercise_week_info)):
                         ew[lll] = ew[lll] + int(exercise_week_info[j][7])
+
     value = list(dict(sorted(ew.items(), key=lambda x: x[0])).values())
     for i in range(6):
         try:
@@ -216,7 +220,55 @@ def get_pie_week_diff_chart2():
             continue
     title = '주차간 비교'
     name = sorted(name)
+    return name, value, title, ew
+
+
+@bp.route("/weekChart2")
+def get_pie_week_diff_chart2():
+    graph_base = GraphBase()
+    name, value, title, ew = exer()
     c = graph_base.pie_base(name, value, title)
+    return c.dump_options_with_quotes()
+
+
+@bp.route("/weekChart3")
+def get_pie_week_diff_chart3():
+    graph_base = GraphBase()
+    a = exer()
+    b = ffff()
+    ew = a[3]
+    fw = b[3]
+    ext = dict()
+
+    print(ew, fw)
+    f = set(fw.keys())
+    e = set(ew.keys())
+    ## 있는 것만
+    # for i in (f - e):
+    #     ew[i] = 0
+    # for i in (e - f):
+    #     fw[i] = 0
+    # for i in (f or b):
+    #     ext[i] = fw[i] - ew[i]
+    h = {i for i in range(1, 6)}
+    ## 없는 것도 포함
+    for i in (h - e):
+        ew[i] = 0
+    for i in (h - f):
+        fw[i] = 0
+    for i in h:
+        ext[i] = fw[i] - ew[i]
+
+    # h = f or b
+    h = sorted(h)
+    value = list(dict(sorted(ext.items(), key=lambda x: x[0])).values())
+    title = '주차간 비교'
+    name = []
+    h = list(h)
+    for i in h:
+        name.append('{}주차'.format(i))
+    name = sorted(name)
+    c = graph_base.bar_base(h, value, title)
     return c.dump_options_with_quotes()
 
 
