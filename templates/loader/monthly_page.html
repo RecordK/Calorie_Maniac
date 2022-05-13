@@ -13,6 +13,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
 <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+<script>
+    window.onload = function () {
+        const month = document.querySelector('#select_month');
+        const inputMonth = document.querySelector('#hidden_input');
+        s
+        console.log(month);
+        console.log(month.selectedOptions)
+    };
+</script>
 <main class="h-100">
     <div class="border-teal">
         <div class="container-sm">
@@ -21,36 +30,34 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="d-grid">
-                            <select name="ll" class="form-select form-select-lg mb-3" aria-label="select_month"
+                            <select id="select_month" class="form-select form-select-lg mb-3" aria-label="select_month"
                                     onchange="this.form.submit()">
                                 {% for display_month in range(1, 13) %}
-                                {% if display_month == month %}
-                                <option name="month_select" value="{{ display_month }}" selected>{{ display_month }} 월
-                                </option>
-                                {% else %}
-                                <option name="month_select" value="{{ display_month }}">{{ display_month }} 월</option>
-                                {% endif %}
+                                    {% if display_month == month %}
+                                        <option name="month_select" value="{{ display_month }}" selected>{{ display_month }} 월
+                                        </option>
+                                    {% else %}
+                                        <option name="month_select" value="{{ display_month }}">{{ display_month }} 월</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
+                        <input type="hidden" id="hidden_input" value="">
                         <div id="line" style="width:650px; height:600px;">
                             <script>
-        $(
-            function () {
-                var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
-                $.ajax({
-                    type: "GET",
-                    url: "http://127.0.0.1:5000/main/lineGraph",
-                    dataType: 'json',
-                    success: function (result) {
-                        chart.setOption(result);
-                    }
-                });
-            }
-        )
-
-
-
+                                $(
+                                    function () {
+                                        var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "http://127.0.0.1:5000/main/lineGraph",
+                                            dataType: 'json',
+                                            success: function (result) {
+                                                chart.setOption(result);
+                                            }
+                                        });
+                                    }
+                                )
                             </script>
                         </div>
                     </div>
