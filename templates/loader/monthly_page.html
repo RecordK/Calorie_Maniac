@@ -14,57 +14,71 @@
 <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
 <script>
-    window.onload = function () {
-        const month = document.querySelector('#select_month');
-        const inputMonth = document.querySelector('#hidden_input');
-        s
-        console.log(month);
-        console.log(month.selectedOptions)
-    };
+    function monthCheck() {
+        const monthSelect = document.querySelector('#select_month');
+        const date = new Date();
+        const month = date.getMonth() + 1;
+        let urlMonth;
+
+        if (monthSelect.options[monthSelect.selectIndex] === undefined) {
+            monthSelect.value = month;
+            urlMonth = "/main/lineGraph?month=" + monthSelect.value;
+        }
+
+        monthSelect.addEventListener('change', function () {
+            {#window.location.href = "/main/lineGraph?month=" + monthSelect.value;#}
+            urlMonth = "/main/lineGraph?month=" + monthSelect.value;
+        });
+
+        console.log(urlMonth)
+        return urlMonth
+    }
 </script>
 <main class="h-100">
     <div class="border-teal">
         <div class="container-sm">
             <div class="mb-4"></div>
-            <form action="/main/lineGraph" method="get">
+            <form action="#" method="get" id="graph_form">
                 <div class="row">
                     <div class="col-2">
                         <div class="d-grid">
-                            <select id="select_month" class="form-select form-select-lg mb-3" aria-label="select_month"
-                                    onchange="this.form.submit()">
+                            <select id="select_month" name="select_check" class="form-select form-select-lg mb-3" aria-label="select_month">
                                 {% for display_month in range(1, 13) %}
-                                    {% if display_month == month %}
-                                        <option name="month_select" value="{{ display_month }}" selected>{{ display_month }} 월
-                                        </option>
-                                    {% else %}
-                                        <option name="month_select" value="{{ display_month }}">{{ display_month }} 월</option>
-                                    {% endif %}
+                                    <option id="choose_month" name="choose_month" value="{{ display_month }}">{{ display_month }} 월</option>
                                 {% endfor %}
                             </select>
                         </div>
-                        <input type="hidden" id="hidden_input" value="">
-                        <div id="line" style="width:650px; height:600px;">
-                            <script>
-                                $(
-                                    function () {
-                                        var chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
-                                        $.ajax({
-                                            type: "GET",
-                                            url: "http://127.0.0.1:5000/main/lineGraph",
-                                            dataType: 'json',
-                                            success: function (result) {
-                                                chart.setOption(result);
-                                            }
-                                        });
-                                    }
-                                )
-                            </script>
-                        </div>
                     </div>
                 </div>
+                <div id="line" style="width:650px; height:600px;">
+                    <script>
+                        function drawGraph(urlMonth) {
+                            $(
+                                function () {
+                                    let chart = echarts.init(document.getElementById('line'), 'white', {renderer: 'canvas'});
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "http://127.0.0.1:5000" + urlMonth,
+                                        dataType: 'json',
+                                        success: function (result) {
+                                            chart.setOption(result);
+                                        }
+                                    });
+                                }
+                            )
+                        }
+
+                        urlMonth = monthCheck()
+                        drawGraph(urlMonth)
+                        const monthSelect = document.querySelector('#select_month');
+                        monthSelect.addEventListener('change', function () {
+                            drawGraph();
+                            let urlMonth = "/main/lineGraph?month=" + monthSelect.value;
+                            drawGraph(urlMonth);
+                        });
+                    </script>
+                </div>
             </form>
-
-
         </div>
     </div>
 </main>
