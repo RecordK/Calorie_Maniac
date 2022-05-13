@@ -274,8 +274,8 @@ def get_pie_week_diff_chart3():
 
 @bp.route("/lineGraph")
 def get_line_month_graph():
-    month = request.form.get('select_month')
-    print('month:', month)
+    month = request.args.get('month')
+    print('month-lineg:', month)
     graph_base = GraphBase()
     monthly_now = datetime.today().month
     # print(monthly_now)
