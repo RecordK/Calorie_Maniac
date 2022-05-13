@@ -279,7 +279,6 @@ def get_line_month_graph():
         return
     print('month-lineg:', month)
     graph_base = GraphBase()
-    monthly_now = datetime.today().month
     # print(monthly_now)
 
     # Test Code
@@ -327,7 +326,7 @@ def get_line_month_graph():
 
     # Month Logic
     monthly_now = datetime.today().month
-    food_month_list = food_history_service.retrieve_by_month(monthly_now)
+    food_month_list = food_history_service.retrieve_by_month((int(month)))
     food_month_info = []
 
     if not food_month_list:
@@ -362,4 +361,5 @@ def get_line_month_graph():
     day_food_total_kcal = list(days.values())
     # print(day_food_total_kcal)
     c = graph_base.line_month_base(d, day_exercise_total_kcal, day_food_total_kcal)
+    print('c:', c)
     return c.dump_options_with_quotes()
