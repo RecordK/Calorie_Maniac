@@ -44,3 +44,6 @@ static/save_img/*
 *.pyc
 ### others ###
 *.csv
+
+### mac ###
+.DS_Store

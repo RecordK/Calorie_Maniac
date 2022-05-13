@@ -54,11 +54,11 @@ def daily_report():
     if not exercise_today:
         exercise_today = '.'
     else:
-        for exercise in exercise_list:
+        for exercise in exercise_today:
             exercise_info.append(
                 [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
-                 exercise.month, exercise.week, exercise.day])
+                 exercise.month, exercise.week, exercise.day, exercise.image])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
                            exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
 
@@ -274,16 +274,19 @@ def get_pie_week_diff_chart3():
 
 @bp.route("/lineGraph")
 def get_line_month_graph():
+    month = request.args.get('month')
+    if month is None:
+        return
+    print('month-lineg:', month)
     graph_base = GraphBase()
-    monthly_now = datetime.today().month
     # print(monthly_now)
 
     # Test Code
     exercise_history_service = ExerciseHistoryService()
 
-    # Month Logic
+    # Month Logi
     monthly_now = datetime.today().month
-    exercise_month_list = exercise_history_service.retrieve_by_month(monthly_now)
+    exercise_month_list = exercise_history_service.retrieve_by_month(int(month))
     exercise_month_info = []
 
     if not exercise_month_list:
@@ -323,7 +326,7 @@ def get_line_month_graph():
 
     # Month Logic
     monthly_now = datetime.today().month
-    food_month_list = food_history_service.retrieve_by_month(monthly_now)
+    food_month_list = food_history_service.retrieve_by_month((int(month)))
     food_month_info = []
 
     if not food_month_list:
@@ -358,4 +361,5 @@ def get_line_month_graph():
     day_food_total_kcal = list(days.values())
     # print(day_food_total_kcal)
     c = graph_base.line_month_base(d, day_exercise_total_kcal, day_food_total_kcal)
+    print('c:', c)
     return c.dump_options_with_quotes()
