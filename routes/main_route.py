@@ -222,6 +222,8 @@ def get_pie_week_diff_chart2():
 
 @bp.route("/lineGraph")
 def get_line_month_graph():
+    month = request.form.get('select_month')
+    print('month:', month)
     graph_base = GraphBase()
     monthly_now = datetime.today().month
     # print(monthly_now)
@@ -229,7 +231,7 @@ def get_line_month_graph():
     # Test Code
     exercise_history_service = ExerciseHistoryService()
 
-    # Month Logic
+    # Month Logi
     monthly_now = datetime.today().month
     exercise_month_list = exercise_history_service.retrieve_by_month(monthly_now)
     exercise_month_info = []

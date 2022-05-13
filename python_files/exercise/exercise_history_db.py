@@ -140,3 +140,17 @@ class ExerciseHistoryDB:
             self.logger.error(e)
         finally:
             self.disconnection()
+
+    def select_sum_coin(self):
+        try:
+            self.connection()
+            cursor = self.conn.cursor()
+            sql = 'SELECT sum(coin) from exercise_history'
+            cursor.execute(sql)
+            coin = cursor.fetchone()
+            print(coin)
+            return coin
+        except Exception as e:
+            self.logger.error(e)
+        finally:
+            self.disconnection()

@@ -49,3 +49,7 @@ class ExerciseHistoryService:
     def retrieve_by_day(self, day):
         exercise_day_list = exercise_history_db.select_by_day(day)
         return exercise_day_list
+
+    def retrieve_coin(self):
+        coin = exercise_history_db.select_sum_coin()
+        return coin
