@@ -65,11 +65,13 @@ def upload_food_with_image():
 @bp.post('/wrong')
 def delete_img():
     food_path = request.form['food_path']
-    print(food_path)
-    food_path = '../static' + food_path
-    if os.path.exists(food_path):
-        os.remove(food_path)
+    food_path = 'static/' + food_path
+    base_path = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+    path = os.path.join(base_path, food_path)
+    if os.path.exists(path):
+        os.remove(path)
     return render_template('food_page.html')
+
 
 @bp.post('/upload_food')
 def get_food_img():
