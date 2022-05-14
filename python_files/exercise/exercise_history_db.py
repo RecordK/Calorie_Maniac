@@ -1,7 +1,9 @@
 import logging
-import pymysql
-from python_files.exercise.exercise_history import ExerciseHistory
 from datetime import datetime
+
+import pymysql
+
+from python_files.exercise.exercise_history import ExerciseHistory
 from python_files.setting.db_setting import DBSetting
 
 
@@ -54,7 +56,7 @@ class ExerciseHistoryDB:
             self.connection()
             cursor = self.conn.cursor()
             today = datetime.today().strftime("%Y-%m-%d")
-            sql = 'SELECT * FROM exercise_history WHERE DATE(end_time) = %s'
+            sql = 'SELECT * FROM exercise_history WHERE DATE(end_time) = %s ORDER by end_time DESC'
             date = (today,)
             cursor.execute(sql, date)
             exercise_today = []

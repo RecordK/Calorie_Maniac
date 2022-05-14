@@ -1,8 +1,8 @@
 import logging
+
 import pymysql
+
 from python_files.exercise.exercise_info import ExerciseInfo
-
-
 # local mysql!!!
 from python_files.setting.db_setting import DBSetting
 

@@ -1,6 +1,6 @@
-from python_files.exercise.exercise_history_db import ExerciseHistoryDB
-from python_files.exercise.exercise_history import ExerciseHistory
 from datetime import datetime, timedelta
+
+from python_files.exercise.exercise_history_db import ExerciseHistoryDB
 
 exercise_history_db = ExerciseHistoryDB()
 
