@@ -50,6 +50,7 @@ def daily_report():
     exercise_index = [exercise.exercise_list for exercise in exercise_today]
     exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     coin = exercise_history_service.retrieve_coin()
+    today_coin = exercise_history_service.retrieve_today_coin()
     exercise_info = []
 
     if not exercise_today:
@@ -61,7 +62,7 @@ def daily_report():
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
                  exercise.month, exercise.week, exercise.day, exercise.image])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
-                           exercise_list=exercise_today, exercise_info=exercise_info, coin=coin, zip=zip)
+                           exercise_list=exercise_today, exercise_info=exercise_info, coin=coin, today_coin=today_coin, zip=zip)
 
 
 @bp.get('/report/weekly')
