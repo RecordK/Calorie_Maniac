@@ -63,4 +63,6 @@ class ExerciseHistoryService:
 
     def retrieve_today_coin(self):
         today_coin = exercise_history_db.select_sum_coin_by_day()
+        if today_coin is None:
+            today_coin = 0
         return today_coin
