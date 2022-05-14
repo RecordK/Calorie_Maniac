@@ -1,6 +1,7 @@
 import numpy as np
 import mediapipe as mp
 import cv2
+
 ####
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -83,22 +84,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -176,22 +177,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -260,22 +261,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -347,22 +348,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -433,22 +434,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -517,22 +518,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -601,22 +602,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -686,22 +687,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
@@ -772,23 +773,22 @@ class Exersize_service:
 
                 # Render curl counter
                 # Setup status box
-                cv2.rectangle(image, (0, 0), (300, 200), (51, 153, 255), -1)
+                cv2.rectangle(image, (0, 0), (300, 200), (193, 223, 121), -1)
 
                 # Rep data
                 cv2.putText(image, 'Reps: ' + str(self.counter),
                             (10, 50),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Calorie Burnt data
                 cv2.putText(image, 'Kcal: ' + str(self.calories),
                             (10, 120),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
 
                 # Reward Coin data
                 cv2.putText(image, 'Coin: ' + str(self.coin),
                             (10, 190),
-                            cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 51, 51), 5, cv2.LINE_AA)
-
+                            cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 69, 255), 5, cv2.LINE_AA)
                 # Render detections
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                           mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),

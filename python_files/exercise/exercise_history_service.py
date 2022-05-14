@@ -7,10 +7,17 @@ exercise_history_db = ExerciseHistoryDB()
 
 class ExerciseHistoryService:
 
-    def insert_data(self, exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin,
-                    month, week, day, image):
-        exercise_history_db.insert_exercise_data(exercise_index, exercise_name, start_time, use_kcal, count, coin,
-                                                 month, week, day, image)
+    def insert_data(self,
+                    exercise_index, exercise_name, start_time,
+                    end_time, exercised_time, use_kcal,
+                    count, coin, month,
+                    week, day, image):
+        exercise_history_db.insert_exercise_data(
+            exercise_index, exercise_name, start_time,
+            use_kcal, count, coin,
+            month, week, day,
+            image
+        )
 
     def retrieve_by_today(self):
         return exercise_history_db.select_by_date()
@@ -53,3 +60,9 @@ class ExerciseHistoryService:
     def retrieve_coin(self):
         coin = exercise_history_db.select_sum_coin()
         return coin
+
+    def retrieve_today_coin(self):
+        today_coin = exercise_history_db.select_sum_coin_by_day()
+        if today_coin is None:
+            today_coin = 0
+        return today_coin
