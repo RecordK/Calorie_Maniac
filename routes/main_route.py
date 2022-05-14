@@ -32,7 +32,7 @@ def daily_report():
     # Food
     food_info_service = FoodInfoService()
     food_history_service = FoodHistoryService()
-    today = datetime.today().strftime("%Y-%m-%d %H:%M")
+    today = datetime.today().strftime("%Y-%m-%d")
     food_today = food_history_service.retrieve_by_today()
     food_info_index = [food.food_index for food in food_today]
     food_info_list = food_info_service.retrieve_by_index(food_info_index)
