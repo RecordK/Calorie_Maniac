@@ -26,11 +26,12 @@
 {#            <div class="mt-3"></div>#}
             <div class="row">
                 <div class="col-6">
-                    <span class="fs-5">{{ daily_list.split(',')[0] }}</span>
+                    <span class="fs-4">{{ daily_list.split(',')[0] }}</span>
                 </div>
                 {% if daily_list.split()[0] == '운동' %}
-                    <div class="col-6 text-end inline">
-                        coin:
+                    <div class="col-6 text-end inline fs-6">
+                        누적 코인: {{ coin }}개 <br>
+                        오늘 코인: 0 개
                     </div>
                 {% endif %}
             </div>

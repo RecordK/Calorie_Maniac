@@ -150,8 +150,7 @@ class ExerciseHistoryDB:
             sql = 'SELECT sum(coin) from exercise_history'
             cursor.execute(sql)
             coin = cursor.fetchone()
-            print(coin)
-            return coin
+            return coin[0]
         except Exception as e:
             self.logger.error(e)
         finally:
