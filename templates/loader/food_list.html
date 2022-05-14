@@ -15,8 +15,7 @@
         <tbody>
             {% for food in food_list %}
                 <tr>
-                    <td width="45%">{{ food.food_name }}</td>
-                    <td width="20%">{{ food.food_kcal }}</td>
+                    <td width="65%">{{ food.food_name }}</td>
                     <td width="35%"><button type="submit" class="btn btn-outline-success pt-0 pb-0" onclick="checkForm({{ food.food_index }})" onsubmit="return true;">등록하기</button></td>
                 </tr>
             {% endfor %}
