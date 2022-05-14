@@ -1,7 +1,6 @@
-from pyecharts.globals import ThemeType
 from pyecharts import options as opts
-from pyecharts.charts import Line, Pie, Bar, Timeline
-from random import randrange
+from pyecharts.charts import Line, Pie, Bar
+from pyecharts.globals import ThemeType
 
 
 class GraphBase:
