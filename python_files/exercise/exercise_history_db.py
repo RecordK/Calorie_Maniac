@@ -73,7 +73,9 @@ class ExerciseHistoryDB:
         try:
             self.connection()
             cursor = self.conn.cursor()
-            sql = 'INSERT INTO exercise_history (exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day, image) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+            sql = 'INSERT INTO exercise_history (' \
+                  'exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day, image' \
+                  ') VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
             data = (
             exercise_index, exercise_name, start_time, end_time, exercised_time, use_kcal, count, coin, month, week, day, image)
             cursor.execute(sql, data)
@@ -148,8 +150,7 @@ class ExerciseHistoryDB:
             sql = 'SELECT sum(coin) from exercise_history'
             cursor.execute(sql)
             coin = cursor.fetchone()
-            print(coin)
-            return coin
+            return coin[0]
         except Exception as e:
             self.logger.error(e)
         finally:

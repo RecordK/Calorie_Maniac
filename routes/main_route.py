@@ -32,7 +32,7 @@ def daily_report():
     # Food
     food_info_service = FoodInfoService()
     food_history_service = FoodHistoryService()
-    today = datetime.today().strftime("%Y-%m-%d %H:%M")
+    today = datetime.today().strftime("%Y-%m-%d")
     food_today = food_history_service.retrieve_by_today()
     food_info_index = [food.food_index for food in food_today]
     food_info_list = food_info_service.retrieve_by_index(food_info_index)
@@ -42,13 +42,14 @@ def daily_report():
     else:
         for food in food_info_list:
             nutrition_info.append([food.food_carbohydrate, food.food_protein, food.food_fat, food.food_sugars])
+
     # Exercise
     exercise_history_service = ExerciseHistoryService()
-    # print(exercise_history_service)
     exercise_today = exercise_history_service.retrieve_by_today()
-    # print('exercise_today:', exercise_today)
+
     exercise_index = [exercise.exercise_list for exercise in exercise_today]
     exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
+    coin = exercise_history_service.retrieve_coin()
     exercise_info = []
 
     if not exercise_today:
@@ -60,7 +61,7 @@ def daily_report():
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
                  exercise.month, exercise.week, exercise.day, exercise.image])
     return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
-                           exercise_list=exercise_today, exercise_info=exercise_info, zip=zip)
+                           exercise_list=exercise_today, exercise_info=exercise_info, coin=coin, zip=zip)
 
 
 @bp.get('/report/weekly')
