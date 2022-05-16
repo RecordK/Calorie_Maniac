@@ -143,8 +143,6 @@ def ffff():
     return name, value, title, fw
 
 
-
-
 def exer():
     monthly_now = datetime.today().month
     # print(monthly_now)
@@ -214,10 +212,6 @@ def exer():
 def pie_graph():
     month = int(request.args.get('month'))
     option = int(request.args.get('val'))
-    print('m & v:', month, option)
-    print(type(month))
-    print(type(option))
-    graph_base = GraphBase()
     if option == 1:
         pie = get_pie_week_diff_chart1()
         return pie
@@ -228,7 +222,7 @@ def pie_graph():
         pie = get_pie_week_diff_chart3()
         return pie
     else:
-        return  '잘못된 요청'
+        return '잘못된 요청!'
 
 
 def get_pie_week_diff_chart1():
@@ -236,8 +230,6 @@ def get_pie_week_diff_chart1():
     name, value, title, fw = ffff()
     c = graph_base.pie_base(name, value, title)
     return c.dump_options_with_quotes()
-
-
 
 
 def get_pie_week_diff_chart2():
