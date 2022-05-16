@@ -6,7 +6,7 @@ import numpy as np
 
 class GraphBase:
     def pie_base(self, name=['탄수화물', '단백질', '지방', '당류'], value=[123, 456, 789, 321], title='음식 영양 정보') -> Pie:
-        a = np.round(value, 2)
+        a = value
         v = [[i] for i in a]
         k = name
         p = (
@@ -75,7 +75,7 @@ class GraphBase:
                                                                               animation_easing="elasticOut")
                                             )
                     )
-        base.add_xaxis(day).add_yaxis('운동한 칼로리', exercise_kcal, 2)
+        base.add_xaxis(day).add_yaxis('운동한 칼로리', np.round(exercise_kcal, 2))
 
         # 추가 꺾은선
         l = (Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
