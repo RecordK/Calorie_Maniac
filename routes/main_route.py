@@ -33,16 +33,9 @@ def daily_report():
     food_info_service = FoodInfoService()
     food_history_service = FoodHistoryService()
     today = datetime.today().strftime("%Y-%m-%d")
-    food_today = food_history_service.retrieve_by_today()
-    food_info_index = [food.food_index for food in food_today]
-    food_info_list = food_info_service.retrieve_by_index(food_info_index)
-    nutrition_info = []
+    food_today = food_history_service.retrieve_by_food(today)
     if not food_today:  # 빈 배열 감지
-        food_today = '오늘 먹은 음식이 없어요!'
-    else:
-        for food in food_info_list:
-            nutrition_info.append([food.food_carbohydrate, food.food_protein, food.food_fat, food.food_sugars])
-
+        food_today = []
     # Exercise
     exercise_history_service = ExerciseHistoryService()
     exercise_today = exercise_history_service.retrieve_by_today()
@@ -61,8 +54,8 @@ def daily_report():
                 [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
                  exercise.month, exercise.week, exercise.day, exercise.image])
-    return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
-                           exercise_list=exercise_today, exercise_info=exercise_info, coin=coin, today_coin=today_coin, zip=zip)
+    return render_template('loader/daily_page.html', today=today, food_list=food_today, exercise_list=exercise_today,
+                           exercise_info=exercise_info, coin=coin, today_coin=today_coin, zip=zip)
 
 
 @bp.get('/report/weekly')
