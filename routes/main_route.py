@@ -1,10 +1,11 @@
-from flask import Blueprint, Flask, render_template, request, session
-from graphbase import GraphBase
 from datetime import datetime
 
+from flask import Blueprint, render_template, request, session
+
+from graphbase import GraphBase
 from python_files.exercise.exercise_history_service import ExerciseHistoryService
-from python_files.food.food_info_service import FoodInfoService
 from python_files.food.food_history_service import FoodHistoryService
+from python_files.food.food_info_service import FoodInfoService
 
 # 버스와 관련된 기능 제공 클래스
 # 블루프린트 객체 생성 : 라우트 등록 객체
@@ -33,22 +34,12 @@ def daily_report():
     food_info_service = FoodInfoService()
     food_history_service = FoodHistoryService()
     today = datetime.today().strftime("%Y-%m-%d")
-    food_today = food_history_service.retrieve_by_today()
-    food_info_index = [food.food_index for food in food_today]
-    food_info_list = food_info_service.retrieve_by_index(food_info_index)
-    nutrition_info = []
+    food_today = food_history_service.retrieve_by_food(today)
     if not food_today:  # 빈 배열 감지
-        food_today = '오늘 먹은 음식이 없어요!'
-    else:
-        for food in food_info_list:
-            nutrition_info.append([food.food_carbohydrate, food.food_protein, food.food_fat, food.food_sugars])
-
+        food_today = []
     # Exercise
     exercise_history_service = ExerciseHistoryService()
     exercise_today = exercise_history_service.retrieve_by_today()
-
-    exercise_index = [exercise.exercise_list for exercise in exercise_today]
-    exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     coin = exercise_history_service.retrieve_coin()
     today_coin = exercise_history_service.retrieve_today_coin()
     exercise_info = []
@@ -61,8 +52,8 @@ def daily_report():
                 [exercise.exercise_list, exercise.exercise_index, exercise.exercise_name, exercise.start_time,
                  exercise.end_time, exercise.exercised_time, exercise.count, exercise.use_kcal, exercise.coin,
                  exercise.month, exercise.week, exercise.day, exercise.image])
-    return render_template('loader/daily_page.html', today=today, food_list=food_today, food_nutrition=nutrition_info,
-                           exercise_list=exercise_today, exercise_info=exercise_info, coin=coin, today_coin=today_coin, zip=zip)
+    return render_template('loader/daily_page.html', today=today, food_list=food_today, exercise_list=exercise_today,
+                           exercise_info=exercise_info, coin=coin, today_coin=today_coin, zip=zip)
 
 
 @bp.get('/report/weekly')
@@ -152,12 +143,6 @@ def ffff():
     return name, value, title, fw
 
 
-@bp.route("/weekChart1")
-def get_pie_week_diff_chart1():
-    graph_base = GraphBase()
-    name, value, title, fw = ffff()
-    c = graph_base.pie_base(name, value, title)
-    return c.dump_options_with_quotes()
 
 
 def exer():
@@ -225,7 +210,36 @@ def exer():
     return name, value, title, ew
 
 
-@bp.route("/weekChart2")
+@bp.get('/week_chart')
+def pie_graph():
+    month = int(request.args.get('month'))
+    option = int(request.args.get('val'))
+    print('m & v:', month, option)
+    print(type(month))
+    print(type(option))
+    graph_base = GraphBase()
+    if option == 1:
+        pie = get_pie_week_diff_chart1()
+        return pie
+    elif option == 2:
+        pie = get_pie_week_diff_chart2()
+        return pie
+    elif option == 3:
+        pie = get_pie_week_diff_chart3()
+        return pie
+    else:
+        return  '잘못된 요청'
+
+
+def get_pie_week_diff_chart1():
+    graph_base = GraphBase()
+    name, value, title, fw = ffff()
+    c = graph_base.pie_base(name, value, title)
+    return c.dump_options_with_quotes()
+
+
+
+
 def get_pie_week_diff_chart2():
     graph_base = GraphBase()
     name, value, title, ew = exer()
@@ -233,7 +247,6 @@ def get_pie_week_diff_chart2():
     return c.dump_options_with_quotes()
 
 
-@bp.route("/weekChart3")
 def get_pie_week_diff_chart3():
     graph_base = GraphBase()
     a = exer()

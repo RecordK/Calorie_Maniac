@@ -1,7 +1,9 @@
 import logging
-import pymysql
-from python_files.food.food_history import FoodHistory
 from datetime import datetime
+
+import pymysql
+
+from python_files.food.food_history import FoodHistory
 from python_files.setting.db_setting import DBSetting
 
 
@@ -44,7 +46,7 @@ class FoodHistoryDB:
 			cursor = self.conn.cursor()
 			today = datetime.today().strftime("%Y-%m-%d")
 			print('food_history_db-today:', today)
-			sql = 'SELECT * FROM food_history WHERE DATE(food_date) = %s'
+			sql = 'SELECT * FROM food_history WHERE DATE(food_date) = %s ORDER by food_date DESC'
 			date = (today, )
 			cursor.execute(sql, date)
 			food_today = []
@@ -135,3 +137,23 @@ class FoodHistoryDB:
 			self.logger.error(e)
 		finally:
 			self.disconnection()
+
+	def select_food_join_all(self, today):
+		try:
+			self.connection()
+			cursor = self.conn.cursor()
+			sql = 'SELECT * FROM food_history LEFT JOIN food_info fi ON fi.food_index = food_history.food_index WHERE DATE (food_date) = %s ORDER BY food_date DESC'
+			cursor.execute(sql, (today, ))
+			food_all = []
+			if cursor is None:
+				return food_all
+			else:
+				for row in cursor:
+					food_all.append([row[9], row[2], row[4], row[5], row[11], row[12], row[13], row[14], row[15]])
+				print('food:', food_all)
+				return food_all
+		except Exception as e:
+			self.logger.error(e)
+		finally:
+			self.disconnection()
+

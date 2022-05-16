@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from python_files.food.food_history_db import FoodHistoryDB
+
 # from python_files.exercise.exercise_history_db import ExerciseHistoryDB
 
 food_history_db = FoodHistoryDB()
@@ -47,3 +48,7 @@ class FoodHistoryService:
 	def retrieve_by_day(self, day):
 		exercise_day_list = food_history_db.select_by_day(day)
 		return exercise_day_list
+
+	def retrieve_by_food(self, today):
+		food_history_all = food_history_db.select_food_join_all(today)
+		return food_history_all

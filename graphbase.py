@@ -1,12 +1,12 @@
-from pyecharts.globals import ThemeType
 from pyecharts import options as opts
-from pyecharts.charts import Line, Pie, Bar, Timeline
-from random import randrange
+from pyecharts.charts import Line, Pie, Bar
+from pyecharts.globals import ThemeType
+import numpy as np
 
 
 class GraphBase:
     def pie_base(self, name=['탄수화물', '단백질', '지방', '당류'], value=[123, 456, 789, 321], title='음식 영양 정보') -> Pie:
-        a = value
+        a = np.round(value, 2)
         v = [[i] for i in a]
         k = name
         p = (
@@ -70,28 +70,30 @@ class GraphBase:
         return l
 
     def line_month_base(self, day, exercise_kcal, food_kcal) -> Line:
-        base = Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS
-                                            , animation_opts=opts.AnimationOpts(animation_delay=1000
-                                                                                ,
-                                                                                animation_easing="elasticOut")))
-        base.add_xaxis(day).add_yaxis('운동한 칼로리', exercise_kcal)
+        base = Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
+                                            animation_opts=opts.AnimationOpts(animation_delay=1000,
+                                                                              animation_easing="elasticOut")
+                                            )
+                    )
+        base.add_xaxis(day).add_yaxis('운동한 칼로리', exercise_kcal, 2)
 
-        ## 추가 꺾은선
+        # 추가 꺾은선
         l = (Line(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS,
                                           animation_opts=opts.AnimationOpts(animation_delay=1000,
                                                                             animation_easing="elasticOut")
                                           ))).set_global_opts(
-            title_opts=opts.TitleOpts(
-                title="월간 리포트"),
+            title_opts=opts.TitleOpts(title="월간 리포트"),
             yaxis_opts=opts.AxisOpts(name="kcal", type_="value"),
             xaxis_opts=opts.AxisOpts(name='날짜', type_="value"),
             datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="slider")],
             legend_opts=opts.LegendOpts(pos_left="40%", legend_icon='pin'),
             tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross")
-        ).set_series_opts(label_opts=opts.LabelOpts(is_show=True)).add_xaxis(day
-                                                                             ).add_yaxis('먹은 음식 칼로리', food_kcal)
+        ).set_series_opts(
+            label_opts=opts.LabelOpts(is_show=True)
+        ).add_xaxis(day).add_yaxis('먹은 음식 칼로리', np.round(food_kcal, 2))
 
-        ## 합치기
+
+        # 합치기
         l = l.overlap(base)
 
         return l

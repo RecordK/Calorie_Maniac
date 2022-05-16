@@ -1,13 +1,12 @@
-from dateutil.utils import today
-from flask import Blueprint, Flask, render_template, request, session, Response
 from datetime import datetime
-import glob
 
+from flask import Blueprint, render_template, request, Response
+
+from python_files.exercise.exec_service import Exersize_service
+from python_files.exercise.exercise_history_db import ExerciseHistoryDB
 # from python_files.exercise import exercise_history_service
 from python_files.exercise.exercise_history_service import ExerciseHistoryService
 from python_files.exercise.exercise_info_db import ExerciseInfoDB
-from python_files.exercise.exec_service import Exersize_service
-from python_files.exercise.exercise_history_db import ExerciseHistoryDB
 
 bp = Blueprint('health', __name__, url_prefix='/main/health')
 

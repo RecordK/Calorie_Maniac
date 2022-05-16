@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, request
 import os
+
+from flask import Blueprint, render_template, request
+
 from python_files.food import food_info
 from python_files.food.food_info_service import FoodInfoService
 

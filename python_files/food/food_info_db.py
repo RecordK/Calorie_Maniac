@@ -1,5 +1,7 @@
 import logging
+
 import pymysql
+
 from python_files.food.food_info import FoodInfo
 from python_files.setting.db_setting import DBSetting
 
