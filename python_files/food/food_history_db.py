@@ -1,7 +1,9 @@
 import logging
-import pymysql
-from python_files.food.food_history import FoodHistory
 from datetime import datetime
+
+import pymysql
+
+from python_files.food.food_history import FoodHistory
 from python_files.setting.db_setting import DBSetting
 
 
@@ -44,7 +46,7 @@ class FoodHistoryDB:
 			cursor = self.conn.cursor()
 			today = datetime.today().strftime("%Y-%m-%d")
 			print('food_history_db-today:', today)
-			sql = 'SELECT * FROM food_history WHERE DATE(food_date) = %s'
+			sql = 'SELECT * FROM food_history WHERE DATE(food_date) = %s ORDER by food_date DESC'
 			date = (today, )
 			cursor.execute(sql, date)
 			food_today = []

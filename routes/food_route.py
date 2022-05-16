@@ -1,10 +1,12 @@
-from datetime import datetime
-from flask import Blueprint, Flask, render_template, request, session
-from python_files.food.food_info_service import FoodInfoService
-from python_files.food.food_history_service import FoodHistoryService
-from yolov3 import detect_1231 as d
-from werkzeug.utils import secure_filename
 import os
+from datetime import datetime
+
+from flask import Blueprint, render_template, request
+from werkzeug.utils import secure_filename
+from yolov3 import detect_1231 as d
+
+from python_files.food.food_history_service import FoodHistoryService
+from python_files.food.food_info_service import FoodInfoService
 
 bp = Blueprint('food', __name__, url_prefix='/main/food')
 food_info_service = FoodInfoService()

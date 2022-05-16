@@ -1,10 +1,11 @@
-from flask import Blueprint, Flask, render_template, request, session
-from graphbase import GraphBase
 from datetime import datetime
 
+from flask import Blueprint, render_template, request, session
+
+from graphbase import GraphBase
 from python_files.exercise.exercise_history_service import ExerciseHistoryService
-from python_files.food.food_info_service import FoodInfoService
 from python_files.food.food_history_service import FoodHistoryService
+from python_files.food.food_info_service import FoodInfoService
 
 # 버스와 관련된 기능 제공 클래스
 # 블루프린트 객체 생성 : 라우트 등록 객체
@@ -39,9 +40,6 @@ def daily_report():
     # Exercise
     exercise_history_service = ExerciseHistoryService()
     exercise_today = exercise_history_service.retrieve_by_today()
-
-    exercise_index = [exercise.exercise_list for exercise in exercise_today]
-    exercise_list = exercise_history_service.retrieve_by_index(exercise_index)
     coin = exercise_history_service.retrieve_coin()
     today_coin = exercise_history_service.retrieve_today_coin()
     exercise_info = []

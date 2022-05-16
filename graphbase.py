@@ -1,7 +1,8 @@
-from pyecharts.globals import ThemeType
 from pyecharts import options as opts
-from pyecharts.charts import Line, Pie, Bar, Timeline
+from pyecharts.charts import Line, Pie, Bar
+from pyecharts.globals import ThemeType
 import numpy as np
+
 
 class GraphBase:
     def pie_base(self, name=['탄수화물', '단백질', '지방', '당류'], value=[123, 456, 789, 321], title='음식 영양 정보') -> Pie:

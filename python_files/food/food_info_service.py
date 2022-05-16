@@ -1,5 +1,5 @@
 import pandas as pd
-from python_files.food.food_info import FoodInfo
+
 from python_files.food.food_info_db import FoodInfoDB
 
 
