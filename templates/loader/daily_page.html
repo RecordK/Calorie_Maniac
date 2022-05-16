@@ -41,31 +41,31 @@
             <div class="row">
                     {% if kinds is defined %}
                     {% if daily_list.split()[0] == '음식'%}
-                        {% for kind, nutrition in zip(kinds, food_nutrition) %}
+                        {% for kind in kinds %}
                             {% if loop.index > 1 %}
                                 <div class="spr-line-1"></div>
                             {% endif %}
-                            <div class="">{{ kind.food_date }}</div>
+                            <div class="">{{ kind[2] }}</div>
                             <div class="spr-line-1 mb-1"></div>
                             <div class="col-5" style="float:left;">
-                                <h5>{{ kind.food_name }}</h5>
+                                <h5>{{ kind[1] }}</h5>
                                 <div class="inline">
-                                    <img src="{{ url_for('static', filename=kind.food_image) }}" alt="food_image" id="food_image" onerror="this.src='{{ url_for('static', filename='images/No_image_available.webp') }}'">
+                                    <img src="{{ url_for('static', filename=kind[3]) }}" alt="food_image" id="food_image" onerror="this.src='{{ url_for('static', filename='images/No_image_available.webp') }}'">
                                     <div class="inline ms-2">
-                                        탄수화물: {{ nutrition[0] }}g<br>
-                                        단백질: {{ nutrition[1] }}g<br>
-                                        지방: {{ nutrition[2] }}g<br>
-                                        당류: {{ nutrition[3] }}g<br>
+                                        탄수화물: {{ kind[4] }}g<br>
+                                        단백질: {{ kind[5] }}g<br>
+                                        지방: {{ kind[6] }}g<br>
+                                        당류: {{ kind[7] }}g<br>
                                     </div>
                                 </div>
                             </div>
-                            <div id="pie{{kind.food_index}}{{kind.food_date}}" value="{{kind.food_index}}{{kind.food_date}}" style="width:400px; height:200px;"
+                            <div id="pie{{ kind[0] }}{{ kind[2] }}" value="{{ kind[0] }}{{ kind[2] }}" style="width:400px; height:200px;"
                                  class="col-7 pie-graph">
                                 <script>
                                     $(
                                         function () {
-                                            var chart = echarts.init(document.getElementById('pie{{kind.food_index}}{{kind.food_date}}'), 'white', {renderer: 'canvas'});
-                                            var url = "http://127.0.0.1:5000/main/dailyChart/{{kind.food_index}}/{{kind.food_date}}";
+                                            var chart = echarts.init(document.getElementById('pie{{ kind[0] }}{{ kind[2] }}'), 'white', {renderer: 'canvas'});
+                                            var url = "http://127.0.0.1:5000/main/dailyChart/{{ kind[0] }}/{{ kind[2] }}";
                                             $.ajax({
                                                 type: "GET",
                                                 url: url,

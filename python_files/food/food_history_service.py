@@ -48,3 +48,7 @@ class FoodHistoryService:
 	def retrieve_by_day(self, day):
 		exercise_day_list = food_history_db.select_by_day(day)
 		return exercise_day_list
+
+	def retrieve_by_food(self, today):
+		food_history_all = food_history_db.select_food_join_all(today)
+		return food_history_all
