@@ -143,12 +143,6 @@ def ffff():
     return name, value, title, fw
 
 
-@bp.route("/weekChart1")
-def get_pie_week_diff_chart1():
-    graph_base = GraphBase()
-    name, value, title, fw = ffff()
-    c = graph_base.pie_base(name, value, title)
-    return c.dump_options_with_quotes()
 
 
 def exer():
@@ -216,7 +210,36 @@ def exer():
     return name, value, title, ew
 
 
-@bp.route("/weekChart2")
+@bp.get('/week_chart')
+def pie_graph():
+    month = int(request.args.get('month'))
+    option = int(request.args.get('val'))
+    print('m & v:', month, option)
+    print(type(month))
+    print(type(option))
+    graph_base = GraphBase()
+    if option == 1:
+        pie = get_pie_week_diff_chart1()
+        return pie
+    elif option == 2:
+        pie = get_pie_week_diff_chart2()
+        return pie
+    elif option == 3:
+        pie = get_pie_week_diff_chart3()
+        return pie
+    else:
+        return  '잘못된 요청'
+
+
+def get_pie_week_diff_chart1():
+    graph_base = GraphBase()
+    name, value, title, fw = ffff()
+    c = graph_base.pie_base(name, value, title)
+    return c.dump_options_with_quotes()
+
+
+
+
 def get_pie_week_diff_chart2():
     graph_base = GraphBase()
     name, value, title, ew = exer()
@@ -224,7 +247,6 @@ def get_pie_week_diff_chart2():
     return c.dump_options_with_quotes()
 
 
-@bp.route("/weekChart3")
 def get_pie_week_diff_chart3():
     graph_base = GraphBase()
     a = exer()
