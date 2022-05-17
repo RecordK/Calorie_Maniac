@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/start_page_style.css') }}">
+    <script>
+        window.onload = function () {
+            history.pushState(null, null, '/');
+        };
+    </script>
 </head>
 <body>
     <!-- header -->

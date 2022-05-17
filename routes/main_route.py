@@ -23,6 +23,12 @@ def main():
     return render_template('index.html')
 
 
+@bp.get('/delete_user')
+def delete_session():
+    session.clear()
+    return render_template('start_page.html')
+
+
 @bp.get('/')
 def main_return():
     return render_template('index.html')
